@@ -25,8 +25,7 @@ class Home extends CI_Controller {
         $data['active'] = 'home'; 
         $data['title'] = 'Child Care';
         //$this->load->view('header_view', $data);
-        $this->load->view('back/agency/home_view', $data);
-        //$this->load->view('footer_view', $data);  
+        $this->load->view('back/agency/home_view', $data); 
      }elseif($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
         {
 
@@ -42,7 +41,6 @@ class Home extends CI_Controller {
         $data['title'] = 'Child Care';
         //$this->load->view('header_view', $data);
         $this->load->view('back/agency/home_view', $data);
-        //$this->load->view('footer_view', $data);   
      }elseif($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'vendor')
         {
 
@@ -50,15 +48,13 @@ class Home extends CI_Controller {
         $data['title'] = 'Child Care';
         //$this->load->view('header_view', $data);
         $this->load->view('back/agency/home_view', $data);
-        //$this->load->view('footer_view', $data);  
      }elseif($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'employee')
         {
 
         $data['active'] = 'home'; 
         $data['title'] = 'Child Care';
         //$this->load->view('header_view', $data);
-        $this->load->view('back/agency/home_view', $data);
-        //$this->load->view('footer_view', $data);  
+        $this->load->view('back/agency/home_view', $data); 
      }else {
             redirect(base_url().'login');
      }
