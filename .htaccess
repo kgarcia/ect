@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+RewriteCond $1 !^(index\.php|public|\.txt) 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?$1
+</IfModule>
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 ect/index.php
+</IfModule>
+
+
+
+# Google Analytics Integration - Added by cPanel.
+<IfModule mod_substitute.c>
+AddOutputFilterByType SUBSTITUTE text/html
+Substitute "s|(<script src='/google_analytics_auto.js'></script>)?</head>|<script src='/google_analytics_auto.js'></script></head>|i"
+</IfModule>
+# END Google Analytics Integration
