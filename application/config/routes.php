@@ -56,6 +56,10 @@ $route['translate_uri_dashes'] = TRUE;
 //USER AGENCY ROUTES
 //
 $route['register-daycare'] = 'register_daycare';
+
 $route['agency-daycare'] = 'agency_daycare';
+$route['add-new'] = 'add_new';
+
+
 $route['personnel-daycare'] = 'personnel_daycare';
 
