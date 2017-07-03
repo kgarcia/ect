@@ -61,5 +61,5 @@ $route['agency-daycare'] = 'agency_daycare';
 $route['add-new'] = 'add_new';
 
 
-$route['personnel-daycare'] = 'personnel_daycare';
+$route['agency-vendor'] = 'agency_vendor';
 

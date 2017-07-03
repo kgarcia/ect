@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?=base_url().'assets/plugins/flexslider/flexslider.css'?>">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/css/styles.css'?>">
+    <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-1.12.3.min.js'?>"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -47,12 +48,8 @@
                     <div id="navbar-collapse" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="nav-item"><a href="<?=base_url().'user-section/home'?>">Home</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-daycare'?>">DayCare</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-personnel'?>">Personnel</a></li>
-                                <!--<ul class="dropdown-menu">
-                                    <li><a href="registrodaycare.html">DayCare</a></li>
-                                    <li><a href="registropersonal.html">Personnel</a></li>             
-                                </ul>  --Z -->                          
+                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-daycare'?>">DayCares</a></li>
+                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-vendor'?>">Vendors</a></li>                        
                             <!--//dropdown-->
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Reports <i class="fa fa-angle-down"></i></a>

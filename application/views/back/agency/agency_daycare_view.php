@@ -3,7 +3,7 @@
                 <div class="row">
                     <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">     
                         <div class="form-box-inner">
-                            <h2 class="title text-center">Daycare Registration</h2>                 
+                            <h2 class="title text-center"><?=$legend?></h2>                 
                             <div class="row">
                                 <div class="form-container col-xs-12 col-md-12" align="center">
                                 
@@ -37,15 +37,27 @@
                                             <?=form_error('owner')?>
                                             <input type="text" name="owner" value="<?=is_null($daycare) ? set_value('owner') : $daycare->owner?>" class="form-control login-email" placeholder="Owner">
                                         </div>
-                                        
+                                        <?php if (!$daycare) { ?>
+
+                                        <div class="form-group">
+                                            <label class="sr-only" >Director's Name</label>
+                                            <?=form_error('dirname')?>
+                                            <input type="text" class="form-control login-email" name="dirname" value="<?=is_null($daycare) ? set_value('dirname') : $dirname?>" placeholder="Director's Name">
+                                        </div>    
                                         <div class="form-group">
                                             <label class="sr-only" for="signup-email">Your email</label>
                                             <?=form_error('email')?>
                                             <input id="signup-email" type="email" name="email" value="<?=is_null($daycare) ? set_value('email') : $email?>" class="form-control login-email" placeholder="e-mail">
                                         </div><!--//form-group-->
 
+                                        <?php
+                                        }?>
+                                        
+                                        
+                                        
+
                                         <input type="hidden" name="grabar" value="si"/>   
-                                        <input type="hidden" name="id_course" value="<?=$daycare->id_daycares?>"/>
+                                        <input type="hidden" name="id_daycare" value="<?=$daycare->id_daycares?>"/>
                                         <button type="submit" class="btn btn-cta-primary"><?=$button?></button>
                                         <button type="reset" id="res" class="btn btn-cta-primary">Cancel</button>
                                         <a class="btn btn-default" href="#" onclick="window.history.back();">Back</a>
