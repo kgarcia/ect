@@ -29,4 +29,13 @@ class Employee_model extends CI_Model
 
     }
 
+    public function showEmployee(){
+        $query = $this->db->get('employees');
+        echo $query->num_rows();
+        if($query->num_rows()>0) 
+            return $query;
+        else
+            return false;
+    }
+
 }
