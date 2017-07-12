@@ -123,7 +123,7 @@ function create_daycare()
                 $email = $this->input->post('email');
                 $id_agency = $this->session->userdata('id_agency');
                 $password ='1234567';
-                $pw = md5($password); $id_rol = 2;
+                $pw = md5($password); $id_rol = 3;
                 $type_emp = 1;
 
 
@@ -194,7 +194,7 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
           
             if($this->form_validation->run()==FALSE)
             {
-                $this->edit();
+                $this->edit($id_daycare);
             }else{
                 
                 $name = $this->input->post('name');

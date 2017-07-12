@@ -29,12 +29,12 @@
                                             <label class="sr-only" >Date of birth</label>
 
                                             <?=form_error('birthdate')?>
-                                            <input id="datepicker" type ="text"  name="birthdate" value="<?=is_null($vendor) ? set_value('birthdate') : $vendor->birthdate?>" class="form-control" placeholder="Date of birth">
+                                            <input id="datepicker" type ="text"  name="birthdate" value="<?=is_null($vendor) ? set_value('birthdate') : $bdate?>" class="form-control" placeholder="Date of birth">
                                           
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" >Gender</label>
-                                            <?=form_error('Gender')?>
+                                            <?=form_error('gender')?>
                                             <select class="form-control" name="gender" id="gender">
                                                   <?php if (!$vendor) {?>
 
@@ -86,12 +86,14 @@
                                                 </select>
                                         </div>
 
+                                        <?php if (!$vendor) { ?>
+
                                         <div class="form-group">
                                             <label class="sr-only" for="signup-email">Your email</label>
                                             <?=form_error('email')?>
                                             <input id="signup-email" type="email" name="email" value="<?=is_null($vendor) ? set_value('email') : $email?>" class="form-control login-email" placeholder="e-mail">
                                         </div><!--//form-group-->
-                                        <?php if (!$vendor) { ?>
+                                        
 
                                         <?php
                                         }?>

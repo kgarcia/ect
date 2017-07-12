@@ -39,7 +39,7 @@ function get_courses_grades($id_school,$id_grade){
 }
 function get_vendor($id_vendor){
         
-        $query = $this->db->get_where('vendors', array('id_vendor' =>$id_vendor, 'status' => '1'));
+        $query = $this->db->get_where('vendors', array('id_vendor' => $id_vendor, 'status' => '1'));
         // si hay resultados
         if ($query->num_rows() == 1) {
            
@@ -59,48 +59,46 @@ function new_user($email,$pw,$id_rol)
         return $this->db->insert_id();  
     }
 
-function new_daycare($id_agency,$name,$phone,$address,$children,$owner)
+function new_vendor($name,$phone,$address,$birthdate,$gender,$id_user)
     {
        $data = array(
-            'agency_id' => $id_agency,
             'name' => $name,
             'phone' => $phone,
             'address' => $address,
-            'children_quantity' => $children,
-            'owner' => $owner
+            'birthdate' => $birthdate,
+            'gender' => $gender,
+            'user_id' => $id_user
 
         );
         
-        $this->db->insert('daycares', $data);
+        $this->db->insert('vendors', $data);
         return $this->db->insert_id();   
     }
-function new_administrator($id_daycare,$id_user,$type_emp,$dirname)
+function new_agency_vendor($id_agency,$id_vendor)
     {
        $data = array(
-            'daycare_id' => $id_daycare,
-            'user_id' => $id_user,
-            'type_employee_id' => $type_emp,
-            'name' => $dirname
+            'agency_id' => $id_agency,
+            'vendor_id' => $id_vendor
 
         );
         
-        $this->db->insert('employees', $data);
-        return $this->db->insert_id();   
+        
+        return $this->db->insert('agency_vendor', $data);  
     }
 
-function update_daycare($id_daycare,$name,$phone,$address,$children,$owner){
+function update_vendor($id_vendor,$name,$phone,$address,$birthdate,$gender){
 
          $data = array(
             'name' => $name,
             'phone' => $phone,
             'address' => $address,
-            'children_quantity' => $children,
-            'owner' => $owner
+            'birthdate' => $birthdate,
+            'gender' => $gender
             
         );
 
-            $this->db->where('id_daycares', $id_daycare);
-            return  $this->db->update('daycares', $data);
+            $this->db->where('id_vendor', $id_vendor);
+            return  $this->db->update('vendors', $data);
 
 
  }

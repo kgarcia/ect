@@ -11,52 +11,32 @@
                                 <div class="form-container col-xs-12 col-md-12" align="center">
                                     <form class="signup-form"> 
                                         <div class="form-group">
-                                            <label class="sr-only" >Name of the Centre</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Name of the Centre">
+                                            <label class="sr-only" >Name of the Agency</label>
+                                            <input type="text" name="" class="form-control login-email" placeholder="Name of the Agency">
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" >Address</label>
                                             <input type="text" name="" class="form-control login-email" placeholder="Address">
                                         </div>
                                         <div class="form-group">
-                                            <label class="sr-only" >Number of Children</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Number of Children">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" >Date of Registration</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Date of Registration">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" >Listing of Certifications</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Listing of Certifications">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" >Number of Employee</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Number of Employee">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" >Owner</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Owner">
-                                        </div>
-                                        <div class="form-group">
                                             <label class="sr-only" >Name of Director</label>
                                             <input type="text" name="" class="form-control login-email" placeholder="Name of Director">
                                         </div>
                                         <div class="form-group">
-                                            <label class="sr-only" >Phone Numbers</label>
-                                            <input type="text" name="" class="form-control login-email" placeholder="Phone Numbers">
+                                            <label class="sr-only" >Phone Number</label>
+                                            <input type="text" name="" class="form-control login-email" placeholder="Phone Number">
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" for="signup-email">Your email</label>
                                             <input id="signup-email" type="email" class="form-control " placeholder="Your email">
                                         </div><!--//form-group-->
-                                        <div class="form-group">
+                                        <!--<div class="form-group">
                                             <label class="sr-only" for="signup-password">Your password</label>
                                             <input id="signup-password" type="password" class="form-control " placeholder="Password">
-                                        </div><!--//form-group-->
+                                        </div>--><!--//form-group-->
                                         <button type="submit" class="btn btn-block btn-cta-primary">Sign up</button>
                                         <p class="note">By signing up, you agree to our terms of services and privacy policy.</p>
-                                        <p class="lead">Already have an account? <a class="login-link" id="login-link" href="login.html">Log in</a></p>  
+                                        <p class="lead">Already have an account? <a class="login-link" id="login-link" href="<?=base_url().'login'?>">Log in</a></p>  
                                     </form>
                                 </div><!--//form-container-->
                             </div><!--//row-->

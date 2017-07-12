@@ -31,27 +31,17 @@ class Agency_vendor extends CI_Controller {
 
                           $id_vendor = $id_vendor_arr[$c]->vendor_id;
                           $rowVendor[$c] = $this->Agency_vendor_model->get_vendor($id_vendor);
+
+
                      }
 
                 }
             
 
 
-
-            //$vendors = $this->Agency_vendor_model->get_vendors($id_agency);
-
             $data['vendor'] = $rowVendor;
             
-           /*if (is_array($daycares)){
-                foreach ($daycares as $k => $daycare) {
-
-                    $rowCourse = $this->Clas_model->get_course($class->id_course);
-                    $course[$k] = $rowCourse->name;
-
-                   
-                }
-
-            }*/
+           
 
 
         $data['active'] = 'vendor'; 
@@ -70,7 +60,7 @@ class Agency_vendor extends CI_Controller {
         if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
         {
             $data['title'] = 'New Vendor';    
-            $data['active'] = 'vendors';
+            $data['active'] = 'vendor';
             $data['option'] = 'no';
             $data['legend'] = 'New Vendor'; 
             $data['button'] = 'Create';
@@ -85,7 +75,7 @@ class Agency_vendor extends CI_Controller {
         }
 
     }
-function create_daycare()
+function create_vendor()
     {   
     if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
     {
@@ -100,12 +90,16 @@ function create_daycare()
             $this->form_validation->set_rules('name','Name','required|trim|max_length[250]');
              $this->form_validation->set_rules('phone','Phone Number','required|trim|max_length[45]');
               $this->form_validation->set_rules('address','Address','required|trim|max_length[250]');
-                $this->form_validation->set_rules('children','Children Quantity','trim|is_natural_no_zero|max_length[11]');
-                 $this->form_validation->set_rules('owner','Owner','required|trim|max_length[45]');
-                  $this->form_validation->set_rules('dirname',"Director's Name",'required|trim|max_length[45]');
+                $this->form_validation->set_rules('birthdate','Date of birth','required|trim|max_length[45]');
+                  $this->form_validation->set_rules('gender',"Gender",'required|callback_check_default2');
                   $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email|is_unique[users.email]');
 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+
+
+
+
+                  $this->form_validation->set_message('check_default2', 'Please select a Gender');
           
           
             if($this->form_validation->run()==FALSE)
@@ -116,28 +110,32 @@ function create_daycare()
                 $name = $this->input->post('name');
                 $phone = $this->input->post('phone');
                 $address = $this->input->post('address');
-                $children = $this->input->post('children');
-                $owner = $this->input->post('owner');
-                $dirname = $this->input->post('dirname');
+                $birthdate = $this->input->post('birthdate');
+
+                $date = new DateTime($birthdate);
+                $bdate =$date->format('Y-m-d');
+
+                $gender = $this->input->post('gender');
                 $email = $this->input->post('email');
                 $id_agency = $this->session->userdata('id_agency');
                 $password ='1234567';
-                $pw = md5($password); $id_rol = 2;
-                $type_emp = 1;
+                $pw = md5($password); $id_rol = 4;
+                
 
 
                                         
                 //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
-                $id_user = $this->Agency_daycare_model->new_user($email,$pw,$id_rol);
-                $id_daycare = $this->Agency_daycare_model->new_daycare($id_agency,$name,$phone,$address,$children,$owner);
-                $id_administrator = $this->Agency_daycare_model->new_administrator($id_daycare,$id_user,$type_emp,$dirname);
+                $id_user = $this->Agency_vendor_model->new_user($email,$pw,$id_rol);
+                $id_vendor = $this->Agency_vendor_model->new_vendor($name,$phone,$address,$bdate,$gender,$id_user);
+
+                //$this->Agency_vendor_model->new_agency_vendor($id_agency,$id_vendor);
                 
-                if ($id_daycare != Null) {
+                if ($this->Agency_vendor_model->new_agency_vendor($id_agency,$id_vendor) != Null) {
 
                     echo "<script> if (confirm('Do you want to continue?')){
-                        window.location='".base_url()."user-section/agency-daycare/add-new"."'
+                        window.location='".base_url()."user-section/agency-vendor/add-new"."'
                     } else {
-                        window.location='".base_url()."user-section/agency-daycare"."'
+                        window.location='".base_url()."user-section/agency-vendor"."'
                     }</script>";
 
                     
@@ -152,26 +150,28 @@ function create_daycare()
       } 
     }
 
- function edit($id_daycare)
+ function edit($id_vendor)
     {
         if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
         {
-            $data['title'] = 'Edit Daycare';    
-            $data['active'] = 'daycare';
-            $data['legend'] = 'Edit Daycare';
-            $data['daycare'] = $this->Agency_daycare_model->get_daycare($id_daycare);
+            $data['title'] = 'Edit Vendor';    
+            $data['active'] = 'vendor';
+            $data['legend'] = 'Edit Vendor';
+            $data['vendor'] = $this->Agency_vendor_model->get_vendor($id_vendor);
+             $date = new DateTime($data['vendor']->birthdate);
+                $bdate =$date->format('m/d/Y');
+            $data['bdate'] = $bdate;
             $data['button'] = 'Save';
             $data['option'] = 'yes';
-            $data['action'] = 'user-section/agency-daycare/update_daycare/'.$id_daycare;
+            $data['action'] = 'user-section/agency-vendor/update_vendor/';
 
-            $id_agency = $this->session->userdata('id_agency');
              $this->load->view('back/header_view', $data);
-            $this->load->view('back/agency/agency_daycare_view', $data);
+            $this->load->view('back/agency/agency_vendor_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
     }
 
-    function update_daycare()
+function update_vendor()
 {
 if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
 {
@@ -179,34 +179,45 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
 
    if(isset($_POST['grabar']) and $_POST['grabar'] == 'si')
         {
-            $id_daycare = $this->input->post('id_daycare');
+           $id_vendor = $this->input->post('id_vendor');
             //SI EXISTE EL CAMPO OCULTO LLAMADO GRABAR CREAMOS LAS VALIDACIONES
                                     
-             $this->form_validation->set_rules('name','Name','required|trim|max_length[250]');
+              $this->form_validation->set_rules('name','Name','required|trim|max_length[250]');
              $this->form_validation->set_rules('phone','Phone Number','required|trim|max_length[45]');
               $this->form_validation->set_rules('address','Address','required|trim|max_length[250]');
-                $this->form_validation->set_rules('children','Children Quantity','trim|is_natural_no_zero|max_length[11]');
-                 $this->form_validation->set_rules('owner','Owner','required|trim|max_length[45]');
+                $this->form_validation->set_rules('birthdate','Date of birth','required|trim|max_length[45]');
+                  $this->form_validation->set_rules('gender',"Gender",'required|callback_check_default2');
 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+
+
+
+
+                  $this->form_validation->set_message('check_default2', 'Please select a Gender');
           
           
             if($this->form_validation->run()==FALSE)
             {
-                $this->edit();
+                $this->edit($id_vendor);
             }else{
+                
                 
                 $name = $this->input->post('name');
                 $phone = $this->input->post('phone');
                 $address = $this->input->post('address');
-                $children = $this->input->post('children');
-                $owner = $this->input->post('owner');
+                $birthdate = $this->input->post('birthdate');
 
-                $this->Agency_daycare_model->update_daycare($id_daycare,$name,$phone,$address,$children,$owner);
+                $date = new DateTime($birthdate);
+                $bdate =$date->format('Y-m-d');
+
+                $gender = $this->input->post('gender');
+                
+
+                $this->Agency_vendor_model->update_vendor($id_vendor,$name,$phone,$address,$bdate,$gender);
                
                                
 
-                redirect(base_url().'user-section/agency-daycare');
+                redirect(base_url().'user-section/agency-vendor');
             }
         }
 
@@ -219,5 +230,10 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
 
 }
 }
+ function check_default2($post_string)
+    {
+      return $post_string == '-1' ? FALSE : TRUE;
+    }
+
 
 }
