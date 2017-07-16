@@ -136,8 +136,8 @@ class Contact extends CI_Controller
 
                     //echo $this->email->print_debugger();
 
-                var_dump($this->email->print_debugger());
-                //redirect(base_url().'contact');
+                //var_dump($this->email->print_debugger());
+                redirect(base_url().'contact');
             }
        
         }else {echo "Wrong way!!!";}
