@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="<?=base_url().'assets/plugins/flexslider/flexslider.css'?>">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/css/styles.css'?>">
+    <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/plugins/ui/jquery-ui.css'?>">
     <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-1.12.3.min.js'?>"></script>
+    <script type="text/javascript" src="<?=base_url().'assets/plugins/ui/jquery-ui.min.js'?>"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

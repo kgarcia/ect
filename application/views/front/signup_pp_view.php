@@ -41,7 +41,17 @@
                                            
                                            <?=$this->session->set_userdata('a_director', $director);?>
 
+                                            <?=$this->session->set_userdata('a_children', $children);?>
+
+                                             <?=$this->session->set_userdata('a_owner', $owner);?>
+
                                           <?=$this->session->set_userdata('a_email', $email);?>
+
+                                           <?=$this->session->set_userdata('a_type', $type);?>
+
+                                             <?=$this->session->set_userdata('a_birthdate', $birthdate);?>
+                                               <?=$this->session->set_userdata('a_gender', $gender);?>
+
                                   <br><br><br><div class="row">
                                   <div class="form-container col-xs-6 col-md-6" align="center">
                                     <a href="<?=base_url().'signup/create_pp_subscription'?>"><button id="sub" class="btn btn-block btn-cta-primary" disabled>Finish</button></a>

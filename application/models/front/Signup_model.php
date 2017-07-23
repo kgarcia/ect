@@ -74,6 +74,7 @@ class Signup_model extends CI_Model {
             'name' => $name,
             'phone' => $phone,
             'address' => $address,
+            'director' => $director,
             'user_id' => $id_user
 
         );
@@ -81,6 +82,57 @@ class Signup_model extends CI_Model {
         $this->db->insert('agencies', $data);
         return $this->db->insert_id();   
     }
+
+    function new_daycare($name,$phone,$address,$children,$owner)
+    {
+       $data = array(
+            
+            'name' => $name,
+            'phone' => $phone,
+            'address' => $address,
+            'children_quantity' => $children,
+            'owner' => $owner
+
+        );
+        
+        $this->db->insert('daycares', $data);
+        return $this->db->insert_id();   
+    }
+function new_administrator($id_daycare,$id_user,$type_emp,$director)
+    {
+       $data = array(
+            'daycare_id' => $id_daycare,
+            'user_id' => $id_user,
+            'type_employee_id' => $type_emp,
+            'name' => $director
+
+        );
+        
+        $this->db->insert('employees', $data);
+        return $this->db->insert_id();   
+    }
+
+   function new_employee($id_user,$type_emp,$name,$phone,$address,$birthdate,$gender)
+   {
+
+   		$data = array(
+
+            'user_id' => $id_user,
+            'type_employee_id' => $type_emp,
+            'name' => $name,
+            'phone' => $phone,
+            'address' => $address,
+            'birthdate' => $birthdate,
+            'gender' => $gender
+
+        );
+        
+        $this->db->insert('employees', $data);
+        return $this->db->insert_id(); 
+
+
+
+   }
 
     
 }
