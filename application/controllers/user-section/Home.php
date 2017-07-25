@@ -56,9 +56,9 @@ class Home extends CI_Controller {
 
         $data['active'] = 'home'; 
         $data['title'] = 'Child Care';
-        //$this->load->view('header_view', $data);
-        $this->load->view('back/agency/home_view', $data);
-        //$this->load->view('footer_view', $data);  
+        $this->load->view('back/header_view', $data);
+        $this->load->view('back/employee/home_view', $data);
+        $this->load->view('back/footer_view', $data);  
      }else {
             redirect(base_url().'login');
      }
