@@ -37,7 +37,7 @@ class Employee_quiz extends CI_Controller {
             $data['solutions'] = $solutions;
             $data['quiz_description'] = $quiz->description;
 
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/employee/header_view', $data);
             $this->load->view('back/employee/quiz_view', $data);
             $this->load->view('back/footer_view', $data);  
          }else {

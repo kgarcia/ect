@@ -41,7 +41,7 @@ class Employee_workshops extends CI_Controller {
             $data['active'] = 'home'; //TODO 
             $data['workshops'] = $workshops;
             $data['vendors'] = $vendors;
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/employee/header_view', $data);
             $this->load->view('back/employee/completed_workshops', $data);
             $this->load->view('back/footer_view', $data);  
          }
@@ -119,7 +119,7 @@ public function all_workshops()
             $data['vendors'] = $vendors;
             $data['completed_hours_cat'] = $completed_hours_cat;
             $data['required_hours_cat'] = $required_hours_cat;
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/employee/header_view', $data);
             $this->load->view('back/employee/all_workshops', $data);
             $this->load->view('back/footer_view', $data);  
         }
