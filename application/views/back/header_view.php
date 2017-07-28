@@ -51,10 +51,19 @@
                         <ul class="nav navbar-nav">
                             <li class="nav-item"><a href="<?=base_url().'user-section/home'?>">Home</a></li>
                             <li class="nav-item"><a href="<?=base_url().'user-section/agency-daycare'?>">DayCares</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-vendor'?>">Vendors</a></li>                        
+                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li>                  
                             <!--//dropdown-->
+
+                             <!--<li class="nav-item dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="" > Workshops<i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?=base_url().'user-section/agency-category'?>">Categories</a></li>
+                                    <li><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li> 
+                                               
+                                </ul>                            
+                            </li>-->
                             <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Reports <i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="">Reports <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="">Daycare Certifications</a></li>
                                     <li><a href="">Personnel Certifications.</a></li> 

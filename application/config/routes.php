@@ -62,4 +62,4 @@ $route['add-new'] = 'add_new';
 
 
 $route['agency-vendor'] = 'agency_vendor';
-
+$route['agency-workshop'] = 'agency_workshop';
