@@ -78,6 +78,9 @@
     <script type="text/javascript" src="<?=base_url().'assets/plugins/FitVids/jquery.fitvids.js'?>"></script>
     <script type="text/javascript" src="<?=base_url().'assets/plugins/flexslider/jquery.flexslider-min.js'?>"></script> 
              
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+    
     <!-- blog specific js starts -->
     <script type="text/javascript" src="<?=base_url().'assets/plugins/imagesloaded/imagesloaded.pkgd.min.js'?>"></script>     
     <script type="text/javascript" src="<?=base_url().'assets/plugins/masonry.pkgd.min.js'?>"></script> 
@@ -85,7 +88,10 @@
     <!-- blog specific js ends -->    
     
     <script type="text/javascript" src="<?=base_url().'assets/js/main.js'?>"></script>
-    
-            
+           <script type="text/javascript">
+            $(document).ready( function () {
+                $('#my_table').DataTable( );
+            } );
+        </script>
 </body>
 </html> 
