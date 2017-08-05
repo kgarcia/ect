@@ -70,8 +70,9 @@
     </footer><!--//footer-->
  
     <!-- Javascript -->          
-    <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-1.12.3.min.js'?>"></script>
+    
     <script type="text/javascript" src="<?=base_url().'assets/plugins/bootstrap/js/bootstrap.min.js'?>"></script> 
+    <script type="text/javascript" src="<?=base_url().'assets/plugins/list/dist/list.min.js'?>"></script> 
     <script type="text/javascript" src="<?=base_url().'assets/plugins/bootstrap-hover-dropdown.min.js'?>"></script>
     <script type="text/javascript" src="<?=base_url().'assets/plugins/back-to-top.js'?>"></script>
     <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-placeholder/jquery.placeholder.js'?>"></script>
@@ -88,10 +89,7 @@
     <!-- blog specific js ends -->    
     
     <script type="text/javascript" src="<?=base_url().'assets/js/main.js'?>"></script>
-           <script type="text/javascript">
-            $(document).ready( function () {
-                $('#my_table').DataTable( );
-            } );
-        </script>
+    
+            
 </body>
 </html> 
