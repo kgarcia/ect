@@ -118,6 +118,7 @@ class Login extends CI_Controller
                         'id_user'     =>         $check_user->id_user,
                         'roles'        =>        $row_rol->description,
                         'id_rol'        =>        $row_rol->id_role,
+                        'id_agency'     =>        $row_age->id_agencies,
                         'email'         =>         $check_user->email,
                         'name'         =>                  $name
                         );        

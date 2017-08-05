@@ -77,6 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 <<<<<<< HEAD
 	'hostname' => 'localhost',
+<<<<<<< HEAD
 	'username' => 'kevingn',
 	'password' => '',
 =======
@@ -85,6 +86,11 @@ $db['default'] = array(
 	'password' => '123',
 >>>>>>> a39bb101418318464eabace01327f8b2cdbc0f4e
 	'database' => 'elidiaz_ect',
+=======
+	'username' => 'root',
+	'password' => '',
+	'database' => 'ect',
+>>>>>>> fe9b0192f691762c7a32d0cc16ded92ccd1e8647
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
