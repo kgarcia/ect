@@ -51,4 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'page';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
+
+//USER AGENCY ROUTES
+//
+$route['register-daycare'] = 'register_daycare';
+
+$route['agency-daycare'] = 'agency_daycare';
+$route['add-new'] = 'add_new';
+
+
+$route['agency-vendor'] = 'agency_vendor';
+$route['agency-workshop'] = 'agency_workshop';
