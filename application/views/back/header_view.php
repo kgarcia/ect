@@ -15,6 +15,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
     <!-- Global CSS -->
     <link rel="stylesheet" href="<?=base_url().'assets/plugins/bootstrap/css/bootstrap.min.css'?>">   
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
     <!-- Plugins CSS -->    
     <link rel="stylesheet" href="<?=base_url().'assets/plugins/font-awesome/css/font-awesome.css'?>">
     <link rel="stylesheet" href="<?=base_url().'assets/plugins/flexslider/flexslider.css'?>">
@@ -23,6 +25,13 @@
     <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/plugins/ui/jquery-ui.css'?>">
     <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-1.12.3.min.js'?>"></script>
     <script type="text/javascript" src="<?=base_url().'assets/plugins/ui/jquery-ui.min.js'?>"></script>
+     <!-- DATATABLES -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/css/datatables.css'?>">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
+    <!--bootstrap -->
+    
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -50,20 +59,16 @@
                     <div id="navbar-collapse" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="nav-item"><a href="<?=base_url().'user-section/home'?>">Home</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-daycare'?>">DayCares</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li>                  
-                            <!--//dropdown-->
-
-                             <!--<li class="nav-item dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="" > Workshops<i class="fa fa-angle-down"></i></a>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Register <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?=base_url().'user-section/agency-category'?>">Categories</a></li>
                                     <li><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li> 
                                                
                                 </ul>                            
-                            </li>-->
+                            </li><!--//dropdown-->
                             <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="">Reports <i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Reports <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="">Daycare Certifications</a></li>
                                     <li><a href="">Personnel Certifications.</a></li> 
@@ -84,3 +89,4 @@
                 </nav><!--//main-nav-->         
             </div><!--//container-->
         </header><!--//header-->   
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

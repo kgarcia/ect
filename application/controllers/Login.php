@@ -176,6 +176,7 @@ class Login extends CI_Controller
                         'id_rol'        =>        $row_rol->id_role,
                         'email'         =>         $check_user->email,
                         'id_employee' =>  $row_emp->id_employees,
+                        'id_daycare' =>  $row_emp->daycare_id,
                         'name' =>       $name
                         );        
                         $this->session->set_userdata($data);
