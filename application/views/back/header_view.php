@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="<?=base_url().'assets/plugins/flexslider/flexslider.css'?>">
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/css/styles.css'?>">
+    <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/plugins/ui/jquery-ui.css'?>">
+    <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-1.12.3.min.js'?>"></script>
+    <script type="text/javascript" src="<?=base_url().'assets/plugins/ui/jquery-ui.min.js'?>"></script>
      <!-- DATATABLES -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
     <link id="theme-style" rel="stylesheet" href="<?=base_url().'assets/css/datatables.css'?>">
@@ -42,7 +45,7 @@
         <header class="header header-blog">  
             <div class="container">       
                 <h1 class="logo">
-                    <a href="<?=base_url().'user-section/home'?>">ETC <span class="sub">Agency</span></a>
+                    <a href="<?=base_url().'user-section/home'?>">ECT <span class="sub"><?=$title?></span></a>
                 </h1><!--//logo-->
                 <nav class="main-nav navbar-right" role="navigation">
                     <div class="navbar-header">
@@ -59,8 +62,9 @@
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Register <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="registrodaycare.html">DayCare</a></li>
-                                    <li><a href="personnel_registration">Personnel</a></li>             
+                                    <li><a href="<?=base_url().'user-section/agency-category'?>">Categories</a></li>
+                                    <li><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li> 
+                                               
                                 </ul>                            
                             </li><!--//dropdown-->
                             <li class="nav-item dropdown">

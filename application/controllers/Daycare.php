@@ -18,7 +18,7 @@ class Daycare extends CI_Controller {
 
         $data['title'] = 'Personnel Registration';    
         $data['active'] = 'Personnel_Registration';
-        $this->load->view('back/header_view', $data);
+        $this->load->view('back/daycare/header_view_k', $data);
         //$this->load->view('front/nav_view', $data);
         $this->load->view('back/daycare/personnel_registration', $data);
         $this->load->view('back/footer_view', $data); 
@@ -41,11 +41,11 @@ class Daycare extends CI_Controller {
 	}
 
 	function employee_list(){
-		 $data['title'] = 'Employee List';    
+		$data['title'] = 'Employee List';    
         $data['active'] = 'Employee_List';
         $data['employees'] = $this->employee_model->getEmployees();
         
-        $this->load->view('back/header_view', $data);
+        $this->load->view('back/daycare/header_view_k', $data);
         $this->load->view('back/daycare/employee_list', $data);
         $this->load->view('back/footer_view', $data); 
         
@@ -56,7 +56,7 @@ class Daycare extends CI_Controller {
         $data['active'] = 'Employee_List';
         #$data['employees'] = $this->employee_model->getEmployees();
         $data['segmento'] = $this->uri->segment(3);
-        $this->load->view('back/header_view', $data);
+        $this->load->view('back/daycare/header_view_k', $data);
         if($data['segmento']){
             $data['employee'] = $this->employee_model->showEmployee($data['segmento']);
             $data['workshops'] = $this->employee_model->getWorkshops($data['segmento']);

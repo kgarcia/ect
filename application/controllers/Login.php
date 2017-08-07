@@ -118,6 +118,7 @@ class Login extends CI_Controller
                         'id_user'     =>         $check_user->id_user,
                         'roles'        =>        $row_rol->description,
                         'id_rol'        =>        $row_rol->id_role,
+                        'id_agency'     =>        $row_age->id_agencies,
                         'email'         =>         $check_user->email,
                         'name'         =>                  $name
                         );        
@@ -175,6 +176,7 @@ class Login extends CI_Controller
                         'id_rol'        =>        $row_rol->id_role,
                         'email'         =>         $check_user->email,
                         'id_employee' =>  $row_emp->id_employees,
+                        'id_daycare' =>  $row_emp->daycare_id,
                         'name' =>       $name
                         );        
                         $this->session->set_userdata($data);

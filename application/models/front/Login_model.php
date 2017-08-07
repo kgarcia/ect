@@ -108,7 +108,7 @@ class Login_model extends CI_Model {
      public function get_adm($id_user){
        
         $this->db->where('user_id',$id_user);
-        $query = $this->db->get('administrators');
+        $query = $this->db->get('employees');
     
         
         if ($query->num_rows() == 1) {
