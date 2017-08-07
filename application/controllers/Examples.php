@@ -14,7 +14,7 @@ class Examples extends CI_Controller {
 
 	public function _example_output($output = null, $data)
 	{
-	    $this->load->view('back/header_view', $data);
+        $this->load->view('back/daycare/header_view_k', $data);
 		$this->load->view('example.php',(array)$output);
 		
         $this->load->view('back/footer_view', $data); 
@@ -152,17 +152,21 @@ class Examples extends CI_Controller {
 
 			$crud->set_theme('flexigrid');
 			$crud->set_table('employees');
-			$crud->set_relation('officeCode','offices','city');
-			$crud->display_as('officeCode','Office City');
+			// where daycare_id = mi daycare
+			$crud->set_relation('daycare_id','daycares','name');
+			$crud->set_relation('type_employee_id','type_employees','name');
+			$crud->display_as('daycare_id','Daycare');
+			$crud->display_as('type_employee_id','Type');
+			$crud->columns('daycare_id','name','phone','birthdate','gender','type_employee_id');
 			$crud->set_subject('Employee');
 
-			$crud->required_fields('lastName');
+		//	$crud->required_fields('lastName');
 
-			$crud->set_field_upload('file_url','assets/uploads/files');
+			//$crud->set_field_upload('file_url','assets/uploads/files');
 
 			$output = $crud->render();
- $data['title'] = 'Quizzes List';    
-        $data['active'] = 'Quizzes_List';
+ $data['title'] = 'Employee Management';    
+        $data['active'] = 'Employee_management';
 			$this->_example_output($output, $data);
 	}
 

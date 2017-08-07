@@ -75,22 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-<<<<<<< HEAD
 	'hostname' => 'localhost',
-<<<<<<< HEAD
-	'username' => 'root',
-	'password' => '',
-	'database' => 'ect',
-=======
 	'username' => 'kevingn',
 	'password' => '',
-=======
-	'hostname' => '127.0.0.1',
-	'username' => 'root',
-	'password' => '123',
->>>>>>> a39bb101418318464eabace01327f8b2cdbc0f4e
 	'database' => 'elidiaz_ect',
->>>>>>> 6443bb38f7f9781fa94aacbd9a51c6b359d9f4eb
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

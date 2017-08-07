@@ -11,21 +11,21 @@ class Daycare extends CI_Controller {
         $this->load->database('default');
         //$this->load->helper('server_root');
         //$this->removeCache();
-        $this->load->model('back/employee_model');
+        $this->load->model('back/quiz_model');
 	}
 
 	function personnel_registration(){
 
-        $data['title'] = 'Personnel Registration';    
-        $data['active'] = 'Personnel_Registration';
-        $this->load->view('back/daycare/header_view_k', $data);
+        $data['title'] = 'Quiz Registration';    
+        $data['active'] = 'Quiz_Registration';
+        $this->load->view('back/header_view', $data);
         //$this->load->view('front/nav_view', $data);
-        $this->load->view('back/daycare/personnel_registration', $data);
+        $this->load->view('back/daycare/quiz_registration', $data);
         $this->load->view('back/footer_view', $data); 
         
 	}
 
-	function create_employee(){
+	function create_quiz(){
                 
 		$data = array(
 			'name' => $this->input->post('name'),
@@ -36,34 +36,34 @@ class Daycare extends CI_Controller {
                         'birthdate'=>$this->input->post('birthdate'),
                         'gender'=>$this->input->post('gender'),
 			);
-                $this->employee_model->createEmployee($data);
-                $this->employee_list(); 
+                $this->quiz_model->createquiz($data);
+                $this->quiz_list(); 
 	}
 
-	function employee_list(){
-		$data['title'] = 'Employee List';    
-        $data['active'] = 'Employee_List';
-        $data['employees'] = $this->employee_model->getEmployees();
+	function quiz_list(){
+		 $data['title'] = 'quiz List';    
+        $data['active'] = 'quiz_List';
+        $data['quizzes'] = $this->quiz_model->getquizzes();
         
-        $this->load->view('back/daycare/header_view_k', $data);
-        $this->load->view('back/daycare/employee_list', $data);
+        $this->load->view('back/header_view', $data);
+        $this->load->view('back/daycare/quiz_list', $data);
         $this->load->view('back/footer_view', $data); 
         
 	}
 	
-	function show_employee(){
-		 $data['title'] = 'Employee List';    
-        $data['active'] = 'Employee_List';
-        #$data['employees'] = $this->employee_model->getEmployees();
+	function show_quiz(){
+		 $data['title'] = 'quiz List';    
+        $data['active'] = 'quiz_List';
+        #$data['quizzes'] = $this->quiz_model->getquizzes();
         $data['segmento'] = $this->uri->segment(3);
-        $this->load->view('back/daycare/header_view_k', $data);
+        $this->load->view('back/header_view', $data);
         if($data['segmento']){
-            $data['employee'] = $this->employee_model->showEmployee($data['segmento']);
-            $data['workshops'] = $this->employee_model->getWorkshops($data['segmento']);
-            $this->load->view('back/daycare/show_employee', $data);
+            $data['quiz'] = $this->quiz_model->showquiz($data['segmento']);
+            $data['workshops'] = $this->quiz_model->getWorkshops($data['segmento']);
+            $this->load->view('back/daycare/show_quiz', $data);
         }
         else{
-            $this->load->view('back/daycare/show_employee', $data);
+            $this->load->view('back/daycare/show_quiz', $data);
         }
         $this->load->view('back/footer_view', $data); 
         

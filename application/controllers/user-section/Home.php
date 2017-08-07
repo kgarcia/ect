@@ -13,7 +13,7 @@ class Home extends CI_Controller {
         $this->load->library(array('form_validation'));
         $this->load->helper(array('url','form'));
         $this->load->database('default');
-               
+        $this->load->model('back/employee_model');
     }
 
     public function index()
@@ -38,12 +38,14 @@ class Home extends CI_Controller {
 
      }elseif($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'administrator')
         {
-
-        $data['active'] = 'home'; 
-        $data['title'] = 'Child Care';
-        //$this->load->view('header_view', $data);
-        $this->load->view('back/agency/home_view', $data);
-        //$this->load->view('footer_view', $data);   
+    $data['title'] = 'Employee List';    
+        $data['active'] = 'Employee_List';
+        $data['employees'] = $this->employee_model->getEmployees();
+        
+        $this->load->view('back/daycare/header_view_k', $data);
+        $this->load->view('back/daycare/employee_list', $data);
+        $this->load->view('back/footer_view', $data); 
+        
      }elseif($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'vendor')
         {
 
