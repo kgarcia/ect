@@ -46,7 +46,7 @@ class Agency_vendor extends CI_Controller {
 
         $data['active'] = 'vendor'; 
         $data['title'] = 'Vendor';
-        $this->load->view('back/header_view', $data);
+        $this->load->view('back/agency/header_view', $data);
         $this->load->view('back/agency/agency_vendor_list_view', $data); 
         $this->load->view('back/footer_view', $data);
      }
@@ -66,7 +66,7 @@ class Agency_vendor extends CI_Controller {
             $data['button'] = 'Create';
             $data['action'] = 'user-section/agency-vendor/create_vendor/'; 
            
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/agency/header_view', $data);
             $this->load->view('back/agency/agency_vendor_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
@@ -165,7 +165,7 @@ function create_vendor()
             $data['option'] = 'yes';
             $data['action'] = 'user-section/agency-vendor/update_vendor/';
 
-             $this->load->view('back/header_view', $data);
+             $this->load->view('back/agency/header_view', $data);
             $this->load->view('back/agency/agency_vendor_view', $data);
             $this->load->view('back/footer_view', $data); 
         }

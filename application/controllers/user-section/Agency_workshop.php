@@ -49,7 +49,7 @@ class Agency_workshop extends CI_Controller {
 
         $data['active'] = 'Workshop'; 
         $data['title'] = 'Workshops';
-        $this->load->view('back/header_view', $data);
+        $this->load->view('back/agency/header_view', $data);
         $this->load->view('back/agency/agency_workshop_list_view', $data); 
         $this->load->view('back/footer_view', $data);
      }
@@ -71,7 +71,7 @@ class Agency_workshop extends CI_Controller {
 
             $data['categories'] = $this->Agency_workshop_model->get_categories();
            
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/agency/header_view', $data);
             $this->load->view('back/agency/agency_workshop_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
@@ -168,7 +168,7 @@ function create_workshop()
 
             $data['category'] = $row_cat->description;
            
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/agency/header_view', $data);
             $this->load->view('back/agency/agency_workshop_view', $data);
             $this->load->view('back/footer_view', $data); 
         }

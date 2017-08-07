@@ -41,7 +41,7 @@ class Agency_daycare extends CI_Controller {
 
         $data['active'] = 'daycare'; 
         $data['title'] = 'Daycare';
-        $this->load->view('back/header_view', $data);
+        $this->load->view('back/agency/header_view', $data);
         $this->load->view('back/agency/agency_daycare_list_view', $data); 
         $this->load->view('back/footer_view', $data);
      }
@@ -77,7 +77,7 @@ class Agency_daycare extends CI_Controller {
             //$data['grades'] = $grade;
             //$data['programs'] = $this->Course_model->get_programs($id_school);
             //$data['departments'] = $this->Course_model->get_departments($id_school);
-            $this->load->view('back/header_view', $data);
+            $this->load->view('back/agency/header_view', $data);
             $this->load->view('back/agency/agency_daycare_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
@@ -166,7 +166,7 @@ function create_daycare()
             $data['action'] = 'user-section/agency-daycare/update_daycare/'.$id_daycare;
 
             $id_agency = $this->session->userdata('id_agency');
-             $this->load->view('back/header_view', $data);
+             $this->load->view('back/agency/header_view', $data);
             $this->load->view('back/agency/agency_daycare_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
