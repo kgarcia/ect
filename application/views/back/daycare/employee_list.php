@@ -19,7 +19,7 @@
                         <?php foreach ($employees->result() as $emp) {?>
                                 <tr>
                                     
-                                    <td><a href="show_employee/<?= $emp->id_employees ?>"><?= $emp->name ?></a></td>
+                                    <td><a href="employee_workshops/<?= $emp->id_employees ?>"><?= $emp->name ?></a></td>
                                     <td><?= $emp->phone ?></td>
                                     <td><?= $emp->gender ?></td>
                                     <td class="success">Completed</td>

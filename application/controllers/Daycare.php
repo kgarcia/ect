@@ -12,6 +12,7 @@ class Daycare extends CI_Controller {
         //$this->load->helper('server_root');
         //$this->removeCache();
         $this->load->model('back/employee_model');
+        $this->load->model('back/Workshop_model');
 	}
 
 	function personnel_registration(){
@@ -52,7 +53,7 @@ class Daycare extends CI_Controller {
 	}
 	
 	function show_employee(){
-		 $data['title'] = 'Employee List';    
+		 $data['title'] = 'Employee Workshops';    
         $data['active'] = 'Employee_List';
         #$data['employees'] = $this->employee_model->getEmployees();
         $data['segmento'] = $this->uri->segment(3);
@@ -68,5 +69,45 @@ class Daycare extends CI_Controller {
         $this->load->view('back/footer_view', $data); 
         
 	}
+	
+	 public function employee_workshops()
+
+    {    
+         if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'administrator')
+        {
+            $data['title'] = 'Employee Workshops';    
+            $data['active'] = 'Employee_List';
+            #$data['employees'] = $this->employee_model->getEmployees();
+            $data['segmento'] = $this->uri->segment(3);
+            
+            $id_employee = $this->uri->segment(3);
+            $employee = $this->Workshop_model->get_employee($id_employee);
+
+            $enrolls = $this->Workshop_model->get_employee_enrolls($id_employee);
+
+            if( is_array($enrolls)){
+                foreach ($enrolls as $i => $enroll) {
+
+                    $workshops[$i] = $this->Workshop_model->get_workshop($enroll->workshop_id);
+                    $vendor_id = $workshops[$i]->vendor_id;
+                    $vendors[$i] = $this->Workshop_model->get_vendor($vendor_id);
+
+                }
+            }
+
+
+            $data['active'] = 'home'; //TODO 
+            $data['workshops'] = $workshops;
+            $data['vendors'] = $vendors;
+            $this->load->view('back/daycare/header_view_k', $data);
+            $this->load->view('back/employee/completed_workshops', $data);
+            $this->load->view('back/footer_view', $data);  
+         }
+         else 
+         {
+            redirect(base_url().'login');
+         }  
+    }
 }
 ?>

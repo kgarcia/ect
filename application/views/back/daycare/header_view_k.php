@@ -42,7 +42,7 @@
         <header class="header header-blog">  
             <div class="container">       
                 <h1 class="logo">
-                    <a href="<?=base_url().'user-section/home'?>">ETC <span class="sub">Agency</span></a>
+                    <a href="<?=base_url().'user-section/home'?>">ETC <span class="sub">Daycare</span></a>
                 </h1><!--//logo-->
                 <nav class="main-nav navbar-right" role="navigation">
                     <div class="navbar-header">
@@ -86,4 +86,5 @@
                 </nav><!--//main-nav-->         
             </div><!--//container-->
         </header><!--//header-->   
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

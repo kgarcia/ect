@@ -157,9 +157,12 @@ class Examples extends CI_Controller {
 			$crud->set_relation('type_employee_id','type_employees','name');
 			$crud->display_as('daycare_id','Daycare');
 			$crud->display_as('type_employee_id','Type');
-			$crud->columns('daycare_id','name','phone','birthdate','gender','type_employee_id');
+			$crud->columns('daycare_id','name','phone','birthdate','gender','type_employee_id', 'date_of_hired', 'date_of_responsability');
 			$crud->set_subject('Employee');
-
+			$crud->unset_add();
+			$crud->unset_print();
+			$crud->unset_read();
+			$crud->unset_edit_fields('daycare_id','user_id', 'created_at', 'updated_at', 'status');
 		//	$crud->required_fields('lastName');
 
 			//$crud->set_field_upload('file_url','assets/uploads/files');
