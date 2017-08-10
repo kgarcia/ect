@@ -1,3 +1,4 @@
+
 <section class="features-tabbed section">
             <div class="container">
                 <h2 class="page-title text-center"><i class="fa fa-archive"></i> All Workshops </h2><br><br>
@@ -22,10 +23,10 @@
                                         ?>
 
                                         <tr>
-                                            <td><a class="" href="" data-toggle="modal" data-target="#myModal"><?=$workshop->name?></a></td> 
+                                            <td><a class="" href=""><?=$workshop->name?></a></td> 
                                             <td><?=$vendors[$i]->name?></td>
                                             <td>
-                                            <a href="<?php echo site_url("employee_workshops/completed_workshops"); ?>" rel="modal:open" class="btn btn-success btn-lg">Upload</a>
+                                            <button type="button" class="open-uploadDialog btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-id="<?=$workshop->id_workshops?>">Upload</button>
                                             </td>
                                             <td><?=$workshop->hours?></td>
                                             
@@ -62,7 +63,48 @@
                             </table>
                         </div>
 
+                        <div id="myModal" class="modal fade" role="dialog" align="center"> 
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Upload Certificate</h4>
+                              </div>                              
+
+                              <div class="modal-body"> 
+                                  <?php $attributes = array('class' => 'form-horizontal'); ?>
+                                  <?php echo form_open_multipart(base_url().'workshops/certificate', $attributes) ?> 
+
+                                     <input type="hidden" name="workshopId" id="workshopId" value="" />
+                                     <input type = "file" name = "certificate" accept="image/jpeg,image/gif,image/png,application/pdf" /> 
+                                     <p class="help-block">Only Image and PDF File Import.</p>
+                                     <br /><br /> 
+                                     <button type="submit" class="btn btn-block btn-cta-primary">Upload</button>
+                                  
+                                  <?php echo form_close() ?>
+                                    
+                               </div>
+
+                            </div>
+
+                          </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </section>
+
+   <script type="text/javascript">
+
+   $(document).ready(function() {
+        $(document).on("click", ".open-uploadDialog", function () {
+             var workshopId = $(this).data('id');
+             $(".modal-body #workshopId").val( workshopId );
+         })
+    });
+
+    </script>
+        

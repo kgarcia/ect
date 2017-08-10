@@ -6,15 +6,18 @@
  				<h2 class="title text-center">Pre-service Quiz</h2>                 
  					<div class="row">
  						<div class="form-container col-xs-12 col-md-12">
- 							<?php $attributes = array('class' => 'form-horizontal'); ?>
-          					<?php echo form_open_multipart(base_url().'employee/transfer/request_transfer', $attributes) ?> 
+ 							<?php $attributes = array('class' => 'form-horizontal', 
+ 							'onsubmit' => "return confirm('Are you sure to submit your quiz? Once is submitted you will not be able to change any answer.');"); ?>
+          					<?php echo form_open_multipart(base_url().'quiz/send', $attributes) ?> 
  								</br>
  								<?php
-				                  foreach($questions as $question)
+				                  foreach($questions as $q => $question)
 				                  {
 				                    ?>
  								<div class="form-group">
- 									<b><?=$question->description?></b><br><br>
+
+ 									<b><?=$question->description." (".$question->score." pts.) "?></b><br><br>
+ 									<input type="hidden" name="<?php echo "quest_".$q; ?>" value="<?php echo $question->id_questions; ?>"/>
  									<?php echo form_error('question'); ?>
 									<?php
 					                  switch($question->questiontype_id)
@@ -25,7 +28,7 @@
 						                  foreach($solutions[$question->id_questions] as $sols)
 						                  {
 						                    ?>
-						                    <input type="radio" name=<?=$question->id_questions?> value=<?=$sols->id_solutions?>> <?=$sols->description?><br>
+						                    <input type="radio" name=<?="ans_".$question->id_questions?> value=<?=$sols->id_solutions?>> <?=$sols->description?><br>
 						                    <?php
 						                  }
 
@@ -34,17 +37,7 @@
 						                case 2:
 						                  ?> 
 
-						                  <input type="radio" name=<?=$question->id_questions?> value="yes"> YES <br>  
-						                  <input type="radio" name=<?=$question->id_questions?> value="no"> NO <br> 
-
-						                   <?php						                
-
-						                  break;
-
-						                case 3:
-						                  ?> 
-
-						                  <textarea id=<?=$question->id_questions?> name=<?=$question->id_questions?> rows="4" style="width:100%"></textarea>
+						                  <textarea id=<?=$question->id_questions?> name=<?="ans_".$question->id_questions?> rows="4" style="width:100%"></textarea>
 
 						                   <?php						                
 
@@ -60,6 +53,7 @@
 					             ?> 
 
  								<input type="hidden" name="grabar" value="si"/>
+ 								<input type="hidden" name="quiz_id" value="<?php echo $quiz_id; ?>"/>
 
  								</br>
  								<button type="submit" class="btn btn-block btn-cta-primary">Send</button>  
@@ -71,4 +65,5 @@
  		</div><!--//row-->
  	</div><!--//container-->
  </section><!--//signup-section-->
+
 
