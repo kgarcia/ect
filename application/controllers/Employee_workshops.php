@@ -69,7 +69,7 @@ public function all_workshops()
 
             $rules = $this->Workshop_model->get_employee_rules($years_diff, $employee->type_employee_id);
 
-            $actual_scholar_year = $this->Workshop_model->get_actual_scholar_year($daycare_id);
+            $actual_scholar_year = $this->Workshop_model->get_actual_scholar_year();
 
             $ind = 0;
 
@@ -129,4 +129,42 @@ public function all_workshops()
          }  
     }
 
+    public function upload_certificate() { 
+        if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'employee')
+        {
+             $config['upload_path']   = './uploads/'; 
+             $config['allowed_types'] = 'gif|jpg|png|pdf';  
+             $this->load->library('upload', $config);
+                
+             if ( $this->upload->do_upload('certificate')) {
+                $data = $this->upload->data();
+                $path = $data["full_path"];
+                $id_workshop = $this->input->post('workshopId');
+                $id_employee = $this->session->userdata('id_employee');
+                $employee = $this->Workshop_model->get_employee($id_employee);
+                $daycare_id = $employee->daycare_id;
+                $actual_scholar_year = $this->Workshop_model->get_actual_scholar_year();
+
+                if (is_null($actual_scholar_year)){
+                    $this->Workshop_model->create_enrollment($id_workshop,$id_employee);
+                } else {
+                    $this->Workshop_model->create_enrollment_scholar_year($id_workshop,$id_employee,$actual_scholar_year->id_scholar_years);
+                }             
+                $this->Workshop_model->create_certification($id_workshop,$id_employee,$path);
+
+                echo "<script>javascript:alert('The certificate has been uploaded successfully');
+                window.location='".base_url()."workshops/all'
+                </script>";
+
+             }    
+             else { 
+                redirect(base_url().'login');
+             } 
+        } 
+        else 
+        {
+            redirect(base_url().'login');
+        } 
+    }
 }

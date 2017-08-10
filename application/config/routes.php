@@ -60,9 +60,9 @@ $route['quiz/preservice'] = 'employee_quiz/preservice_quiz';
 //
 $route['register-daycare'] = 'register_daycare';
 
-$route['agency-daycare'] = 'agency_daycare';
+$route['admin-daycare'] = 'admin_daycare';
 $route['add-new'] = 'add_new';
 
 
-$route['agency-vendor'] = 'agency_vendor';
-$route['agency-workshop'] = 'agency_workshop';
+$route['admin-vendor'] = 'admin_vendor';
+$route['admin-workshop'] = 'admin_workshop';

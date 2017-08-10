@@ -28,11 +28,11 @@ class Workshop_model extends CI_Model
 		}
 	}
 
-	function get_actual_scholar_year($daycare_id){
+	function get_actual_scholar_year(){
 
         $today = date( 'Y-m-d H:i:s' );  
 
-        $query = $this->db->get_where('scholar_years', array('start <=' => $today, 'finish >=' => $today, 'daycare_id' => $daycare_id, 'status' => 1));
+        $query = $this->db->get_where('scholar_years', array('start <=' => $today, 'finish >=' => $today, 'status' => 1));
         // si hay resultados
         if ($query->num_rows() == 1) {
            
@@ -126,5 +126,37 @@ class Workshop_model extends CI_Model
 			return $query->result();
 		}
 	}
+
+	function create_enrollment($workshop_id,$employee_id)
+    {
+       $data = array(
+            'workshop_id' => $workshop_id,
+       		'employee_id' => $employee_id
+        );
+       $this->db->insert('enrollment', $data);
+       return $this->db->insert_id();    
+    }
+
+    function create_enrollment_scholar_year($workshop_id,$employee_id,$scholar_year_id)
+    {
+       $data = array(
+            'workshop_id' => $workshop_id,
+       		'employee_id' => $employee_id,
+       		'scholar_year_id' => $scholar_year_id
+        );
+       $this->db->insert('enrollment', $data);
+       return $this->db->insert_id();    
+    }
+
+    function create_certification($id_workshop,$id_employee,$path)
+    {
+       $data = array(
+            'id_workshop' => $id_workshop,
+       		'id_employee' => $id_employee,
+       		'path' => $path
+        );
+       $this->db->insert('certifications', $data);
+       return $this->db->insert_id();    
+    }
 
 }
