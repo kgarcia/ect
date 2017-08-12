@@ -13,9 +13,10 @@
                                  <?php $attributes = array('class' => 'signup-form'); ?>
                                  <?php echo form_open_multipart(base_url().'signup/create_subscription', $attributes) ?>
                                  <div class="form-group">
+                                <!-- <div class="form-group">
                                  <label class="radio-inline input-lg">
                                       <input type="radio" name="inlineRadioOptions" id="age1" value="1"> Agency
-                                    </label>
+                                    </label>-->
                                     <label class="radio-inline input-lg">
                                       <input type="radio" name="inlineRadioOptions" id="day2" value="2"> Daycare
                                     </label>
@@ -90,6 +91,11 @@
                                                   
      $(document).ready(function() { 
 
+      //$.ajaxPrefilter(function(options, originalOptions, jqXHR ) {
+       //options.async = true; 
+
+     //});
+
          $("#age1").click(function() {
                   age = $('#age1').val();
                   $.post("<?=base_url();?>signup/fill_sub", {
@@ -97,7 +103,7 @@
                   }, function(data) {
                     $("#sub").html(data);
                     // console.log(data);
-                  },); 
+                  }); 
               });
 
          $("#day2").click(function() {
@@ -105,6 +111,7 @@
                   $.post("<?=base_url();?>signup/fill_sub", {
                    type : day
                   }, function(data) {
+                    
                     $("#sub").html(data);
                     // console.log(data);
                   }); 
@@ -115,10 +122,13 @@
                   $.post("<?=base_url();?>signup/fill_sub", {
                    type : emp
                   }, function(data) {
+                    
                     $("#sub").html(data);
                     // console.log(data);
                   }); 
               });
+
+         
 
 
                                          

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Agency_vendor_model extends CI_Model
+class Admin_vendor_model extends CI_Model
 {
     public function construct()
     {
@@ -8,18 +8,18 @@ class Agency_vendor_model extends CI_Model
     }
 
 
-function get_vendors($id_agency){
+function get_vendors(){
         
-        $query = $this->db->get_where('vendors', array('agency_id' => $id_agency, 'status' => '1'));
+        $query = $this->db->get_where('vendors', array('status' => '1'));
         // si hay resultados
         if ($query->num_rows() > 0) {
            
             return $query->result();
         }
     }
-function get_id_vendors($id_agency){
+function get_id_vendors(){
         
-        $query = $this->db->get_where('agency_vendor', array('agency_id' => $id_agency, 'status' => '1'));
+        $query = $this->db->get_where('agency_vendor', array('status' => '1'));
         // si hay resultados
         if ($query->num_rows() > 0) {
            
@@ -59,15 +59,15 @@ function new_user($email,$pw,$id_rol)
         return $this->db->insert_id();  
     }
 
-function new_vendor($name,$phone,$address,$birthdate,$gender,$id_user)
+function new_vendor($name,$phone,$address,$bdate,$gender,$email)
     {
        $data = array(
             'name' => $name,
             'phone' => $phone,
             'address' => $address,
-            'birthdate' => $birthdate,
+            'birthdate' => $bdate,
             'gender' => $gender,
-            'user_id' => $id_user
+            'email' => $email
 
         );
         
@@ -86,14 +86,15 @@ function new_agency_vendor($id_agency,$id_vendor)
         return $this->db->insert('agency_vendor', $data);  
     }
 
-function update_vendor($id_vendor,$name,$phone,$address,$birthdate,$gender){
+function update_vendor($id_vendor,$name,$phone,$address,$birthdate,$gender,$email){
 
          $data = array(
             'name' => $name,
             'phone' => $phone,
             'address' => $address,
             'birthdate' => $birthdate,
-            'gender' => $gender
+            'gender' => $gender,
+            'email' => $email
             
         );
 

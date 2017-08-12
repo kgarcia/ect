@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Agency_daycare_model extends CI_Model
+
+class Admin_workshop_model extends CI_Model
 {
     public function construct()
     {
@@ -7,9 +8,19 @@ class Agency_daycare_model extends CI_Model
     }
 
 
-function get_daycares($id_agency){
+function get_workshops(){
         
-        $query = $this->db->get_where('daycares', array('agency_id' => $id_agency, 'status' => '1'));
+        $query = $this->db->get_where('workshops', array('status' => '1'));
+        // si hay resultados
+        if ($query->num_rows() > 0) {
+           
+            return $query->result();
+        }
+    }
+
+    function get_categories(){
+        
+        $query = $this->db->get_where('categories', array( 'status' => '1'));
         // si hay resultados
         if ($query->num_rows() > 0) {
            
@@ -18,18 +29,27 @@ function get_daycares($id_agency){
     }
 
 
-function get_courses_grades($id_school,$id_grade){
+function get_id_categories(){
         
-        $query = $this->db->get_where('courses', array('id_school' => $id_school,'id_grade' => $id_grade, 'status' => '1'));
+        $query = $this->db->get_where('categories', array('status' => '1'));
         // si hay resultados
         if ($query->num_rows() > 0) {
            
             return $query->result();
         }
 }
-function get_daycare($id_daycare){
+function get_category($id_category){
         
-        $query = $this->db->get_where('daycares', array('id_daycares' =>$id_daycare, 'status' => '1'));
+        $query = $this->db->get_where('categories', array('id_categories' =>$id_category, 'status' => '1'));
+        // si hay resultados
+        if ($query->num_rows() == 1) {
+           
+            return $query->row();
+        }
+    }
+function get_workshop($id_workshop){
+        
+        $query = $this->db->get_where('workshops', array('id_workshops' =>$id_workshop, 'status' => '1'));
         // si hay resultados
         if ($query->num_rows() == 1) {
            
@@ -49,19 +69,17 @@ function new_user($email,$pw,$id_rol)
         return $this->db->insert_id();  
     }
 
-function new_daycare($id_agency,$name,$phone,$address,$children,$owner)
+function new_workshop($category,$name,$hours,$topic)
     {
        $data = array(
-            'agency_id' => $id_agency,
+            'category_id' => $category,
             'name' => $name,
-            'phone' => $phone,
-            'address' => $address,
-            'children_quantity' => $children,
-            'owner' => $owner
+            'hours' => $hours,
+            'topic' => $topic
 
         );
         
-        $this->db->insert('daycares', $data);
+        $this->db->insert('workshops', $data);
         return $this->db->insert_id();   
     }
 function new_administrator($id_daycare,$id_user,$type_emp,$dirname)
@@ -78,19 +96,18 @@ function new_administrator($id_daycare,$id_user,$type_emp,$dirname)
         return $this->db->insert_id();   
     }
 
-function update_daycare($id_daycare,$name,$phone,$address,$children,$owner){
+function update_workshop($id_workshop,$category,$name,$hours,$topic){
 
          $data = array(
+            'category_id' => $category,
             'name' => $name,
-            'phone' => $phone,
-            'address' => $address,
-            'children_quantity' => $children,
-            'owner' => $owner
+            'hours' => $hours,
+            'topic' => $topic
             
         );
 
-            $this->db->where('id_daycares', $id_daycare);
-            return  $this->db->update('daycares', $data);
+            $this->db->where('id_workshops', $id_workshop);
+            return  $this->db->update('workshops', $data);
 
 
  }

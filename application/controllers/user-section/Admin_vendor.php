@@ -3,12 +3,12 @@
 /**
 *
 */
-class Agency_vendor extends CI_Controller {
+class Admin_vendor extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
         error_reporting(E_ALL ^ (E_NOTICE));
-        $this->load->model('back/Agency_vendor_model');
+        $this->load->model('back/Admin_vendor_model');
         //$this->load->model(array('Login_model','backend/Beneficiary_model','backend/Event_model'));
         $this->load->library(array('form_validation'));
         $this->load->helper(array('url','form'));
@@ -19,35 +19,23 @@ class Agency_vendor extends CI_Controller {
     public function index()
 
     {    
-     if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+     if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
         {
-            $id_agency = $this->session->userdata('id_agency');
+            //$id_agency = $this->session->userdata('id_agency');
 
-            $id_vendor_arr = $this->Agency_vendor_model->get_id_vendors($id_agency);
-            if (is_array($id_vendor_arr))
-                {
-                 foreach($id_vendor_arr as $c => $k)
-                     {
-
-                          $id_vendor = $id_vendor_arr[$c]->vendor_id;
-                          $rowVendor[$c] = $this->Agency_vendor_model->get_vendor($id_vendor);
+            $vendors = $this->Admin_vendor_model->get_vendors();
 
 
-                     }
 
-                }
-            
-
-
-            $data['vendor'] = $rowVendor;
+            $data['vendor'] =  $vendors;
             
            
 
 
         $data['active'] = 'vendor'; 
         $data['title'] = 'Vendor';
-        $this->load->view('back/agency/header_view', $data);
-        $this->load->view('back/agency/agency_vendor_list_view', $data); 
+        $this->load->view('back/webadmin/header_view', $data);
+        $this->load->view('back/webadmin/admin_vendor_list_view', $data); 
         $this->load->view('back/footer_view', $data);
      }
     
@@ -57,17 +45,17 @@ class Agency_vendor extends CI_Controller {
  function add_new()
     {
 
-        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
         {
             $data['title'] = 'New Vendor';    
             $data['active'] = 'vendor';
             $data['option'] = 'no';
             $data['legend'] = 'New Vendor'; 
             $data['button'] = 'Create';
-            $data['action'] = 'user-section/agency-vendor/create_vendor/'; 
+            $data['action'] = 'user-section/admin-vendor/create_vendor/'; 
            
-            $this->load->view('back/agency/header_view', $data);
-            $this->load->view('back/agency/agency_vendor_view', $data);
+            $this->load->view('back/webadmin/header_view', $data);
+            $this->load->view('back/webadmin/admin_vendor_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
         else {
@@ -77,7 +65,7 @@ class Agency_vendor extends CI_Controller {
     }
 function create_vendor()
     {   
-    if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+    if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
     {
 
         //echo "probando";
@@ -92,7 +80,7 @@ function create_vendor()
               $this->form_validation->set_rules('address','Address','required|trim|max_length[250]');
                 $this->form_validation->set_rules('birthdate','Date of birth','required|trim|max_length[45]');
                   $this->form_validation->set_rules('gender',"Gender",'required|callback_check_default2');
-                  $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email|is_unique[users.email]');
+                   $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email');
 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
@@ -117,30 +105,29 @@ function create_vendor()
 
                 $gender = $this->input->post('gender');
                 $email = $this->input->post('email');
-                $id_agency = $this->session->userdata('id_agency');
-                $password ='1234567';
-                $pw = md5($password); $id_rol = 4;
+                //$id_agency = $this->session->userdata('id_agency');
+                
                 
 
 
                                         
                 //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
-                $id_user = $this->Agency_vendor_model->new_user($email,$pw,$id_rol);
-                $id_vendor = $this->Agency_vendor_model->new_vendor($name,$phone,$address,$bdate,$gender,$id_user);
+                //$id_user = $this->Admin_vendor_model->new_user($email,$pw,$id_rol);
+                $id_vendor = $this->Admin_vendor_model->new_vendor($name,$phone,$address,$bdate,$gender,$email);
 
-                //$this->Agency_vendor_model->new_agency_vendor($id_agency,$id_vendor);
+                //$this->Admin_vendor_model->new_agency_vendor($id_agency,$id_vendor);
                 
-                if ($this->Agency_vendor_model->new_agency_vendor($id_agency,$id_vendor) != Null) {
+                if (  $id_vendor != Null) {
 
                     echo "<script> if (confirm('Do you want to continue?')){
-                        window.location='".base_url()."user-section/agency-vendor/add-new"."'
+                        window.location='".base_url()."user-section/admin-vendor/add-new"."'
                     } else {
-                        window.location='".base_url()."user-section/agency-vendor"."'
+                        window.location='".base_url()."user-section/admin-vendor"."'
                     }</script>";
 
                     
                 }
-                //redirect(base_url().'agency-daycare/add_new');
+                //redirect(base_url().'admin-daycare/add_new');
 
                 
         }
@@ -152,28 +139,28 @@ function create_vendor()
 
  function edit($id_vendor)
     {
-        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
         {
             $data['title'] = 'Edit Vendor';    
             $data['active'] = 'vendor';
             $data['legend'] = 'Edit Vendor';
-            $data['vendor'] = $this->Agency_vendor_model->get_vendor($id_vendor);
+            $data['vendor'] = $this->Admin_vendor_model->get_vendor($id_vendor);
              $date = new DateTime($data['vendor']->birthdate);
                 $bdate =$date->format('m/d/Y');
             $data['bdate'] = $bdate;
             $data['button'] = 'Save';
             $data['option'] = 'yes';
-            $data['action'] = 'user-section/agency-vendor/update_vendor/';
+            $data['action'] = 'user-section/admin-vendor/update_vendor/';
 
-             $this->load->view('back/agency/header_view', $data);
-            $this->load->view('back/agency/agency_vendor_view', $data);
+             $this->load->view('back/webadmin/header_view', $data);
+            $this->load->view('back/webadmin/admin_vendor_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
     }
 
 function update_vendor()
 {
-if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
 {
 
 
@@ -187,6 +174,7 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
               $this->form_validation->set_rules('address','Address','required|trim|max_length[250]');
                 $this->form_validation->set_rules('birthdate','Date of birth','required|trim|max_length[45]');
                   $this->form_validation->set_rules('gender',"Gender",'required|callback_check_default2');
+                  $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email');
 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
@@ -207,17 +195,19 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
                 $address = $this->input->post('address');
                 $birthdate = $this->input->post('birthdate');
 
+
                 $date = new DateTime($birthdate);
                 $bdate =$date->format('Y-m-d');
 
                 $gender = $this->input->post('gender');
+                  $email = $this->input->post('email');
                 
 
-                $this->Agency_vendor_model->update_vendor($id_vendor,$name,$phone,$address,$bdate,$gender);
+                $this->Admin_vendor_model->update_vendor($id_vendor,$name,$phone,$address,$bdate,$gender,$email);
                
                                
 
-                redirect(base_url().'user-section/agency-vendor');
+                redirect(base_url().'user-section/admin-vendor');
             }
         }
 

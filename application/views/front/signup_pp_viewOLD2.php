@@ -5,15 +5,20 @@
                 <div class="row">
                     <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">     
                         <div class="form-box-inner">
-                            <h2 class="title text-center">Subscription</h2>  
-                            <p class="intro text-center">Please Click "Subscribe" Button to Proceed to the Payment</p>               
+                            <h2 class="title text-center">Last Steps</h2>  
+                            <p class="intro text-center">Follow the Steps Below Carefully</p>               
                             <div class="row">
                                 <div class="form-container col-xs-12 col-md-12" align="center">
                                  <!--<form class="signup-form"> -->
                                  <?php $attributes = array('class' => 'signup-form','target' => '_blank'); ?>
                                  <?php echo form_open_multipart($action, $attributes) ?>
                                         
-                                        
+                                        <div align="left">
+                                        <ol>
+                                        <li>Please Click "Subscribe" Button to Proceed to the Payment</li>
+                                        <li>Then Click "Finish" Button to Complete your Registration</li>
+                                        </ol>
+                                        </div><br><br>
 
                                         <!-- Identify your business so that you can collect the payments. -->
                                                     <input type="hidden" name="business" value="eli7diaz@gmail.com">
@@ -172,11 +177,11 @@
                                                <?=$this->session->set_userdata('a_price', $price);?>
 
                                   <br><br><br><div class="row">
-                                  <!--<div class="form-container col-xs-6 col-md-6" align="center">
+                                  <div class="form-container col-xs-6 col-md-6" align="center">
                                     <a href="<?=base_url().'signup/create_pp_subscription'?>"><button id="sub" class="btn btn-block btn-cta-primary" disabled>Finish</button></a>
-                                  </div>-->
-                                  <div class="form-container col-xs-12 col-md-12" align="center">
-                                    <a class="btn btn-block btn-cta-primary" href="#" onclick="window.history.back();">Cancel</a>
+                                  </div>
+                                  <div class="form-container col-xs-6 col-md-6" align="center">
+                                    <a class="btn btn-block btn-cta-primary" href="#" onclick="window.history.back();">Back</a>
                                   </div>
                                 </div>
                                 <script language="JavaScript" type="text/javascript">

@@ -120,8 +120,8 @@ class Signup extends CI_Controller
         </div>
         <div class="form-group">'.
         form_error("children").'
-            <label class="sr-only" >Number of children</label>
-            <input type="number" name="children" min="0" class="form-control login-email " placeholder="Number of Children" value="'.set_value("children").'">
+            <label class="sr-only" >Number of Employees</label>
+            <input type="number" name="children" min="2" class="form-control login-email " placeholder="Number of Employees" value="'.set_value("children").'">
         </div>
 
         <div class="form-group">'.
@@ -176,7 +176,8 @@ class Signup extends CI_Controller
 
 
 
-        echo '<div class="form-group">'.
+        echo '
+         <div class="form-group">'.
               form_error("name").'
             <label class="sr-only" >Name</label>
             <input type="text" name="name" class="form-control login-email" placeholder="Name" value="'.set_value("name").'">
@@ -315,6 +316,7 @@ class Signup extends CI_Controller
                      $data['address'] = $address;
                       $data['director'] = $director;
                        $data['email'] = $email;
+                       $data['type'] = $this->input->post('ty');
                        $data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
                 
 
@@ -339,9 +341,10 @@ class Signup extends CI_Controller
                 $this->form_validation->set_rules('dirname','Director','required|trim|max_length[250]');
                 $this->form_validation->set_rules('children','Number of Children','required|trim|is_natural_no_zero');
                 $this->form_validation->set_rules('owner','Owner','required|trim|max_length[250]');
+                //$this->form_validation->set_rules('price',"Price",'required|callback_check_default3');
                  
                   $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email|is_unique[users.email]');
-
+                  //$this->form_validation->set_message('check_default3', 'Please select a Plan'); 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
           
@@ -358,6 +361,7 @@ class Signup extends CI_Controller
                 $children = $this->input->post('children');
                 $owner = $this->input->post('owner');
                 $email = $this->input->post('email');
+                //$price = $this->input->post('price');
                 $password ='1234567';
                 $pw = md5($password); $id_rol = 3;
                 
@@ -378,6 +382,7 @@ class Signup extends CI_Controller
                        $data['children'] = $children;
                         $data['owner'] = $owner;
                        $data['email'] = $email;
+                       $data['price'] = $price;
                        $data['type'] = $this->input->post('ty');
                        $data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
                 
@@ -406,10 +411,11 @@ class Signup extends CI_Controller
               $this->form_validation->set_rules('address','Address','required|trim|max_length[250]');
                 $this->form_validation->set_rules('birthdate','Date of birth','required|trim|max_length[45]');
                   $this->form_validation->set_rules('gender',"Gender",'required|callback_check_default2');
+                 //   $this->form_validation->set_rules('price',"Price",'required|callback_check_default3'); 
 
                  
                   $this->form_validation->set_rules('email', 'E-mail', 'required|trim|valid_email|is_unique[users.email]');
-
+     //   $this->form_validation->set_message('check_default3', 'Please select a Plan'); 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
             $this->form_validation->set_message('check_default2', 'Please select a Gender');
           
@@ -425,6 +431,7 @@ class Signup extends CI_Controller
                 $birthdate = $this->input->post('birthdate');
                 $gender = $this->input->post('gender');
                 $email = $this->input->post('email');
+            //    $price = $this->input->post('price');
 
 
                 $date = new DateTime($birthdate);
@@ -440,6 +447,8 @@ class Signup extends CI_Controller
                       $data['birthdate'] = $bdate;
                        $data['gender'] = $gender;
                        $data['email'] = $email;
+                        $data['price'] = $price;
+
                        $data['type'] = $this->input->post('ty');
                        $data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
                 
@@ -464,11 +473,57 @@ class Signup extends CI_Controller
      function create_pp_subscription()
 
     {
+      // STEP 1: read POST data
+                // Reading POSTed data directly from $_POST causes serialization issues with array data in the POST.
+                // Instead, read raw POST data from the input stream.
+                $raw_post_data = file_get_contents('php://input');
+                $raw_post_array = explode('&', $raw_post_data);
+                $myPost = array();
+                foreach ($raw_post_array as $keyval) {
+                  $keyval = explode ('=', $keyval);
+                  if (count($keyval) == 2)
+                    $myPost[$keyval[0]] = urldecode($keyval[1]);
+                }
+                // read the IPN message sent from PayPal and prepend 'cmd=_notify-validate'
+                $req = 'cmd=_notify-validate';
+                if (function_exists('get_magic_quotes_gpc')) {
+                  $get_magic_quotes_exists = true;
+                }
+                foreach ($myPost as $key => $value) {
+                  if ($get_magic_quotes_exists == true && get_magic_quotes_gpc() == 1) {
+                    $value = urlencode(stripslashes($value));
+                  } else {
+                    $value = urlencode($value);
+                  }
+                  $req .= "&$key=$value";
+                }
+
+                // Step 2: POST IPN data back to PayPal to validate
+                $ch = curl_init('https://ipnpb.paypal.com/cgi-bin/webscr');
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+                curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
+                // In wamp-like environments that do not come bundled with root authority certificates,
+                // please download 'cacert.pem' from "http://curl.haxx.se/docs/caextract.html" and set
+                // the directory path of the certificate as shown below:
+                // curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
+                if ( !($res = curl_exec($ch)) ) {
+                  // error_log("Got " . curl_error($ch) . " when processing IPN data");
+                  curl_close($ch);
+                  exit;
+                }
+                curl_close($ch);
 
             //SI EXISTE EL CAMPO OCULTO LLAMADO GRABAR CREAMOS LAS VALIDACIONES
-               
+          
            if($this->session->userdata('a_type') == 1)
-        {
+        {  
+
                 
                 $name = $this->session->userdata('a_name');
                 $phone = $this->session->userdata('a_phone');
@@ -500,72 +555,110 @@ class Signup extends CI_Controller
 
             }elseif ($this->session->userdata('a_type') == 2) {
 
-                $name = $this->session->userdata('a_name');
-                $phone = $this->session->userdata('a_phone');
-                 $address = $this->session->userdata('a_address');
-                 $director = $this->session->userdata('a_director');
-                 $children = $this->session->userdata('a_children');
-                 $owner = $this->session->userdata('a_owner');
-                $email = $this->session->userdata('a_email');
+              // inspect IPN validation result and act accordingly
+                  if (strcmp ($res, "VERIFIED") == 0) {
 
-                $type_emp = 1;
-                
+                     $name = $this->session->userdata('a_name');
+                        $phone = $this->session->userdata('a_phone');
+                         $address = $this->session->userdata('a_address');
+                         $director = $this->session->userdata('a_director');
+                         $children = $this->session->userdata('a_children');
+                         $owner = $this->session->userdata('a_owner');
+                        $email = $this->session->userdata('a_email');
 
-                $password ='1234567';
-                $pw = md5($password); $id_rol = 3;
-                
+                        $type_emp = 1;
+                        
+
+                        $password ='1234567';
+                        $pw = md5($password); $id_rol = 3;
+                        
 
 
-                                        
-                //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
-                $id_user = $this->Signup_model->new_user($email,$pw,$id_rol);
-                $id_daycare = $this->Signup_model->new_daycare($name,$phone,$address,$children,$owner);
-                $id_administrator = $this->Signup_model->new_administrator($id_daycare,$id_user,$type_emp,$director);
+                                                
+                        //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
+                        $id_user = $this->Signup_model->new_user($email,$pw,$id_rol);
+                        $id_daycare = $this->Signup_model->new_daycare($name,$phone,$address,$children,$owner);
+                        $id_administrator = $this->Signup_model->new_administrator($id_daycare,$id_user,$type_emp,$director);
 
-                 if ($id_daycare != Null) {
+                         if ($id_daycare != Null) {
 
-                        echo '<script type="text/javascript">'; 
-                        echo 'alert("Successful Registration!");'; 
-                        echo 'window.location.href = "'.base_url().'signup";';
-                        echo '</script>';
-                                            
-                }
+                                echo '<script type="text/javascript">'; 
+                                echo 'alert("Successful Registration!");'; 
+                                echo 'window.location.href = "'.base_url().'login";';
+                                echo '</script>';
+                                                    
+                        }
+
+
+                    
+                  } else if (strcmp ($res, "INVALID") == 0) {
+
+
+
+                    echo '<script type="text/javascript">'; 
+                   echo 'alert("Invalid IPN");';
+                    echo '</script>';
+                  }
+
+               
 
 
                 
                 
             }elseif ($this->session->userdata('a_type') == 3) {
 
-
-                $name = $this->session->userdata('a_name');
-                $phone = $this->session->userdata('a_phone');
-                 $address = $this->session->userdata('a_address');
-                 $birthdate = $this->session->userdata('a_birthdate');
-                 $gender = $this->session->userdata('a_gender');
-
-                $email = $this->session->userdata('a_email');
-
-                $type_emp = 2;
-                
-
-                $password ='1234567';
-                $pw = md5($password); $id_rol = 5;
-                
+              
+                  
+                  if (strcmp ($res, "VERIFIED") == 0) {
 
 
-                                        
-                //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
-                $id_user = $this->Signup_model->new_user($email,$pw,$id_rol);
-                $id_employee = $this->Signup_model->new_employee($id_user,$type_emp,$name,$phone,$address,$birthdate,$gender);
+
+                     $name = $this->session->userdata('a_name');
+                    $phone = $this->session->userdata('a_phone');
+                     $address = $this->session->userdata('a_address');
+                     $birthdate = $this->session->userdata('a_birthdate');
+                     $gender = $this->session->userdata('a_gender');
+
+                    $email = $this->session->userdata('a_email');
+
+                    $type_emp = 2;
+                    
+
+                    $password ='1234567';
+                    $pw = md5($password); $id_rol = 5;
+                    
+
+
+                                            
+                    //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
+                    $id_user = $this->Signup_model->new_user($email,$pw,$id_rol);
+                    $id_employee = $this->Signup_model->new_employee($id_user,$type_emp,$name,$phone,$address,$birthdate,$gender);
 
                  if ($id_employee != Null) {
 
                         echo '<script type="text/javascript">'; 
                         echo 'alert("Successful Registration!");'; 
-                        echo 'window.location.href = "'.base_url().'signup";';
+                        echo 'window.location.href = "'.base_url().'login";';
                         echo '</script>';
                                             
                 }
+
+
+
+
+                    
+                  } else if (strcmp ($res, "INVALID") == 0) {
+
+                          
+                    echo '<script type="text/javascript">'; 
+                   echo 'alert("Invalid IPN");';
+                    echo '</script>';
+                   
+                  }
+
+
+
+               
 
                 
                 
@@ -581,6 +674,11 @@ class Signup extends CI_Controller
     }
 
     function check_default2($post_string)
+    {
+      return $post_string == '-1' ? FALSE : TRUE;
+    }
+
+    function check_default3($post_string)
     {
       return $post_string == '-1' ? FALSE : TRUE;
     }

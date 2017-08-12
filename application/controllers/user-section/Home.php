@@ -23,9 +23,12 @@ class Home extends CI_Controller {
         {
 
         $data['active'] = 'home'; 
-        $data['title'] = 'Child Care';
+        $data['title'] = 'Webadmin';
         //$this->load->view('header_view', $data);
-        $this->load->view('back/agency/home_view', $data); 
+        $this->load->view('back/webadmin/header_view', $data);
+        $this->load->view('back/webadmin/home_view', $data); 
+        $this->load->view('back/footer_view', $data); 
+        
      }elseif($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
         {
 

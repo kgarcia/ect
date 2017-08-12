@@ -3,7 +3,7 @@
                 <div class="" >                    
                     <div class="team row">
                         <h3 class="title">Daycare List</h3>
-                        <div class="text-center"><a href="<?=base_url().'user-section/agency-daycare/add-new'?>"><button type="button" class="btn btn-cta btn-cta-primary">Add New&nbsp;&nbsp;<i class="fa fa-plus"></i></button></a></div><br><br>
+                        <div class="text-center"><a href="<?=base_url().'user-section/admin-daycare/add-new'?>"><button type="button" class="btn btn-cta btn-cta-primary">Add New&nbsp;&nbsp;<i class="fa fa-plus"></i></button></a></div><br><br>
 
                         <div class="text-center" id="test-list">
                         <i class="fa fa-search"></i>&nbsp;<input type="text" class="search"><br><br><br>
@@ -29,12 +29,12 @@
                                 <div class="social">
                                     <ul class="social-list list-inline">
                                         <li><a href="profile.html"><i class="fa fa-eye"></i></a></li>
-                                        <li><a href="<?=base_url().'user-section/agency-daycare/edit/'.$arrDay[$k]->id_daycares?>"><i class="fa fa-pencil"></i></a></li>
-                                        <li><a href="<?=base_url().'user-section/agency-daycare/delete/'.$arrDay[$k]->id_daycares?>"><i class="fa fa-trash"></i></a></li>
+                                        <li><a href="<?=base_url().'user-section/admin-daycare/edit/'.$arrDay[$k]->id_daycares?>"><i class="fa fa-pencil"></i></a></li>
+                                        <li><a href="<?=base_url().'user-section/admin-daycare/delete/'.$arrDay[$k]->id_daycares?>"><i class="fa fa-trash"></i></a></li>
                                     </ul><!--//social-list-->
                                 </div><!--//social-->
                             </div><!--//member-inner-->
-                            <!--<div><br><a href="<?=base_url().'user-section/agency-daycare/add-new'?>"><button type="button" class="btn btn-cta btn-primary">Add Director&nbsp;&nbsp;<i class="fa fa-plus"></i></button></a></div>-->
+                            <!--<div><br><a href="<?=base_url().'user-section/admin-daycare/add-new'?>"><button type="button" class="btn btn-cta btn-primary">Add Director&nbsp;&nbsp;<i class="fa fa-plus"></i></button></a></div>-->
                         </div>
                         </li>
                         

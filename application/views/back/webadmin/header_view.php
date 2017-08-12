@@ -50,15 +50,16 @@
                     <div id="navbar-collapse" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="nav-item"><a href="<?=base_url().'user-section/home'?>">Home</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-daycare'?>">DayCares</a></li>
-                            <li class="nav-item"><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li>                  
+                            <li class="nav-item"><a href="<?=base_url().'user-section/admin-daycare'?>">DayCares</a></li>
+                            <li class="nav-item"><a href="<?=base_url().'user-section/admin-vendor'?>">Vendors</a></li>
+                            <li class="nav-item"><a href="<?=base_url().'user-section/admin-workshop'?>">Workshops</a></li>                  
                             <!--//dropdown-->
 
                              <!--<li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="" > Workshops<i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<?=base_url().'user-section/agency-category'?>">Categories</a></li>
-                                    <li><a href="<?=base_url().'user-section/agency-workshop'?>">Workshops</a></li> 
+                                    <li><a href="<?=base_url().'user-section/admin-category'?>">Categories</a></li>
+                                    <li><a href="<?=base_url().'user-section/admin-workshop'?>">Workshops</a></li> 
                                                
                                 </ul>                            
                             </li>-->

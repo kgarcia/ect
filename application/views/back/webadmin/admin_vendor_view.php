@@ -86,17 +86,13 @@
                                                 </select>
                                         </div>
 
-                                        <?php if (!$vendor) { ?>
-
                                         <div class="form-group">
                                             <label class="sr-only" for="signup-email">Your email</label>
                                             <?=form_error('email')?>
-                                            <input id="signup-email" type="email" name="email" value="<?=is_null($vendor) ? set_value('email') : $email?>" class="form-control login-email" placeholder="e-mail">
+                                            <input id="signup-email" type="email" name="email" value="<?=is_null($vendor) ? set_value('email') : $vendor->email?>" class="form-control login-email" placeholder="e-mail">
                                         </div><!--//form-group-->
                                         
 
-                                        <?php
-                                        }?>
                                         
                                         
                                         

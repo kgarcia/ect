@@ -3,12 +3,12 @@
 /**
 *
 */
-class Agency_workshop extends CI_Controller {
+class Admin_workshop extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
         error_reporting(E_ALL ^ (E_NOTICE));
-        $this->load->model('back/Agency_workshop_model');
+        $this->load->model('back/Admin_workshop_model');
         //$this->load->model(array('Login_model','backend/Beneficiary_model','backend/Event_model'));
         $this->load->library(array('form_validation'));
         $this->load->helper(array('url','form'));
@@ -19,20 +19,20 @@ class Agency_workshop extends CI_Controller {
     public function index()
 
     {    
-     if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+     if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
         {
-            $id_agency = $this->session->userdata('id_agency');
+            //$id_admin = $this->session->userdata('id_admin');
 
-            $arrWor = $this->Agency_workshop_model->get_workshops($id_agency);
+            $arrWor = $this->Admin_workshop_model->get_workshops();
 
-            //$id_category_arr = $this->Agency_workshop_model->get_id_categories();
+            //$id_category_arr = $this->Admin_workshop_model->get_id_categories();
             if (is_array($arrWor))
                 {
                  foreach($arrWor as $c => $k)
                      {
 
                           $id_category = $arrWor[$c]->category_id;
-                          $rowCat[$c] = $this->Agency_workshop_model->get_category($id_category);
+                          $rowCat[$c] = $this->Admin_workshop_model->get_category($id_category);
 
 
                      }
@@ -49,8 +49,8 @@ class Agency_workshop extends CI_Controller {
 
         $data['active'] = 'Workshop'; 
         $data['title'] = 'Workshops';
-        $this->load->view('back/agency/header_view', $data);
-        $this->load->view('back/agency/agency_workshop_list_view', $data); 
+        $this->load->view('back/webadmin/header_view', $data);
+        $this->load->view('back/webadmin/admin_workshop_list_view', $data); 
         $this->load->view('back/footer_view', $data);
      }
     
@@ -60,19 +60,19 @@ class Agency_workshop extends CI_Controller {
  function add_new()
     {
 
-        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
         {
             $data['title'] = 'New Workshop';    
             $data['active'] = 'workshop';
             $data['option'] = 'no';
             $data['legend'] = 'New Workshop'; 
             $data['button'] = 'Create';
-            $data['action'] = 'user-section/agency-workshop/create_workshop/';
+            $data['action'] = 'user-section/admin-workshop/create_workshop/';
 
-            $data['categories'] = $this->Agency_workshop_model->get_categories();
+            $data['categories'] = $this->Admin_workshop_model->get_categories();
            
-            $this->load->view('back/agency/header_view', $data);
-            $this->load->view('back/agency/agency_workshop_view', $data);
+            $this->load->view('back/webadmin/header_view', $data);
+            $this->load->view('back/webadmin/admin_workshop_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
         else {
@@ -82,7 +82,7 @@ class Agency_workshop extends CI_Controller {
     }
 function create_workshop()
     {   
-    if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+    if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
     {
 
         //echo "probando";
@@ -115,28 +115,28 @@ function create_workshop()
                 $topic = $this->input->post('topic');
 
                 
-                $id_agency = $this->session->userdata('id_agency');
+                //$id_agency = $this->session->userdata('id_agency');
                 
                 
 
 
                                         
                 //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
-                $id_workshop = $this->Agency_workshop_model->new_workshop($category,$id_agency,$name,$hours,$topic);
+                $id_workshop = $this->Admin_workshop_model->new_workshop($category,$name,$hours,$topic);
 
                 //$this->Agency_vendor_model->new_agency_vendor($id_agency,$id_vendor);
                 
                 if ( $id_workshop != Null) {
 
                     echo "<script> if (confirm('Do you want to continue?')){
-                        window.location='".base_url()."user-section/agency-workshop/add-new"."'
+                        window.location='".base_url()."user-section/admin-workshop/add-new"."'
                     } else {
-                        window.location='".base_url()."user-section/agency-workshop"."'
+                        window.location='".base_url()."user-section/admin-workshop"."'
                     }</script>";
 
                     
                 }
-                //redirect(base_url().'agency-daycare/add_new');
+                //redirect(base_url().'admin-daycare/add_new');
 
                 
         }
@@ -148,7 +148,7 @@ function create_workshop()
 
  function edit($id_workshop)
     {
-        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+        if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
         {
            
 
@@ -159,24 +159,24 @@ function create_workshop()
             $data['option'] = 'yes';
             $data['legend'] = 'Edit Workshop'; 
             $data['button'] = 'Save';
-            $data['action'] = 'user-section/agency-workshop/update_workshop/';
-            $data['workshop'] = $this->Agency_workshop_model->get_workshop($id_workshop);
+            $data['action'] = 'user-section/admin-workshop/update_workshop/';
+            $data['workshop'] = $this->Admin_workshop_model->get_workshop($id_workshop);
 
-            $data['categories'] = $this->Agency_workshop_model->get_categories();
+            $data['categories'] = $this->Admin_workshop_model->get_categories();
 
-            $row_cat = $this->Agency_workshop_model->get_category($data['workshop']->category_id);
+            $row_cat = $this->Admin_workshop_model->get_category($data['workshop']->category_id);
 
             $data['category'] = $row_cat->description;
            
-            $this->load->view('back/agency/header_view', $data);
-            $this->load->view('back/agency/agency_workshop_view', $data);
+            $this->load->view('back/webadmin/header_view', $data);
+            $this->load->view('back/webadmin/admin_workshop_view', $data);
             $this->load->view('back/footer_view', $data); 
         }
     }
 
 function update_workshop()
 {
-if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'agency')
+if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'webadmin')
 {
 
 
@@ -209,14 +209,14 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
                 $topic = $this->input->post('topic');
 
                 
-                $id_agency = $this->session->userdata('id_agency');
+                //$id_agency = $this->session->userdata('id_agency');
                 
 
-                $this->Agency_workshop_model->update_workshop($id_workshop,$category,$name,$hours,$topic);
+                $this->Admin_workshop_model->update_workshop($id_workshop,$category,$name,$hours,$topic);
                
                                
 
-                redirect(base_url().'user-section/agency-workshop');
+                redirect(base_url().'user-section/admin-workshop');
             }
         }
 

@@ -88,7 +88,7 @@ class Login extends CI_Controller
                 
                 if ($id_rol == 1) {
 
-                    $row_adm =  $this->Login_model->get_adm($id_user);
+                    $row_adm =  $this->Login_model->get_web($id_user);
                     //$id_school = $row_adm->id_school;
                     //$row_school = $this->Login_model->get_univ($id_school);
                     $row_rol =  $this->Login_model->get_user_rol($id_rol);
@@ -99,9 +99,9 @@ class Login extends CI_Controller
                         'id_user'     =>         $check_user->id_user,
                         'roles'        =>        $row_rol->description,
                         'id_rol'        =>        $row_rol->id_role,
-                        'email'         =>         $check_user->email,
-                        'id_school' =>       $id_school,
-                        'school'  =>         $row_school->name
+                        'id_admin'     =>     $row_adm->id_administrators,
+                        'name'         =>     $row_adm->name,
+                        'email'         =>         $check_user->email
                         );        
                         $this->session->set_userdata($data);
                         $this->index();
