@@ -4,9 +4,10 @@
                 <h2 class="page-title text-center"><i class="fa fa-archive"></i> All Workshops </h2><br><br>
             
                 <div class="row">
-                    <div class="blog-list blog-category-list">
-                        <div id="dvData" class="table-responsive">
-                            <table class="table table-bordered">
+                    
+                        <div class="col-md-12 col-sm-12">
+                            <table class="table table-bordered" id="table_all_workshops">
+                            <thead>
                                 <tr>
                                     <th>Workshop</th> 
                                     <th>Institution</th>
@@ -15,7 +16,8 @@
                                     <th>Missing hours</th>
                                     <th>Estatus</th>
                                 </tr>
-
+                              </thead>
+                              <tbody>
                                 <?php
                                     if (is_array($workshops)) {
                                       foreach($workshops as $i => $workshop)
@@ -60,6 +62,7 @@
                                       }
                                   }
                                 ?>
+                                </tbody>
                             </table>
                         </div>
 
@@ -93,7 +96,7 @@
                         </div>
 
                     </div>
-                </div>
+                
             </div>
         </section>
 

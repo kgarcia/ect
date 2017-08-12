@@ -78,14 +78,11 @@
     <script type="text/javascript" src="<?=base_url().'assets/plugins/jquery-placeholder/jquery.placeholder.js'?>"></script>
     <script type="text/javascript" src="<?=base_url().'assets/plugins/FitVids/jquery.fitvids.js'?>"></script>
     <script type="text/javascript" src="<?=base_url().'assets/plugins/flexslider/jquery.flexslider-min.js'?>"></script> 
-             
-    <!-- blog specific js starts -->
-    <script type="text/javascript" src="<?=base_url().'assets/plugins/imagesloaded/imagesloaded.pkgd.min.js'?>"></script>     
-    <script type="text/javascript" src="<?=base_url().'assets/plugins/masonry.pkgd.min.js'?>"></script> 
-    <script type="text/javascript" src="<?=base_url().'assets/js/blog.js'?>"></script>
-    <!-- blog specific js ends -->    
+               
     
     <script type="text/javascript" src="<?=base_url().'assets/js/main.js'?>"></script>
+    <script src="<?=base_url().'assets/vendors/datatables/js/jquery.dataTables.js'?>"></script>
+    <script src="<?=base_url().'assets/js/DT_bootstrap.js'?>"></script>
     
             
 </body>
