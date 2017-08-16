@@ -51,7 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'page';
 $route['404_override'] = '';
-<<<<<<< HEAD
+$route['translate_uri_dashes'] = FALSE;
+$route['workshops/completed'] = 'employee_workshops/completed_workshops';
+$route['workshops/all'] = 'employee_workshops/all_workshops';
+$route['quiz/preservice'] = 'employee_quiz/preservice_quiz';
 $route['translate_uri_dashes'] = TRUE;
 
 //USER AGENCY ROUTES
@@ -64,9 +67,3 @@ $route['add-new'] = 'add_new';
 
 $route['agency-vendor'] = 'agency_vendor';
 $route['agency-workshop'] = 'agency_workshop';
-=======
-$route['translate_uri_dashes'] = FALSE;
-$route['workshops/completed'] = 'employee_workshops/completed_workshops';
-$route['workshops/all'] = 'employee_workshops/all_workshops';
-$route['quiz/preservice'] = 'employee_quiz/preservice_quiz';
->>>>>>> 6443bb38f7f9781fa94aacbd9a51c6b359d9f4eb

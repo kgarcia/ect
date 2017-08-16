@@ -55,6 +55,8 @@ $route['translate_uri_dashes'] = TRUE;
 $route['workshops/completed'] = 'employee_workshops/completed_workshops';
 $route['workshops/all'] = 'employee_workshops/all_workshops';
 $route['quiz/preservice'] = 'employee_quiz/preservice_quiz';
+$route['workshops/certificate'] = 'employee_workshops/upload_certificate';
+$route['quiz/send'] = 'employee_quiz/send_quiz';
 
 //USER AGENCY ROUTES
 //

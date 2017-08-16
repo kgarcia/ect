@@ -130,13 +130,16 @@ public function all_workshops()
     }
 
     public function upload_certificate() { 
+        echo "<script>javascript:alert('11111111111');
+                
+                </script>";         
         if($this->session->userdata('roles') == TRUE && 
             $this->session->userdata('roles') == 'employee')
         {
              $config['upload_path']   = './uploads/'; 
              $config['allowed_types'] = 'gif|jpg|png|pdf';  
              $this->load->library('upload', $config);
-                
+                 
              if ( $this->upload->do_upload('certificate')) {
                 $data = $this->upload->data();
                 $path = $data["full_path"];
@@ -156,14 +159,15 @@ public function all_workshops()
                 echo "<script>javascript:alert('The certificate has been uploaded successfully');
                 window.location='".base_url()."workshops/all'
                 </script>";
-
+                
              }    
              else { 
-                redirect(base_url().'login');
+             redirect(base_url().'login');
              } 
         } 
         else 
         {
+              
             redirect(base_url().'login');
         } 
     }

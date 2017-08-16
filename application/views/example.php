@@ -10,13 +10,22 @@ foreach($css_files as $file): ?>
 <?php endforeach; ?>
 </head>
 <body>
-	<br><br><br>
-	<div class="container">
-	<div style='height:60px;' ><h1 alisn="center"><?php echo $title; ?></h1></div>  
+<!-- ******Features Section****** -->       
+        <section class="features-tabbed section">
+            <div class="container"><br>
+                <h2 class="page-title text-center"><i class="fa fa-users"></i> <?= $title ?></h2><br><br>
+                <div class="row">
+                    <div class="blog-list blog-category-list">
+                        <article>
     <div>
 		<?php echo $output; ?>
     </div>
-<br><br>
-    </div>
+</article>                  
+                    </div><!--//blog-list--> 
+                </div><!--//row-->
+            </div><!--//container-->
+        </section><!--//features-tabbed-->       
+    </div><!--//wrapper-->
+
 </body>
 

@@ -157,7 +157,7 @@ class Examples extends CI_Controller {
 			$crud->set_relation('type_employee_id','type_employees','name');
 			$crud->display_as('daycare_id','Daycare');
 			$crud->display_as('type_employee_id','Type');
-			$crud->columns('daycare_id','name','phone','birthdate','gender','type_employee_id', 'date_of_hired', 'date_of_responsability');
+			$crud->columns('daycare_id','name','phone','birthdate','gender','type_employee_id', 'job', 'date_of_hired', 'date_of_responsability');
 			$crud->set_subject('Employee');
 			$crud->unset_add();
 			$crud->unset_print();

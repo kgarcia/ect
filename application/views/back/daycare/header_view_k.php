@@ -64,12 +64,25 @@
                                     <li><a href="<?= base_url().'examples/employees_management'?>">Employee Management</a></li>            
                                 </ul>                            
                             </li><!--//dropdown-->
+                            
                             <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">CRUDS SU <i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Quizzes <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<?= base_url().'examples/categories'?>">Categories</a></li>
-                                    <li><a href="<?= base_url().'examples/quizztypes'?>">Quizz Types</a></li> 
-                                    <li><a href="<?= base_url().'examples/questiontypes'?>">Question Types</a></li> 
+                                    <li><a href="<?=base_url().'daycare/quiz_list'?>">List</a></li>
+                                    <li><a href="<?=base_url().'daycare/quiz_registration'?>">Registration</a></li>             
+                                </ul>                            
+                            </li><!--//dropdown-->
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Workshops <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?=base_url().'workshops/completed'?>">Completed</a></li>
+                                    <li><a href="<?=base_url().'workshops/all'?>">All</a></li>             
+                                </ul>                            
+                            </li><!--//dropdown-->
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Reports <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="">All Certifications</a></li>           
                                 </ul>                            
                             </li><!--//dropdown-->
                             <li class="nav-item dropdown">

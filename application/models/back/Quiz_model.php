@@ -7,14 +7,29 @@ class Quiz_model extends CI_Model
 	}
 
   public function createQuiz($data){
-    	$this->db->insert('quizzes', array('description'=>$data['description'], 
-    										'address' =>$data['address'],
+    	if (!$this->db->insert('quizzes', array('description'=>$data['description'], 
+    										'quiztype_id' =>1,
 					                        'daycare_id' => $data['daycare_id'],
-					                        'quizztype_id' => $data['quizztype_id'],
 					                        'duration'=>$data['duration']
-    											));
+    											))) {
+                                        // quit if insert fails - adjust accordingly
+                                        print_r($question);
+                                        die('Failed question insert');
+        }   
+    	$insert_id = $this->db->insert_id();
+    	return $insert_id;
     }
-
+    
+    public function createQuestion($data){
+        if (!$this->db->insert('questions', $data)) {
+                                        // quit if insert fails - adjust accordingly
+                                        print_r($data);
+                                        die('Failed question insert');
+                                    }  
+        $insert_id = $this->db->insert_id();
+    	return $insert_id;
+    }
+    
     public function getQuizzes(){
     	$query = $this->db->get('quizzes');
     	echo $query->num_rows();

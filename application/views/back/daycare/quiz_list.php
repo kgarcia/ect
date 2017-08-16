@@ -1,7 +1,7 @@
 
      <section class="features-tabbed section">
             <div class="container">
-                <h2 class="page-title text-center"><i class="fa fa-archive"></i> Employee List</h2><br><br>
+                <h2 class="page-title text-center"><i class="fa fa-archive"></i> Quiz List</h2><br><br>
             
                 <div class="row">
                     <div class="blog-list blog-category-list">
@@ -10,19 +10,22 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>phone</th>
-                                    <th>Gender</th>
-                                    <th>Status</th>
+                                    <th>Questions</th>
+                                    <th>Max Score</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                        <?php foreach ($employees->result() as $emp) {?>
+                        <?php foreach ($quizzes->result() as $quiz) {?>
                                 <tr>
                                     
-                                    <td><a href="../daycare/employee_workshops/<?= $emp->id_employees ?>"><?= $emp->name ?></a></td>
-                                    <td><?= $emp->phone ?></td>
-                                    <td><?= $emp->gender ?></td>
-                                    <td class="success">Completed</td>
+                                    <td><a href="#"><?= $quiz->description ?></a></td>
+                                     <td><?php $this->db->where('quiz_id', $quiz->id_quizzes);
+                                                $this->db->from('questions');
+                                                echo $this->db->count_all_results(); ?></td>
+                                                
+                                    <td><?php   $this->db->select_sum('score');
+                                                $this->db->where('quiz_id', $quiz->id_quizzes);
+                                                echo $this->db->get('questions')->result()[0]->score;?></td>
                                </tr>
                             <?php }?><!-- ENDFOREACH -->
                             </tbody>

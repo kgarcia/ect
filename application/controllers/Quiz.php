@@ -14,7 +14,7 @@ class Daycare extends CI_Controller {
         $this->load->model('back/quiz_model');
 	}
 
-	function personnel_registration(){
+	function quiz_registration(){
 
         $data['title'] = 'Quiz Registration';    
         $data['active'] = 'Quiz_Registration';

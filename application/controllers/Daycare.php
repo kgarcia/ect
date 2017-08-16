@@ -12,6 +12,7 @@ class Daycare extends CI_Controller {
         //$this->load->helper('server_root');
         //$this->removeCache();
         $this->load->model('back/employee_model');
+        $this->load->model('back/quiz_model');
         $this->load->model('back/Workshop_model');
 	}
 
@@ -24,10 +25,9 @@ class Daycare extends CI_Controller {
         $this->load->view('back/daycare/personnel_registration', $data);
         $this->load->view('back/footer_view', $data); 
         
-	}
-
+	} 
+	
 	function create_employee(){
-                
 		$data = array(
 			'name' => $this->input->post('name'),
 			'address' =>$this->input->post('address'),// $this->input->post('address'),
@@ -100,8 +100,12 @@ class Daycare extends CI_Controller {
             $data['active'] = 'home'; //TODO 
             $data['workshops'] = $workshops;
             $data['vendors'] = $vendors;
+            
+            $emp = $this->employee_model->get_employee($data['segmento']);
+            $data['employee'] = $emp;
+            
             $this->load->view('back/daycare/header_view_k', $data);
-            $this->load->view('back/employee/completed_workshops', $data);
+            $this->load->view('back/daycare/employee_workshops', $data);
             $this->load->view('back/footer_view', $data);  
          }
          else 
@@ -109,5 +113,107 @@ class Daycare extends CI_Controller {
             redirect(base_url().'login');
          }  
     }
+    
+    function quiz_registration(){
+
+        $data['title'] = 'Quiz Registration';    
+        $data['active'] = 'Quiz_Registration';
+        $this->load->view('back/daycare/header_view_k', $data);
+        $this->load->view('back/daycare/quiz_registration', $data);
+        $this->load->view('back/footer_view', $data); 
+        
+	} 
+    
+    function create_quiz(){
+         if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'administrator')
+        {
+//echo '<pre>';
+            $id_employee = $this->session->userdata('id_user');
+            $employee = $this->employee_model->get_employee_by_user_id($id_employee);
+                            $quiz = array(
+                    			'description' => $this->input->post('description'),
+                    			'daycare_id' =>$employee->daycare_id,
+                                            'quiztype_id' => 1,
+                                            'duration' => '10:00:00'//
+                    			);
+                    			$quizid = $this->quiz_model->createQuiz($quiz);
+                                //echo 'quiz_id'.$quizid;
+                                
+                             if ($this->input->post('question')) { // returns false if no property 
+                                $questions = $this->input->post('question', true);
+                                $count = $this->input->post('count', true);// questions count
+                                $score = $this->input->post('score', true);
+                                $opciones = array();
+                                for ($x = 0; $x <= $count; $x++) {
+                                    $var = 'optio'.$x.'n';
+                                    ${"options$x"} = $this->input->post($var, true);
+                                    array_push($opciones,${"options$x"});
+                                    //echo '<br>opt'.$x;
+                                    ////print_r(${"options$x"});
+                                  
+                                } 
+                                  //echo '<br>las opciones';
+                                    ////print_r($opciones);
+                                    //echo '<br>las score';
+                                    ////print_r($score);
+                                //echo '<br>Qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';
+                            
+                                foreach ($questions as $i => $a) { // need index to match other properties
+                                    //echo '<br>quest';
+                                    //echo $a;
+                                    //echo '<br>score';
+                                    //echo $score[$i];
+                                    $question = array(
+                                			'description' => $a,
+                                			'quiz_id' => $quizid,
+                                            'questiontype_id' => 1,
+                                            'score' => $score[$i]//
+                                			);
+                                    $questionid = $this->quiz_model->createQuestion($question);
+                                    
+                                        //echo '<br>OOOOOOOOOOOOOOOOoooooooooooooooooooooopppp';
+                                        $optin = $i+1;
+                                    foreach (${"options$optin"} as $in => $op) {
+                                        //echo '<br>quest';
+                                        //echo $op;
+                                        $option = array(
+                                			'description' => $op,
+                                			'question_id' => $questionid,
+                                            'correct' => 1
+                                			);
+                            			if (!$this->db->insert('solutions', $option)) {
+                                            // quit if insert fails - adjust accordingly
+                                            //print_r($question);
+                                            die('Failed question insert');
+                                        }  
+                                    }
+                                    
+                                }
+                            
+                                // don't redirect inside the loop
+                                redirect(base_url().'daycare/quiz_list');
+                                //echo '</pre>';   
+                            } else{
+                                ////echo 'No Data';
+                            }
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }            
+	}
+	
+	function quiz_list(){
+		$data['title'] = 'Quizzes List';    
+        $data['active'] = 'Employee_List';
+        
+        $data['quizzes'] = $this->quiz_model->getQuizzes();
+        
+        $this->load->view('back/daycare/header_view_k', $data);
+        $this->load->view('back/daycare/quiz_list', $data);
+        $this->load->view('back/footer_view', $data); 
+        
+	}
 }
 ?>
