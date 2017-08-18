@@ -29,6 +29,26 @@ class Employee_model extends CI_Model
 
     }
 
+    function get_employee($id_employees){
+        
+        $query = $this->db->get_where('employees', array('id_employees' => $id_employees, 'status' => 1));
+        // si hay resultados
+        if ($query->num_rows() == 1) {
+           
+            return $query->row();
+        }
+    }
+
+    function get_user($id_user){
+        
+        $query = $this->db->get_where('users', array('id_user' => $id_user, 'status' => 1));
+        // si hay resultados
+        if ($query->num_rows() == 1) {
+           
+            return $query->row();
+        }
+    }
+
     public function showEmployee($id){
         $this->db->where('id_employees', $id);
         $query = $this->db->get('employees');
@@ -45,6 +65,28 @@ class Employee_model extends CI_Model
             return $query;
         else
             return false;
+    }
+
+    function update_employee($id_employees,$name,$phone,$address)
+    {
+       $data = array(
+            'name' => $name,
+            'phone' => $phone,
+            'address' => $address,
+            
+        );
+        $this->db->where('id_employees', $id_employees);
+        $this->db->update('employees', $data);    
+    }
+
+    function update_employee_picture($id_employees,$profile_picture)
+    {
+       $data = array(
+            'profile_picture' => $profile_picture
+            
+        );
+        $this->db->where('id_employees', $id_employees);
+        $this->db->update('employees', $data);    
     }
 
 }

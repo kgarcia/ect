@@ -19,18 +19,18 @@ class Employee_workshops extends CI_Controller {
 
     {    
          if($this->session->userdata('roles') == TRUE && 
-            $this->session->userdata('roles') == 'employee')
+            ($this->session->userdata('roles') == 'employee' || $this->session->userdata('roles') == 'director'))
         {
 
             $id_employee = $this->session->userdata('id_employee');
             $employee = $this->Workshop_model->get_employee($id_employee);
 
-            $enrolls = $this->Workshop_model->get_employee_enrolls($id_employee);
+            $certifications = $this->Workshop_model->get_employee_certifications($id_employee);
 
-            if( is_array($enrolls)){
-                foreach ($enrolls as $i => $enroll) {
+            if( is_array($certifications)){
+                foreach ($certifications as $i => $certification) {
 
-                    $workshops[$i] = $this->Workshop_model->get_workshop($enroll->workshop_id);
+                    $workshops[$i] = $this->Workshop_model->get_workshop($certification->id_workshop);
                     $vendor_id = $workshops[$i]->vendor_id;
                     $vendors[$i] = $this->Workshop_model->get_vendor($vendor_id);
 
@@ -40,6 +40,7 @@ class Employee_workshops extends CI_Controller {
 
             $data['active'] = 'home'; //TODO 
             $data['workshops'] = $workshops;
+            $data['certifications'] = $certifications;
             $data['vendors'] = $vendors;
             $this->load->view('back/employee/header_view', $data);
             $this->load->view('back/employee/completed_workshops', $data);
@@ -55,7 +56,7 @@ public function all_workshops()
 
     {    
          if($this->session->userdata('roles') == TRUE && 
-            $this->session->userdata('roles') == 'employee')
+            ($this->session->userdata('roles') == 'employee' || $this->session->userdata('roles') == 'director'))
         {
 
             $id_employee = $this->session->userdata('id_employee');
@@ -131,7 +132,7 @@ public function all_workshops()
 
     public function upload_certificate() { 
         if($this->session->userdata('roles') == TRUE && 
-            $this->session->userdata('roles') == 'employee')
+            ($this->session->userdata('roles') == 'employee' || $this->session->userdata('roles') == 'director'))
         {
              $config['upload_path']   = './uploads/'; 
              $config['allowed_types'] = 'gif|jpg|png|pdf';  
@@ -139,7 +140,7 @@ public function all_workshops()
                 
              if ( $this->upload->do_upload('certificate')) {
                 $data = $this->upload->data();
-                $path = $data["full_path"];
+                $path = "uploads/".$data["file_name"];
                 $id_workshop = $this->input->post('workshopId');
                 $id_employee = $this->session->userdata('id_employee');
                 $employee = $this->Workshop_model->get_employee($id_employee);
@@ -167,4 +168,91 @@ public function all_workshops()
             redirect(base_url().'login');
         } 
     }
+
+    public function upload_single(){
+
+        if($this->session->userdata('roles') == TRUE && 
+            ($this->session->userdata('roles') == 'employee' || $this->session->userdata('roles') == 'director'))
+        {
+
+            $categories = $this->Workshop_model->get_all_categories();
+            $data['categories'] = $categories;       
+
+            $this->load->view('back/employee/header_view', $data);
+            $this->load->view('back/employee/upload_certification', $data);
+            $this->load->view('back/footer_view', $data); 
+
+        } 
+        else 
+        {
+            redirect(base_url().'login');
+        } 
+    }
+
+    public function fill_workshops()
+    {
+
+        if($this->session->userdata('roles') == TRUE && 
+            ($this->session->userdata('roles') == 'employee' || $this->session->userdata('roles') == 'director'))
+        {
+
+            if($this->input->post('category') && $this->input->post('category')>0)
+            {
+                $category_id = $this->input->post('category');
+                $category_workshops = $this->Workshop_model->get_category_workshops($category_id);
+
+                echo "<option>Select a workshop</option>";
+
+                foreach($category_workshops as $workshop)
+                {
+                    echo '<option value="'.$workshop->id_workshops.'">'.$workshop->name.'</option>';
+                }
+            }
+        } 
+        else 
+        {
+            redirect(base_url().'login');
+        }
+    }
+
+    public function upload_single_certificate() { 
+        if($this->session->userdata('roles') == TRUE && 
+            ($this->session->userdata('roles') == 'employee' || $this->session->userdata('roles') == 'director'))
+        {
+             $config['upload_path']   = './uploads/'; 
+             $config['allowed_types'] = 'gif|jpg|png|pdf';  
+             $this->load->library('upload', $config);
+                
+             if ( $this->upload->do_upload('certification')) {
+                $data = $this->upload->data();
+                $path = "uploads/".$data["file_name"];
+                $id_workshop = $this->input->post('workshop');
+                $id_employee = $this->session->userdata('id_employee');
+                $employee = $this->Workshop_model->get_employee($id_employee);
+                $daycare_id = $employee->daycare_id;
+                $actual_scholar_year = $this->Workshop_model->get_actual_scholar_year();
+
+                if (is_null($actual_scholar_year)){
+                    $this->Workshop_model->create_enrollment($id_workshop,$id_employee);
+                } else {
+                    $this->Workshop_model->create_enrollment_scholar_year($id_workshop,$id_employee,$actual_scholar_year->id_scholar_years);
+                }             
+                $this->Workshop_model->create_certification($id_workshop,$id_employee,$path);
+
+                echo "<script>javascript:alert('The certificate has been uploaded successfully');
+                window.location='".base_url()."workshops/completed'
+                </script>";
+
+             }    
+             else { 
+                redirect(base_url().'login');
+             } 
+        } 
+        else 
+        {
+            redirect(base_url().'login');
+        } 
+    }
+
 }
+

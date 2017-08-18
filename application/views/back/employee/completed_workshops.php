@@ -24,13 +24,11 @@
                                         ?>
 
                                     <tr>
-                                        <td><a href="" data-toggle="modal" data-target=".bs-example-modal-lg"><?=$workshop->name?></a></td> 
+                                        <td><a><?=$workshop->name?></a></td> 
                                         <td><?=$vendors[$i]->name?></td>
                                         <td><?=$workshop->hours?></td>
                                         <td>
-                                        <a href="<?=base_url().'employee_courses/enroll/'.$course->id_workshops?>" class="btn btn-success btn-lg" onclick="if(confirma() == false) return false;"> 
-                                                View</i>
-                                            </a>
+                                         <a class="btn btn-success btn-lg" href="<?= base_url().$certifications[$i]->path ?>" download> View </a>
                                         </td>
                                     </tr>
 
@@ -60,9 +58,3 @@
             </div><!--//container-->
         </section><!--//features-tabbed-->       
     </div><!--//wrapper-->
-
-    <script type="text/javascript">
-        function confirma(){
-            return window.confirm("Are you sure you want to enroll?");
-          }
-    </script>

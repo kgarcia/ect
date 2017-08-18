@@ -25,7 +25,7 @@
                                         ?>
 
                                         <tr>
-                                            <td><a class="" href=""><?=$workshop->name?></a></td> 
+                                            <td><a><?=$workshop->name?></a></td> 
                                             <td><?=$vendors[$i]->name?></td>
                                             <td>
                                             <button type="button" class="open-uploadDialog btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-id="<?=$workshop->id_workshops?>">Upload</button>
