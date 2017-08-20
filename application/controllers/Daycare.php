@@ -84,12 +84,14 @@ class Daycare extends CI_Controller {
             $id_employee = $this->uri->segment(3);
             $employee = $this->Workshop_model->get_employee($id_employee);
 
-            $enrolls = $this->Workshop_model->get_employee_enrolls($id_employee);
+           
+            $certifications = $this->Workshop_model->get_employee_certifications($id_employee);
 
-            if( is_array($enrolls)){
-                foreach ($enrolls as $i => $enroll) {
+            if( is_array($certifications)){
+                foreach ($certifications as $i => $certification) {
 
-                    $workshops[$i] = $this->Workshop_model->get_workshop($enroll->workshop_id);
+
+                    $workshops[$i] = $this->Workshop_model->get_workshop($certification->id_workshop);
                     $vendor_id = $workshops[$i]->vendor_id;
                     $vendors[$i] = $this->Workshop_model->get_vendor($vendor_id);
 
@@ -103,7 +105,7 @@ class Daycare extends CI_Controller {
             
             $emp = $this->employee_model->get_employee($data['segmento']);
             $data['employee'] = $emp;
-            
+            $data['certifications'] = $certifications;
             $this->load->view('back/daycare/header_view_k', $data);
             $this->load->view('back/daycare/employee_workshops', $data);
             $this->load->view('back/footer_view', $data);  
@@ -214,6 +216,48 @@ class Daycare extends CI_Controller {
         $this->load->view('back/daycare/quiz_list', $data);
         $this->load->view('back/footer_view', $data); 
         
+	}
+	
+		function mailTest(){
+	     /* Correo **************************/
+                    $name = 'john';//$this->input->post('name');               
+                    $message = 'hello world';
+                    $email = $this->input->post('kevin93ps@gmail.com');
+                       $this->load->library("email");
+
+                    $configGmail = array(
+                       'protocol' => 'smtp',
+                        'smtp_host' => 'ssl://smtp.gmail.com',
+                        'smtp_port' => 465,
+                        'smtp_user' => 'kevin93ps@gmail.com',
+                        'smtp_pass' => 'Adgn16..',
+                        'mailtype' => 'html',
+                        'charset' => 'utf-8',
+                        'newline' => "\r\n"
+                    );  
+
+                    $this->email->initialize($configGmail);
+                   
+
+                    $this->email->from('kevin93ps@gmail.com');
+                    $this->email->to($email); 
+                    $this->email->subject('Contact message from ect.com');
+                    $this->email->message('<div>
+                                            <h2    style="text-align:center;">
+                                            Contact Message
+                                            </h2>
+                                            <hr>
+                                            <br>
+                                            <span style="font-size:14px;">Name:&nbsp;&nbsp;'.$name.'</span><br>
+                                            <span style="font-size:14px;">Email:&nbsp;&nbsp;'.$email.'</span><br> <br>
+                                            <span style="font-size:14px;">Message:&nbsp;&nbsp;'.$message.'</span><br>
+                                          </div>');  
+
+                    $this->email->send();
+                    //echo $this->email->print_debugger();
+
+                var_dump($this->email->print_debugger());
+                
 	}
 }
 ?>

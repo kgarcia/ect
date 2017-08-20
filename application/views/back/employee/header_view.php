@@ -1,4 +1,4 @@
-header_view.php<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
@@ -65,8 +65,8 @@ header_view.php<!DOCTYPE html>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><i class="fa fa-user"></i>  <?=$this->session->userdata('name')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Profile</a></li>
-                                    <li><a href="#">Upload certificate</a></li>
+                                    <li><a href="<?=base_url().'profile'?>">Profile</a></li>
+                                    <li><a href="<?=base_url().'certification/upload'?>">Upload certificate</a></li>
                                     <li><a href="<?=base_url().'login/logout_ci'?>">Sign Off</a></li>             
                                 </ul>                            
                             </li><!--//dropdown-->

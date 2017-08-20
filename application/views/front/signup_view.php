@@ -13,9 +13,10 @@
                                  <?php $attributes = array('class' => 'signup-form'); ?>
                                  <?php echo form_open_multipart(base_url().'signup/create_subscription', $attributes) ?>
                                  <div class="form-group">
+                                <!-- <div class="form-group">
                                  <label class="radio-inline input-lg">
                                       <input type="radio" name="inlineRadioOptions" id="age1" value="1"> Agency
-                                    </label>
+                                    </label>-->
                                     <label class="radio-inline input-lg">
                                       <input type="radio" name="inlineRadioOptions" id="day2" value="2"> Daycare
                                     </label>
@@ -97,7 +98,7 @@
                   }, function(data) {
                     $("#sub").html(data);
                     // console.log(data);
-                  },); 
+                  }); 
               });
 
          $("#day2").click(function() {

@@ -34,6 +34,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>																						
 </head> 
 
 <body class="blog-page blog-archive-page">
@@ -69,7 +70,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Quizzes <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?=base_url().'daycare/quiz_list'?>">List</a></li>
-                                    <li><a href="<?=base_url().'daycare/quiz_registration'?>">Registration</a></li>             
+                                    <li><a href="<?=base_url().'daycare/quiz_registration'?>">New</a></li>             
                                 </ul>                            
                             </li><!--//dropdown-->
                             <li class="nav-item dropdown">
@@ -79,6 +80,7 @@
                                     <li><a href="<?=base_url().'workshops/all'?>">All</a></li>             
                                 </ul>                            
                             </li><!--//dropdown-->
+																										  
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Reports <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
@@ -88,10 +90,10 @@
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><i class="fa fa-user"></i>  <?=$this->session->userdata('name')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Profile</a></li>
-                                    <li><a href="#">Upload certificate</a></li>
+                                    <li><a href="<?=base_url().'profile'?>">Profile</a></li>
+                                    <li><a href="<?=base_url().'certification/upload'?>">Upload certificate</a></li>
                                     <li><a href="<?=base_url().'login/logout_ci'?>">Sign Off</a></li>             
-                                </ul>                            
+                                </ul>                             
                             </li><!--//dropdown-->
                         </ul><!--//nav-->                                               
                         
@@ -100,4 +102,4 @@
             </div><!--//container-->
         </header><!--//header-->   
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

@@ -42,26 +42,19 @@ class Signup_model extends CI_Model {
             return $query->row();
     }
     }
-     public function get_sport($id_sport){
-       
-        $this->db->where('id_sport',$id_sport);
-        $query = $this->db->get('sports');
-    
-        
-        if ($query->num_rows() == 1) {
-            
-            return $query->row();
-    }
-    }
 
 
-    function new_subscription($id_university,$ends,$sports_quantity,$sub_price)
+
+    function new_subscription($id_administrator,$id_daycare,$description,$enddate,$price)
     {
        $data = array(
-            'id_university' => $id_university,
-            'end_date' => $ends,
-            'sports_quantity' => $sports_quantity,
-            'price' => $sub_price
+
+
+            'employee_id' => $id_administrator,
+            'daycare_id' => $id_daycare,
+            'description' => $description,
+            'date_end' => $enddate,
+            'price' => $price
             
         );
         $this->db->insert('subscriptions', $data);  

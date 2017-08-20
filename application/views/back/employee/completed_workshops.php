@@ -5,15 +5,18 @@
                 <div class="row">
                     <div class="blog-list blog-category-list">
                         <article>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
+                            <div class="col-md-12 col-sm-12">
+                                <table class="table table-bordered table-hover" id="table_completed_workshops">
+                                <thead>
                                     <tr class="active">
                                         <th>Workshop</th> 
                                         <th>Institution</th>
                                         <th width="160">Credit hours</th>
                                         <th width="160">Certificates</th>
                                     </tr>
+                                </thead>
                                     
+                                <tbody>
                                     <?php
                                     if (is_array($workshops)) {
                                       foreach($workshops as $i => $workshop)
@@ -21,13 +24,11 @@
                                         ?>
 
                                     <tr>
-                                        <td><a href="" data-toggle="modal" data-target=".bs-example-modal-lg"><?=$workshop->name?></a></td> 
+                                        <td><a><?=$workshop->name?></a></td> 
                                         <td><?=$vendors[$i]->name?></td>
                                         <td><?=$workshop->hours?></td>
                                         <td>
-                                        <a href="<?=base_url().'employee_courses/enroll/'.$course->id_workshops?>" class="btn btn-success btn-lg" onclick="if(confirma() == false) return false;"> 
-                                                View</i>
-                                            </a>
+                                         <a class="btn btn-success btn-lg" href="<?= base_url().$certifications[$i]->path ?>" download> View </a>
                                         </td>
                                     </tr>
 
@@ -36,10 +37,11 @@
                                   }
                                       ?>
                                                                                    
-                                    
+                                   
+                                </tbody> 
                                 </table>
                             </div>
-                            <div class="pagination-container text-center">
+                            <!--<div class="pagination-container text-center">
                                 <ul class="pagination">
                                     <li class="disabled"><a href="#">&laquo;</a></li>
                                     <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
@@ -48,17 +50,11 @@
                                     <li><a href="#">4</a></li>
                                     <li><a href="#">5</a></li>
                                     <li><a href="#">&raquo;</a></li>
-                                </ul><!--//pagination-->
-                            </div><!--//pagination-container-->
+                                </ul>
+                            </div>-->
                         </article>                  
                     </div><!--//blog-list--> 
                 </div><!--//row-->
             </div><!--//container-->
         </section><!--//features-tabbed-->       
     </div><!--//wrapper-->
-
-    <script type="text/javascript">
-        function confirma(){
-            return window.confirm("Are you sure you want to enroll?");
-          }
-    </script>

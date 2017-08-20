@@ -74,9 +74,9 @@ class Workshop_model extends CI_Model
 		}
 	}
 
-	function get_employee_enrolls($employee_id){
+	function get_employee_certifications($employee_id){
 
-		$query = $this->db->get_where('enrollment', array('employee_id' => $employee_id, 'status' => '1'));
+		$query = $this->db->get_where('certifications', array('id_employee' => $employee_id, 'status' => '1'));
 
         // si hay resultados
 		if ($query->num_rows() > 0) {
@@ -158,5 +158,16 @@ class Workshop_model extends CI_Model
        $this->db->insert('certifications', $data);
        return $this->db->insert_id();    
     }
+
+    function get_all_categories(){
+
+    $query = $this->db->get_where('categories', array( 'status' => '1'));
+
+        // si hay resultados
+    if ($query->num_rows() > 0) {
+
+      return $query->result();
+    }
+  }
 
 }

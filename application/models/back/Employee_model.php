@@ -40,21 +40,42 @@ class Employee_model extends CI_Model
     }
     
     function get_employee($id_employees){
+		
         $query = $this->db->get_where('employees', array('id_employees' => $id_employees, 'status' => 1));
         // si hay resultados
         if ($query->num_rows() == 1) {
+		   
             return $query->row();
         }
     } 
     
      
     function get_employee_by_user_id($id){
+		
         $query = $this->db->get_where('employees', array('user_id' => $id, 'status' => 1));
         // si hay resultados
         if ($query->num_rows() == 1) {
+		   
             return $query->row();
         }
     } 
+function get_user($id_user){
+        
+        $query = $this->db->get_where('users', array('id_user' => $id_user, 'status' => 1));
+        // si hay resultados
+        if ($query->num_rows() == 1) {
+           
+            return $query->row();
+        }
+    }
+									  
+											  
+											 
+								 
+						  
+			
+						 
+	 
     
     public function getWorkshops($id){
         $this->db->where('employee_id', $id);
@@ -73,6 +94,42 @@ class Employee_model extends CI_Model
             $querydc = $this->db->get_where('daycares', array('id_daycares' => $query->row()->daycare_id, 'status' => 1));
             return $querydc->row();
         }
+	
+	
+    function update_employee($id_employees,$name,$phone,$address)
+    {
+       $data = array(
+            'name' => $name,
+            'phone' => $phone,
+            'address' => $address,
+            
+        );
+        $this->db->where('id_employees', $id_employees);
+        $this->db->update('employees', $data);    
+    }
+
+    function update_employee_picture($id_employees,$profile_picture)
+    {
+       $data = array(
+            'profile_picture' => $profile_picture
+            
+        );
+        $this->db->where('id_employees', $id_employees);
+        $this->db->update('employees', $data);    
+    }
+	  
+														
+												  
     } 
+
+																	
+	 
+					 
+												 
+			
+		  
+														
+												  
+	 
 
 }

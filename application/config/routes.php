@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
 $route['default_controller'] = 'page';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
@@ -57,6 +58,10 @@ $route['workshops/all'] = 'employee_workshops/all_workshops';
 $route['quiz/preservice'] = 'employee_quiz/preservice_quiz';
 $route['workshops/certificate'] = 'employee_workshops/upload_certificate';
 $route['quiz/send'] = 'employee_quiz/send_quiz';
+$route['profile/save'] = 'employee_profile/save';
+$route['profile'] = 'employee_profile';
+$route['certification/upload'] = 'employee_workshops/upload_single';
+$route['certification/save'] = 'employee_workshops/upload_single_certificate';
 
 //USER AGENCY ROUTES
 //
