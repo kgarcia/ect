@@ -565,6 +565,14 @@ class Signup extends CI_Controller
                          $children = $this->session->userdata('a_children');
                          $owner = $this->session->userdata('a_owner');
                         $email = $this->session->userdata('a_email');
+                        $price = $this->session->userdata('a_amount');
+                        $description = $this->session->userdata('a_description');
+                        $enddate = $this->session->userdata('a_ends');
+
+
+
+
+
 
                         $type_emp = 1;
                         
@@ -579,14 +587,57 @@ class Signup extends CI_Controller
                         $id_user = $this->Signup_model->new_user($email,$pw,$id_rol);
                         $id_daycare = $this->Signup_model->new_daycare($name,$phone,$address,$children,$owner);
                         $id_administrator = $this->Signup_model->new_administrator($id_daycare,$id_user,$type_emp,$director);
+                        $id_subscription = $this->Signup_model->new_subscription($id_administrator,$id_daycare,$description,$enddate,$price);
 
                          if ($id_daycare != Null) {
 
-                                echo '<script type="text/javascript">'; 
-                                echo 'alert("Successful Registration!");'; 
+                              $this->load->library("email");
+
+                              $configGmail = array(
+                                  'protocol' => 'mail',
+                                  'mailtype' => 'html',
+                                  'charset' => 'utf-8',
+                                  'newline' => "\r\n"
+                              );  
+
+                              $this->email->initialize($configGmail);
+                             
+
+                              $this->email->from('joeluisrr@gmail.com');
+                              $this->email->to($email); 
+                              //$this->email->cc('another@another-example.com'); 
+                              //$this->email->bcc('them@their-example.com'); 
+                              $psswd = substr( md5(microtime()), 1, 4);
+                          
+                              $this->email->subject('User Credentials');
+                              $this->email->message('<div>
+                                            <h2    style="text-align:center;">
+                                            Welcome '.$name.'!. Use this information to Log In ECT
+                                            </h2>
+                                            <hr>
+                                            <br>
+                                            <span style="font-size:17px;">Email:&nbsp;&nbsp;'.$email.'</span><br> <br>
+                                            <span style="font-size:17px;">Password:&nbsp;&nbsp;'.$psswd.'</span><br><br><br>
+                                            <span style="font-size:14px;">Once you get into the application you can change your password</span><br>
+                                          </div>');  
+
+                    if ($this->email->send()) {
+                        // This becomes triggered when sending
+                        echo '<script type="text/javascript">'; 
+                                echo 'alert("Successful Registration, Check Your E-mail To See Your Log In Information (This may take a few minutes).");'; 
                                 echo 'window.location.href = "'.base_url().'login";';
                                 echo '</script>';
+                    }else{
+                        echo '<script type="text/javascript">'; 
+                                echo 'alert("Successful Registration, Your Log In Information E-mail Could not be sent, Please Contact Us.");'; 
+                                echo 'window.location.href = "'.base_url().'contact";';
+                                echo '</script>';
+                    }
                                                     
+                        
+
+
+
                         }
 
 
@@ -620,12 +671,16 @@ class Signup extends CI_Controller
                      $gender = $this->session->userdata('a_gender');
 
                     $email = $this->session->userdata('a_email');
+                      $price = $this->session->userdata('a_amount');
+                        $description = $this->session->userdata('a_description');
+                        $enddate = $this->session->userdata('a_ends');
 
                     $type_emp = 2;
                     
 
-                    $password ='1234567';
-                    $pw = md5($password); $id_rol = 5;
+                    $psswd = substr( md5(microtime()), 1, 4);
+                    $pw = md5($psswd); $id_rol = 5;
+                    $id_daycare = null;
                     
 
 
@@ -633,13 +688,55 @@ class Signup extends CI_Controller
                     //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
                     $id_user = $this->Signup_model->new_user($email,$pw,$id_rol);
                     $id_employee = $this->Signup_model->new_employee($id_user,$type_emp,$name,$phone,$address,$birthdate,$gender);
+                    $id_subscription = $this->Signup_model->new_subscription($id_employee,$id_daycare,$description,$enddate,$price);
+
+
 
                  if ($id_employee != Null) {
 
+                        $this->load->library("email");
+
+                              $configGmail = array(
+                                  'protocol' => 'mail',
+                                  'mailtype' => 'html',
+                                  'charset' => 'utf-8',
+                                  'newline' => "\r\n"
+                              );  
+
+                              $this->email->initialize($configGmail);
+                             
+
+                              $this->email->from('joeluisrr@gmail.com');
+                              $this->email->to($email); 
+                              //$this->email->cc('another@another-example.com'); 
+                              //$this->email->bcc('them@their-example.com'); 
+                              //$psswd = substr( md5(microtime()), 1, 4);
+                          
+                              $this->email->subject('User Credentials');
+                              $this->email->message('<div>
+                                            <h2    style="text-align:center;">
+                                            Welcome '.$name.'!. Use this information to Log In ECT
+                                            </h2>
+                                            <hr>
+                                            <br>
+                                            <span style="font-size:17px;">Email:&nbsp;&nbsp;'.$email.'</span><br> <br>
+                                            <span style="font-size:17px;">Password:&nbsp;&nbsp;'.$psswd.'</span><br><br><br>
+                                            <span style="font-size:14px;">Once you get into the application you can change your password</span><br>
+                                          </div>');  
+
+                    if ($this->email->send()) {
+                        // This becomes triggered when sending
                         echo '<script type="text/javascript">'; 
-                        echo 'alert("Successful Registration!");'; 
-                        echo 'window.location.href = "'.base_url().'login";';
-                        echo '</script>';
+                                echo 'alert("Successful Registration, Check Your E-mail To See Your Log In Information (This may take a few minutes).");'; 
+                                echo 'window.location.href = "'.base_url().'login";';
+                                echo '</script>';
+                    }else{
+                        echo '<script type="text/javascript">'; 
+                                echo 'alert("Successful Registration, Your Log In Information E-mail Could not be sent, Please Contact Us.");'; 
+                                echo 'window.location.href = "'.base_url().'contact";';
+                                echo '</script>';
+                    }
+                          
                                             
                 }
 

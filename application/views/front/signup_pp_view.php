@@ -30,6 +30,8 @@
 
                                                           $amount = 5 * $children;
 
+                                                          $description = '5$ per employee Plan';
+
                                                       ?>
 
 
@@ -55,7 +57,7 @@
 
                                                     $amount = 10 * $children;
 
-
+                                                    $description = '10$ per employee Plan';
                                                      ?>
                                                     <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
                                                     <input type="hidden" name="on0" value="Plan">
@@ -75,6 +77,10 @@
 
                                                       $amount = 17 * $children;
 
+                                                       $description = '17$ per employee Plan';
+
+
+
 
                                                       ?>
 
@@ -90,7 +96,13 @@
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 
-                                                    <?php }elseif ($type == 3) { ?>
+                                                    <?php }elseif ($type == 3) { 
+
+                                                        $amount = 9;
+
+                                                       $description = '9$ solo employee Plan';
+
+                                                      ?>
 
                                                     <input type="hidden" name="item_name" value="Employee ">
 
@@ -149,8 +161,16 @@
 
                                   <?php echo form_close();?>
 
-                         
-                                           
+                         <?php $date = new DateTime();
+        $date = $date->format('Y-m-d h:i:s');
+
+
+
+
+        //Incrementando 1 mes
+        $mod_dateold = strtotime($date."+ 1 month");
+        $mod_date = date("Y-m-d h:i:s",$mod_dateold); ?>
+                                                   
                                            <?=$this->session->set_userdata('a_name', $name);?>
                                            
                                            <?=$this->session->set_userdata('a_phone', $phone);?>
@@ -170,6 +190,11 @@
                                              <?=$this->session->set_userdata('a_birthdate', $birthdate);?>
                                                <?=$this->session->set_userdata('a_gender', $gender);?>
                                                <?=$this->session->set_userdata('a_price', $price);?>
+                                               <?=$this->session->set_userdata('a_amount', $amount);?>
+                                               <?=$this->session->set_userdata('a_ends', $mod_date);
+                                               ?>
+                                               <?=$this->session->set_userdata('a_description', $description
+                                                );?>
 
                                   <br><br><br><div class="row">
                                   <!--<div class="form-container col-xs-6 col-md-6" align="center">

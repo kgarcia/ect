@@ -34,6 +34,10 @@ class Admin_workshop extends CI_Controller {
                           $id_category = $arrWor[$c]->category_id;
                           $rowCat[$c] = $this->Admin_workshop_model->get_category($id_category);
 
+                          $id_vendor = $arrWor[$c]->vendor_id;
+                          $rowVen[$c] = $this->Admin_workshop_model->get_vendor($id_vendor);
+
+
 
                      }
 
@@ -42,6 +46,7 @@ class Admin_workshop extends CI_Controller {
 
 
             $data['category'] = $rowCat;
+            $data['vendor'] = $rowVen;
             $data['arrWor'] = $arrWor;
             
            
@@ -70,6 +75,7 @@ class Admin_workshop extends CI_Controller {
             $data['action'] = 'user-section/admin-workshop/create_workshop/';
 
             $data['categories'] = $this->Admin_workshop_model->get_categories();
+               $data['vendors'] = $this->Admin_workshop_model->get_vendors();
            
             $this->load->view('back/webadmin/header_view', $data);
             $this->load->view('back/webadmin/admin_workshop_view', $data);
@@ -92,6 +98,7 @@ function create_workshop()
             
             //SI EXISTE EL CAMPO OCULTO LLAMADO GRABAR CREAMOS LAS VALIDACIONES
                     $this->form_validation->set_rules('cat',"Category",'required|callback_check_default2');
+                     $this->form_validation->set_rules('vendor',"Vendor",'required|callback_check_default4');
             $this->form_validation->set_rules('name','Name','required|trim|max_length[250]');
              $this->form_validation->set_rules('hours','Hours','trim|is_natural_no_zero|max_length[11]');
               $this->form_validation->set_rules('topic','Topic','required|trim|max_length[250]');
@@ -102,6 +109,7 @@ function create_workshop()
 
 
                   $this->form_validation->set_message('check_default2', 'Please select a Category');
+                  $this->form_validation->set_message('check_default4', 'Please select a Vendor');
           
           
             if($this->form_validation->run()==FALSE)
@@ -110,6 +118,7 @@ function create_workshop()
             }else{
                 
                 $name = $this->input->post('name');
+                $vendor = $this->input->post('vendor');
                 $category = $this->input->post('cat');
                 $hours = $this->input->post('hours');
                 $topic = $this->input->post('topic');
@@ -122,7 +131,7 @@ function create_workshop()
 
                                         
                 //ENVÍAMOS LOS DATOS AL MODELO CON LA SIGUIENTE LÍNEA
-                $id_workshop = $this->Admin_workshop_model->new_workshop($category,$name,$hours,$topic);
+                $id_workshop = $this->Admin_workshop_model->new_workshop($category,  $vendor,$name,$hours,$topic);
 
                 //$this->Agency_vendor_model->new_agency_vendor($id_agency,$id_vendor);
                 
@@ -163,10 +172,13 @@ function create_workshop()
             $data['workshop'] = $this->Admin_workshop_model->get_workshop($id_workshop);
 
             $data['categories'] = $this->Admin_workshop_model->get_categories();
+            $data['vendors'] = $this->Admin_workshop_model->get_vendors();
 
             $row_cat = $this->Admin_workshop_model->get_category($data['workshop']->category_id);
+            $row_ven = $this->Admin_workshop_model->get_vendor($data['workshop']->vendor_id);
 
             $data['category'] = $row_cat->description;
+             $data['vendor'] = $row_ven->name;
            
             $this->load->view('back/webadmin/header_view', $data);
             $this->load->view('back/webadmin/admin_workshop_view', $data);
@@ -185,6 +197,7 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
            $id_workshop = $this->input->post('id_workshop');
             //SI EXISTE EL CAMPO OCULTO LLAMADO GRABAR CREAMOS LAS VALIDACIONES
                     $this->form_validation->set_rules('cat',"Category",'required|callback_check_default2');
+                    $this->form_validation->set_rules('vendor',"Vendor",'required|callback_check_default4');
             $this->form_validation->set_rules('name','Name','required|trim|max_length[250]');
              $this->form_validation->set_rules('hours','Hours','trim|is_natural_no_zero|max_length[11]');
               $this->form_validation->set_rules('topic','Topic','required|trim|max_length[250]');
@@ -195,7 +208,7 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
 
 
                   $this->form_validation->set_message('check_default2', 'Please select a Category');
-          
+          $this->form_validation->set_message('check_default4', 'Please select a Vendor');
           
             if($this->form_validation->run()==FALSE)
             {
@@ -205,6 +218,7 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
                 
                 $name = $this->input->post('name');
                 $category = $this->input->post('cat');
+                $vendor = $this->input->post('vendor');
                 $hours = $this->input->post('hours');
                 $topic = $this->input->post('topic');
 
@@ -212,7 +226,7 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
                 //$id_agency = $this->session->userdata('id_agency');
                 
 
-                $this->Admin_workshop_model->update_workshop($id_workshop,$category,$name,$hours,$topic);
+                $this->Admin_workshop_model->update_workshop($id_workshop,$category, $vendor,$name,$hours,$topic);
                
                                
 
@@ -230,6 +244,13 @@ if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles'
 }
 }
  function check_default2($post_string)
+    {
+      return $post_string == '-1' ? FALSE : TRUE;
+    }
+
+
+
+ function check_default4($post_string)
     {
       return $post_string == '-1' ? FALSE : TRUE;
     }

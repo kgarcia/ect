@@ -132,7 +132,18 @@ class Contact extends CI_Controller
                                             <span style="font-size:14px;">Message:&nbsp;&nbsp;'.$message.'</span><br>
                                           </div>');  
 
-                    $this->email->send();
+                    if ($this->email->send()) {
+                        // This becomes triggered when sending
+                        echo '<script type="text/javascript">'; 
+                                echo 'alert("Message Sent, We will reply you as soon as possible.");'; 
+                                echo 'window.location.href = "'.base_url().'contact";';
+                                echo '</script>';
+                    }else{
+                        echo '<script type="text/javascript">'; 
+                                echo 'alert("Message Could not Be Sent");'; 
+                                echo 'window.location.href = "'.base_url().'contact";';
+                                echo '</script>';
+                    }
 
                     //echo $this->email->print_debugger();
 

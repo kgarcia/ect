@@ -10,6 +10,48 @@
                                 <?php $attributes = array('class' => 'signup-form'); ?>
                                 <?php echo form_open_multipart(base_url().$action, $attributes) 
                                 ?>
+
+                                        <div class="form-group">
+                                                    <label class="sr-only">Vendor</label>
+                                                    <?=form_error('vendor')?>
+                                                    <select class="form-control" name="vendor" id="vendor">
+
+                                                      <?php if (!$workshop) {?>
+                                                          <option value="-1">
+                                                                Select Vendor
+                                                          </option>
+                                                     <?php }else{?>
+
+                                                         <option value="<?=$workshop->vendor_id?>">
+                                                         <?=$vendor?>
+                                                        </option>
+                                                    
+                                                    <?php } ?>
+                                                    <?php
+                                                    if (is_array($vendors))
+                                                    
+                                                     { 
+                                                        foreach($vendors as $filaca)
+                                                        {
+                                                          if ($filaca->id_vendor != $workshop->vendor_id) {
+                                                                
+                                                              
+                                                            
+                                                        ?>
+                                                            <option value="<?=$filaca->id_vendor?>">
+                                                              <?=$filaca->name?>
+                                                            </option>
+                                                        <?php
+                                                                }
+                                                              }
+
+                                                          }
+                                                      
+                                                        ?>   
+                                                        
+                                                    </select>
+                                                  
+                                       </div>
                                 		<div class="form-group">
 							                        <label class="sr-only">Category</label>
                                             		<?=form_error('cat')?>
@@ -17,7 +59,7 @@
 
 							                          <?php if (!$workshop) {?>
 							                              <option value="-1">
-							                                    Select
+							                                    Select Category
 							                              </option>
 							                         <?php }else{?>
 

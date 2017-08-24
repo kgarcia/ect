@@ -28,6 +28,16 @@ function get_workshops(){
         }
     }
 
+      function get_vendors(){
+        
+        $query = $this->db->get_where('vendors', array( 'status' => '1'));
+        // si hay resultados
+        if ($query->num_rows() > 0) {
+           
+            return $query->result();
+        }
+    }
+
 
 function get_id_categories(){
         
@@ -41,6 +51,16 @@ function get_id_categories(){
 function get_category($id_category){
         
         $query = $this->db->get_where('categories', array('id_categories' =>$id_category, 'status' => '1'));
+        // si hay resultados
+        if ($query->num_rows() == 1) {
+           
+            return $query->row();
+        }
+    }
+
+    function get_vendor($id_vendor){
+        
+        $query = $this->db->get_where('vendors', array('id_vendor' =>$id_vendor, 'status' => '1'));
         // si hay resultados
         if ($query->num_rows() == 1) {
            
@@ -69,10 +89,11 @@ function new_user($email,$pw,$id_rol)
         return $this->db->insert_id();  
     }
 
-function new_workshop($category,$name,$hours,$topic)
+function new_workshop($category,$vendor,$name,$hours,$topic)
     {
        $data = array(
             'category_id' => $category,
+            'vendor_id' => $vendor,
             'name' => $name,
             'hours' => $hours,
             'topic' => $topic
@@ -96,10 +117,11 @@ function new_administrator($id_daycare,$id_user,$type_emp,$dirname)
         return $this->db->insert_id();   
     }
 
-function update_workshop($id_workshop,$category,$name,$hours,$topic){
+function update_workshop($id_workshop,$category, $vendor,$name,$hours,$topic){
 
          $data = array(
             'category_id' => $category,
+            'vendor_id' => $vendor,
             'name' => $name,
             'hours' => $hours,
             'topic' => $topic
