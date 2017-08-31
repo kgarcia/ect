@@ -60,6 +60,8 @@ $route['workshops/certificate'] = 'employee_workshops/upload_certificate';
 $route['quiz/send'] = 'employee_quiz/send_quiz';
 $route['profile/save'] = 'employee_profile/save';
 $route['profile'] = 'employee_profile';
+$route['change_password'] = 'employee_profile/change_password';
+$route['save_password'] = 'employee_profile/save_password';
 $route['certification/upload'] = 'employee_workshops/upload_single';
 $route['certification/save'] = 'employee_workshops/upload_single_certificate';
 

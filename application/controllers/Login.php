@@ -130,6 +130,7 @@ class Login extends CI_Controller
                     $row_adm =  $this->Login_model->get_adm($id_user);
                     $name = $row_adm->name;
                     $row_rol =  $this->Login_model->get_user_rol($id_rol);
+                    $row_emp =  $this->Login_model->get_emp($id_user);
                     if($check_user == TRUE)
                     {
                         $data = array(
@@ -139,6 +140,7 @@ class Login extends CI_Controller
                         'id_rol'        =>        $row_rol->id_role,
                         'email'         =>         $check_user->email,
                         'id_administrator' =>  $row_adm->id_administrators,
+                        'id_employee' =>  $row_emp->id_employees,
                         'name' =>       $name
                         );        
                         $this->session->set_userdata($data);

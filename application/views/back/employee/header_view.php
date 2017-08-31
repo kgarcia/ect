@@ -1,4 +1,4 @@
-header_view.php<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
@@ -34,7 +34,7 @@ header_view.php<!DOCTYPE html>
         <header class="header header-blog">  
             <div class="container">       
                 <h1 class="logo">
-                    <a href="<?=base_url().'user-section/home'?>">ETC <span class="sub">Employee</span></a>
+                    <a href="<?=base_url().'user-section/home'?>">STC <span class="sub"><?=$this->session->userdata('employee_label')?></span></a>
                 </h1><!--//logo-->
                 <nav class="main-nav navbar-right" role="navigation">
                     <div class="navbar-header">
@@ -47,27 +47,30 @@ header_view.php<!DOCTYPE html>
                     </div><!--//navbar-header-->
                     <div id="navbar-collapse" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item"><a href="<?=base_url().'user-section/home'?>">Home</a></li>
+                            <li class="nav-item"><a href="<?=base_url().'user-section/language/index/english'?>"><img src="<?=base_url().'assets/images/Usa.png'?>" alt=""></a></li>
+                            <li class="nav-item"><a href="<?=base_url().'user-section/language/index/spanish'?>"><img src="<?=base_url().'assets/images/Spain.png'?>" alt=""></a></a></li>
+                            <li class="nav-item"><a href="<?=base_url().'user-section/home'?>"><?=$this->session->userdata('home_item')?></a></li>
                             <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Workshops <i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><?=$this->session->userdata('workshops_item')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<?=base_url().'workshops/completed'?>">Completed</a></li>
-                                    <li><a href="<?=base_url().'workshops/all'?>">All</a></li>             
+                                    <li><a href="<?=base_url().'workshops/completed'?>"><?=$this->session->userdata('workshops_completed_item')?></a></li>
+                                    <li><a href="<?=base_url().'workshops/all'?>"><?=$this->session->userdata('workshops_all_item')?></a></li>             
                                 </ul>                            
                             </li><!--//dropdown-->
-                            <li class="nav-item"><a href="<?=base_url().'quiz/preservice'?>">Quiz</a></li>
+                            <li class="nav-item"><a href="<?=base_url().'quiz/preservice'?>"><?=$this->session->userdata('quiz_item')?></a></li>
                             <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Reports <i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><?=$this->session->userdata('reports_item')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="">All Certifications</a></li>           
+                                    <li><a href=""><?=$this->session->userdata('reports_certifications_item')?></a></li>           
                                 </ul>                            
                             </li><!--//dropdown-->
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><i class="fa fa-user"></i>  <?=$this->session->userdata('name')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<?=base_url().'profile'?>">Profile</a></li>
-                                    <li><a href="<?=base_url().'certification/upload'?>">Upload certificate</a></li>
-                                    <li><a href="<?=base_url().'login/logout_ci'?>">Sign Off</a></li>             
+                                    <li><a href="<?=base_url().'profile'?>"><?=$this->session->userdata('profile_item')?></a></li>
+                                    <li><a href="<?=base_url().'change_password'?>"><?=$this->session->userdata('change_password_item')?></a></li>
+                                    <li><a href="<?=base_url().'certification/upload'?>"><?=$this->session->userdata('up_cert_item')?></a></li>
+                                    <li><a href="<?=base_url().'login/logout_ci'?>"><?=$this->session->userdata('signoff_item')?></a></li>             
                                 </ul>                            
                             </li><!--//dropdown-->
                         </ul><!--//nav-->                                               

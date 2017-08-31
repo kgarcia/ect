@@ -89,4 +89,14 @@ class Employee_model extends CI_Model
         $this->db->update('employees', $data);    
     }
 
+    function update_password($id_user,$password)
+    {
+       $data = array(
+            'password' => $password
+            
+        );
+        $this->db->where('id_user', $id_user);
+        $this->db->update('users', $data);    
+    }
+
 }

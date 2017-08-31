@@ -7,7 +7,7 @@
                 <div class="row">                    
                     <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
                         <div class="footer-col-inner">
-                            <h3 class="title">About us</h3><!--
+                            <h3 class="title"><?=$this->session->userdata('aboutus_footer')?></h3><!--
                             <ul class="list-unstyled">
                                 <li><a href="#"><i class="fa fa-caret-right"></i>Who we are</a></li>
                                 <li><a href="#"><i class="fa fa-caret-right"></i>Press</a></li>
@@ -19,7 +19,7 @@
                     </div><!--//foooter-col-->    
                     <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
                         <div class="footer-col-inner">
-                            <h3 class="title">Product</h3><!--
+                            <h3 class="title"><?=$this->session->userdata('product_footer')?></h3><!--
                             <ul class="list-unstyled">
                                 <li><a href="#"><i class="fa fa-caret-right"></i>How it works</a></li>
                                 <li><a href="#"><i class="fa fa-caret-right"></i>API</a></li>
@@ -30,7 +30,7 @@
                     </div><!--//foooter-col-->              
                     <div class="footer-col links col-md-2 col-sm-4 col-xs-12 sm-break">
                         <div class="footer-col-inner">
-                            <h3 class="title">Others</h3><!--
+                            <h3 class="title"><?=$this->session->userdata('others_footer')?></h3><!--
                             <ul class="list-unstyled">
                                 <li><a href="#"><i class="fa fa-caret-right"></i>Help</a></li>
                                 <li><a href="#"><i class="fa fa-caret-right"></i>Documentation</a></li>
@@ -48,12 +48,12 @@
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>                    
                             </ul>
                             <div class="form-container">
-                                <p class="intro">Stay up to date with the latest news and offers from DayCare</p>
+                                <p class="intro"><?=$this->session->userdata('stay_footer')?></p>
                                 <form class="signup-form navbar-form">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Enter your email address">
+                                        <input type="text" class="form-control" placeholder="<?=$this->session->userdata('enteremail_footer')?>">
                                     </div>   
-                                    <button type="submit" class="btn btn-cta btn-cta-primary">Subscribe Now</button>                                 
+                                    <button type="submit" class="btn btn-cta btn-cta-primary"><?=$this->session->userdata('subscribe_footer')?></button>                                 
                                 </form>                               
                             </div><!--//subscription-form-->
                         </div><!--//footer-col-inner-->
@@ -64,7 +64,7 @@
         </div><!--//footer-content-->
         <div class="bottom-bar">
             <div class="container">
-                <small class="copyright">Template Copyright @ <a href="http://DiazApps.com/" target="_blank">DiazApps</a></small>                
+                <small class="copyright"><?=$this->session->userdata('copyright_footer')?> @ <a href="http://DiazApps.com/" target="_blank">DiazApps</a></small>                
             </div><!--//container-->
         </div><!--//bottom-bar-->
     </footer><!--//footer-->

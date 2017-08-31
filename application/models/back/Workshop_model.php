@@ -170,4 +170,15 @@ class Workshop_model extends CI_Model
     }
   }
 
+  function get_all_scholar_years(){
+
+    $query = $this->db->get_where('scholar_years', array( 'status' => '1'));
+
+        // si hay resultados
+    if ($query->num_rows() > 0) {
+
+      return $query->result();
+    }
+  }
+
 }

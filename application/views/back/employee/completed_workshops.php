@@ -1,7 +1,20 @@
 <!-- ******Features Section****** -->       
         <section class="features-tabbed section">
             <div class="container"><br>
-                <h2 class="page-title text-center"><i class="fa fa-archive"></i> Completed Workshops</h2><br><br>
+                <h2 class="page-title text-center"><i class="fa fa-archive"></i> <?=$header_wc?></h2><br><br>
+
+                <script type="text/javascript">
+      
+                         var dt_records = <?php echo json_encode($dt_records); ?>;
+                         var dt_search = <?php echo json_encode($dt_search); ?>;
+                         var dt_showing = <?php echo json_encode($dt_showing); ?>;
+                         var table_to = <?php echo json_encode($table_to); ?>;
+                                        var table_of = <?php echo json_encode($table_of); ?>;
+                                        var table_entries = <?php echo json_encode($table_entries); ?>;
+                                        var table_previous = <?php echo json_encode($table_previous); ?>;
+                                        var table_next = <?php echo json_encode($table_next); ?>;
+
+                </script>
                 <div class="row">
                     <div class="blog-list blog-category-list">
                         <article>
@@ -9,10 +22,10 @@
                                 <table class="table table-bordered table-hover" id="table_completed_workshops">
                                 <thead>
                                     <tr class="active">
-                                        <th>Workshop</th> 
-                                        <th>Institution</th>
-                                        <th width="160">Credit hours</th>
-                                        <th width="160">Certificates</th>
+                                        <th><?=$table_workshop?></th> 
+                                        <th><?=$table_institution?></th> 
+                                        <th width="160"><?=$table_hours?></th>
+                                        <th width="160"><?=$table_certificates?></th>
                                     </tr>
                                 </thead>
                                     
@@ -28,7 +41,7 @@
                                         <td><?=$vendors[$i]->name?></td>
                                         <td><?=$workshop->hours?></td>
                                         <td>
-                                         <a class="btn btn-success btn-lg" href="<?= base_url().$certifications[$i]->path ?>" download> View </a>
+                                         <a class="btn btn-success btn-lg" href="<?= base_url().$certifications[$i]->path ?>" download> <?=$table_view?> </a>
                                         </td>
                                     </tr>
 
