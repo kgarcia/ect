@@ -26,14 +26,12 @@ class Employee_workshops extends CI_Controller {
             $employee = $this->Workshop_model->get_employee($id_employee);
 
             $certifications = $this->Workshop_model->get_employee_certifications($id_employee);
-
+            $hoursc = 0;
             if( is_array($certifications)){
                 foreach ($certifications as $i => $certification) {
 
                     $workshops[$i] = $this->Workshop_model->get_workshop($certification->id_workshop);
-                    $vendor_id = $workshops[$i]->vendor_id;
-                    $vendors[$i] = $this->Workshop_model->get_vendor($vendor_id);
-
+                    $hoursc = $hoursc + $workshops[$i]->hours;
                 }
             }
 

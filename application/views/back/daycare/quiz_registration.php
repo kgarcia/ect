@@ -68,6 +68,11 @@ $(function(){
             '<input id="option' + count + '2" name="optio'+count+'n[]' + '" type="text" class="form-control" placeholder="Option 2" /><br>' + 
             '<input id="option' + count + '3" name="optio'+count+'n[]' + '" type="text" class="form-control" placeholder="Option 3" /><br>' + 
             '<input id="option' + count + '4" name="optio'+count+'n[]' + '" type="text" class="form-control" placeholder="Option 4" /><br>'+
+            '<p>Select the correct answers</p>'+
+            '<label>1</label><input type="checkbox" name="correc'+count+'t[]" value="1" />'+
+            '<label>2</label><input type="checkbox" name="correc'+count+'t[]" value="2" />'+
+            '<label>3</label><input type="checkbox" name="correc'+count+'t[]" value="3" />'+
+            '<label>4</label><input type="checkbox" name="correc'+count+'t[]" value="4" />'+
             '</div>');
         $("#count").val(count);
     });

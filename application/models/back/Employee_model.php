@@ -11,11 +11,14 @@ class Employee_model extends CI_Model
     										//'address'=>$data['address'],
     										'address' =>$data['address'],
 					                        'daycare_id' => $data['daycare_id'],
-					                        'type_employee_id' => 1,
+					                        'type_employee_id' => $data['type_employee_id'],
 					                        'user_id'=>$data['user_id'],
 					                        'phone'=>$data['phone'],
 					                        'birthdate'=>$data['birthdate'],
 					                        'gender'=>$data['gender'],
+					                        'job'=>$data['job'],
+					                        'date_of_hired'=>$data['date_of_hired'],
+					                        'date_of_responsability'=>$data['date_of_responsability'],
 					                        'status'=>1
     											));
     }
@@ -124,7 +127,16 @@ function get_user($id_user){
 
 																	
 	 
-					 
+		function get_employee_certifications($employee_id){
+
+		$query = $this->db->get_where('certifications', array('id_employee' => $employee_id, 'status' => '1'));
+
+        // si hay resultados
+		if ($query->num_rows() > 0) {
+
+			return $query->result();
+		}
+	}				 
 												 
 			
 		  

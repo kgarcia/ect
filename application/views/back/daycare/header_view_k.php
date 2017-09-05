@@ -43,7 +43,7 @@
         <header class="header header-blog">  
             <div class="container">       
                 <h1 class="logo">
-                    <a href="<?=base_url().'user-section/home'?>">ETC <span class="sub">Daycare</span></a>
+                    <a href="<?=base_url().'user-section/home'?>">STC <span class="sub">Daycare</span></a>
                 </h1><!--//logo-->
                 <nav class="main-nav navbar-right" role="navigation">
                     <div class="navbar-header">
@@ -91,6 +91,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><i class="fa fa-user"></i>  <?=$this->session->userdata('name')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?=base_url().'profile'?>">Profile</a></li>
+                                    <li><a href="<?=base_url().'daycare/profile'?>">My Daycare</a></li>
                                     <li><a href="<?=base_url().'certification/upload'?>">Upload certificate</a></li>
                                     <li><a href="<?=base_url().'login/logout_ci'?>">Sign Off</a></li>             
                                 </ul>                             

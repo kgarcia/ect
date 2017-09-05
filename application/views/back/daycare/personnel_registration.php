@@ -8,6 +8,7 @@
 
     $name = array('type' => 'text','name' => 'name','id' => 'name', 'placeholder' => 'Name', 'class' => 'form-control login-email');
     $address = array('type' => 'text','name' => 'address','id' => 'address', 'placeholder' => 'Address', 'class' => 'form-control login-email');
+    $job = array('type' => 'text','name' => 'job','id' => 'job', 'placeholder' => 'Job', 'class' => 'form-control login-email');
     $phone = array('type' => 'text','name' => 'phone','id' => 'phone', 'placeholder' => 'Phone', 'class' => 'form-control login-email');
     $birthdate = array('type' => 'date','name' => 'birthdate','id' => 'birthdate', 'placeholder' => 'Birthdate', 'class' => 'form-control login-email');
     $gender = array('type' => 'text','name' => 'gender','id' => 'gender', 'placeholder' => 'Gender', 'class' => 'form-control login-email');
@@ -36,6 +37,21 @@
                                             <label class="sr-only" for="name">Name</label>
                                             <?=form_input($name)?>
                                         </div>
+                                        	<div class="form-group">
+
+ 									<label class="sr-only" >Category</label>
+ 									<?php echo form_error('role'); ?>
+ 									<select class="form-control" name="rol" id="rol">
+
+					                  <option>Select a Role</option>
+
+					                  
+					                    <option value="3">Director</option>
+					                    <option value="5">Employee</option>
+					                                 
+					                </select> 
+
+					            </div>
                                         <div class="form-group">
                                             <?=form_error('email')?>
                                             <label class="sr-only" for="email">Email</label>
@@ -45,6 +61,11 @@
                                             <?=form_error('address')?>
                                             <label class="sr-only" for="address">Address</label>
                                             <?=form_input($address)?>
+                                        </div>
+                                        <div class="form-group">
+                                            <?=form_error('address')?>
+                                            <label class="sr-only" for="address">Address</label>
+                                            <?=form_input($job)?>
                                         </div>
                                         <div class="form-group">
                                             <?=form_error('phone')?>

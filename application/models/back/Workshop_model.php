@@ -169,5 +169,20 @@ class Workshop_model extends CI_Model
       return $query->result();
     }
   }
+  
+  function get_rules_by_type_employee($type_employee_id){
+
+		$query = $this->db->select_sum('hours')->get_where('rules', array('type_employee_id' => $type_employee_id,  'status' => '1'));
+
+ $this->db->select_sum('hours');
+    $this->db->from('rules');
+    $this->db->where('(type_employee_id = '.$type_employee_id.') ');
+    $query = $this->db->get();
+        // si hay resultados
+		if ($query->num_rows() > 0) {
+
+			return $query->result()->hours;
+		}
+	}	
 
 }
