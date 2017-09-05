@@ -12,6 +12,7 @@ $lang['workshops_all_item']			= "Todos";
 $lang['quiz_item']			= "Quiz";
 $lang['reports_item']			= "Reportes";
 $lang['reports_certifications_item']			= "Todos los certificados";
+$lang['reports_work_per_year_item']			= "Cursos Completados por año";
 $lang['profile_item']			= "Perfil";
 $lang['change_password_item']			= "Cambiar Contraseña";
 $lang['up_cert_item']			= "Cargar certificado";

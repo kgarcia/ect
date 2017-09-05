@@ -61,7 +61,7 @@
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><?=$this->session->userdata('reports_item')?> <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href=""><?=$this->session->userdata('reports_certifications_item')?></a></li>           
+                                    <li><a href="<?=base_url().'workshops/per_year'?>"><?=$this->session->userdata('reports_work_per_year_item')?></a></li>           
                                 </ul>                            
                             </li><!--//dropdown-->
                             <li class="nav-item dropdown">

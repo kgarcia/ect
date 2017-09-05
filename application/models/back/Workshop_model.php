@@ -76,14 +76,25 @@ class Workshop_model extends CI_Model
 
 	function get_employee_certifications($employee_id){
 
-		$query = $this->db->get_where('certifications', array('id_employee' => $employee_id, 'status' => '1'));
+    $query = $this->db->get_where('certifications', array('id_employee' => $employee_id, 'status' => '1'));
 
         // si hay resultados
-		if ($query->num_rows() > 0) {
+    if ($query->num_rows() > 0) {
 
-			return $query->result();
-		}
-	}
+      return $query->result();
+    }
+  }
+
+  function get_employee_enrollments($employee_id){
+
+    $query = $this->db->get_where('enrollment', array('employee_id' => $employee_id, 'status' => '1'));
+
+        // si hay resultados
+    if ($query->num_rows() > 0) {
+
+      return $query->result();
+    }
+  }
 
 	function get_workshop($id_workshops){
         

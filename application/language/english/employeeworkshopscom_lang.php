@@ -8,6 +8,8 @@ $lang['table_institution']			= "Institution";
 $lang['table_hours']			= "Credit hours";
 $lang['table_certificates']			= "Certificates";
 $lang['table_view']			= "View";
+$lang['message_no_workshops_scholar_year']			= "No completed workshops in this scholar year";
+
 
 
 // Menu Items

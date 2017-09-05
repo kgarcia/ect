@@ -69,7 +69,7 @@ class Home extends CI_Controller {
         $data['workshops_all_item'] = $this->lang->line('workshops_all_item');
         $data['quiz_item'] = $this->lang->line('quiz_item');
         $data['reports_item'] = $this->lang->line('reports_item');
-        $data['reports_certifications_item'] = $this->lang->line('reports_certifications_item');
+        $data['reports_work_per_year_item'] = $this->lang->line('reports_work_per_year_item');
         $data['profile_item'] = $this->lang->line('profile_item');
         $data['change_password_item'] = $this->lang->line('change_password_item');
         $data['up_cert_item'] = $this->lang->line('up_cert_item');
@@ -89,7 +89,7 @@ class Home extends CI_Controller {
                         'workshops_all_item'         =>         $data['workshops_all_item'],
                         'quiz_item' =>  $data['quiz_item'],
                         'reports_item' =>  $data['reports_item'],
-                        'reports_certifications_item' =>       $data['reports_certifications_item'],
+                        'reports_work_per_year_item' =>       $data['reports_work_per_year_item'],
                         'profile_item'     =>         $data['profile_item'],
                         'change_password_item'     =>         $data['change_password_item'],
                         'up_cert_item'     =>         $data['up_cert_item'],

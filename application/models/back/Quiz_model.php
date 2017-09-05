@@ -43,9 +43,9 @@ class Quiz_model extends CI_Model
             return false;
     }
 
-	function get_daycare_quiz($daycare_id){
+	function get_daycare_quiz($daycare_id, $quiztype_id){
         
-        $query = $this->db->get_where('quizzes', array('daycare_id' => $daycare_id, 'status' => 1));
+        $query = $this->db->get_where('quizzes', array('daycare_id' => $daycare_id, 'quiztype_id' => $quiztype_id, 'status' => 1));
         // si hay resultados
         if ($query->num_rows() == 1) {
            
@@ -95,13 +95,13 @@ class Quiz_model extends CI_Model
         }
     }
 
-    function get_question_correct_solution($question_id){
+    function get_question_correct_solutions($question_id){
         
         $query = $this->db->get_where('solutions', array('question_id' => $question_id, 'correct' => 1, 'status' => 1));
         // si hay resultados
-        if ($query->num_rows() == 1) {
-           
-            return $query->row();
+        if ($query->num_rows() > 0) {
+
+            return $query->result();
         }
     }
 
@@ -139,13 +139,13 @@ class Quiz_model extends CI_Model
         }
     } 
 
-    function get_employee_question_answer($employee_quiz_id, $question_id){
+    function get_employee_question_answers($employee_quiz_id, $question_id){
         
         $query = $this->db->get_where('answers', array('employee_quiz_id' => $employee_quiz_id, 'question_id' => $question_id, 'status' => 1));
         // si hay resultados
-        if ($query->num_rows() == 1) {
-           
-            return $query->row();
+        if ($query->num_rows() > 0) {
+
+            return $query->result();
         }
     }
 

@@ -8,6 +8,7 @@ $lang['table_institution']			= "Institución";
 $lang['table_hours']			= "Horas";
 $lang['table_certificates']			= "Certificados";
 $lang['table_view']			= "Ver";
+$lang['message_no_workshops_scholar_year']			= "No hay cursos completados en este año escolar";
 
 
 // Menu Items
