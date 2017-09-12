@@ -1,0 +1,10 @@
+foreach ($list as $name => $address)
+{
+    $this->email->clear();
+
+    $this->email->to($address);
+    $this->email->from('your@example.com');
+    $this->email->subject('Here is your info '.$name);
+    $this->email->message('Hi '.$name.' Here is the info you requested.');
+    $this->email->send();
+}

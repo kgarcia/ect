@@ -18,10 +18,10 @@
                                       <input type="radio" name="inlineRadioOptions" id="age1" value="1"> Agency
                                     </label>-->
                                     <label class="radio-inline input-lg">
-                                      <input type="radio" name="inlineRadioOptions" id="day2" value="2"> Daycare
+                                      <input type="radio" name="inlineRadioOptions" id="day2" value="2"> Institution
                                     </label>
                                     <label class="radio-inline input-lg">
-                                      <input type="radio" name="inlineRadioOptions" id="emp3" value="3"> Employee
+                                      <input type="radio" name="inlineRadioOptions" id="emp3" value="3"> Staff
                                         </label> 
                                     </div> <br><br>
 

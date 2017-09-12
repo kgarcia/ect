@@ -108,7 +108,7 @@ class Login_model extends CI_Model {
      public function get_web($id_user){
        
         $this->db->where('user_id',$id_user);
-        $query = $this->db->get('employees');
+        $query = $this->db->get('administrators');
     
         
         if ($query->num_rows() == 1) {

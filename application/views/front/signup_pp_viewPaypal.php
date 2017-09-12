@@ -20,27 +20,7 @@
 
                                                     <!-- Specify a Subscribe button. -->
                                                     <input type="hidden" name="cmd" value="_xclick-subscriptions">
-
-
-
-
-                                                    <!-- NUEVOOOO -->
-
-                                                    <input type="hidden" name="LOGIN" value="Ee868795">
-
-                                                    <input type="hidden" name="PARTNER" value="PayPal">
-
                                                     
-
-                                                   
-
-                                                    <input type="hidden" name="TYPE" value="S">
-
-                                                    
-
-
-
-                                                    <!-- NUEVOOO  -->
                                                     
 
                                                     <!-- Set the terms of the regular subscription. -->
@@ -50,24 +30,23 @@
 
                                                           $amount = 10 * $children;
 
-                                                          $description = '10$ per employee Plan';
-
+                                                          $description = '10$ per staff member Plan';
 
                                                       ?>
 
 
-                                                      <input type="hidden" name="DESCRIPTION" value="<?=$description?>">
 
-                                                    <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
+
+                                                    <input type="hidden" name="item_name" value="Institution with <?=$children?> staff members ">
                                                     <input type="hidden" name="on0" value="Plan">
-                                                    <input type="hidden" name="os0" value="10$ per employee (Monthly)">
+                                                    <input type="hidden" name="os0" value="10$ per staff member (Monthly)">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
                                                     <input type="hidden" name="item_number" value="DIG Weekly">
 
-                                                      <input type="hidden" name="AMOUNT" value="<?=$amount?>.00">
-                                                    <!--<input type="hidden" name="a3" value="<?=$amount?>.00">-->
+                          
+                                                    <input type="hidden" name="a3" value="<?=$amount?>.00">
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 
@@ -78,20 +57,17 @@
 
                                                     $amount = 9 * $children;
 
-                                                    $description = '9$ per employee Plan';
+                                                    $description = '9$ per staff member Plan';
                                                      ?>
-
-                                                     <input type="hidden" name="DESCRIPTION" value="<?=$description?>">
-                                                    <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
+                                                    <input type="hidden" name="item_name" value="Institution with <?=$children?> staff members ">
                                                     <input type="hidden" name="on0" value="Plan">
-                                                    <input type="hidden" name="os0" value="9$ per employee (Monthly)">
+                                                    <input type="hidden" name="os0" value="9$ per staff member (Monthly)">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
                                                     <input type="hidden" name="item_number" value="DIG Weekly">
 
-                                                    <input type="hidden" name="AMOUNT" value="<?=$amount?>.00">
-                                                    <!--<input type="hidden" name="a3" value="<?=$amount?>.00">-->
+                                                    <input type="hidden" name="a3" value="<?=$amount?>.00">
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 
@@ -101,25 +77,22 @@
 
                                                       $amount = 8 * $children;
 
-                                                       $description = '8$ per employee Plan';
+                                                       $description = '8$ per staff member Plan';
 
 
 
 
                                                       ?>
 
-                                                      <input type="hidden" name="DESCRIPTION" value="<?=$description?>">
-
-                                                    <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
+                                                    <input type="hidden" name="item_name" value="Institution with <?=$children?> staff members ">
                                                     <input type="hidden" name="on0" value="Plan">
-                                                    <input type="hidden" name="os0" value="8$ per employee (Monthly)">
+                                                    <input type="hidden" name="os0" value="8$ per staff member (Monthly)">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
                                                     <input type="hidden" name="item_number" value="DIG Weekly">
 
-                                                    <input type="hidden" name="AMOUNT" value="<?=$amount?>.00">
-                                                    <!--<input type="hidden" name="a3" value="<?=$amount?>.00">-->
+                                                    <input type="hidden" name="a3" value="<?=$amount?>.00">
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 
@@ -127,20 +100,17 @@
 
                                                         $amount = 7.99;
 
-                                                       $description = '7.99$ solo employee Plan';
+                                                       $description = '7.99$ solo staff member Plan';
 
                                                       ?>
 
-                                                      <input type="hidden" name="DESCRIPTION" value="<?=$description?>">
-
-                                                    <input type="hidden" name="item_name" value="Employee ">
+                                                    <input type="hidden" name="item_name" value="Solo staff member ">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
                                                     <input type="hidden" name="item_number" value="DIG Weekly">
 
-                                                    <input type="hidden" name="AMOUNT" value="<?=$amount?>.00">
-                                                    <!--<input type="hidden" name="a3" value="<?=$amount?>.00">-->
+                                                    <input type="hidden" name="a3" value="<?=$amount?>">
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 
@@ -171,11 +141,6 @@
                                                     <!-- Display the payment button. -->
                                                     <input id="check" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-
-                                           
-                                           <!--<input type="submit" value="Subscribe">-->
-
-
 
                                            <!--<input type="image" name="submit"
                                         src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_subscribe_113x26.png"

@@ -441,7 +441,7 @@ class Signup extends CI_Controller
                               $this->email->initialize($configGmail);
                              
 
-                              $this->email->from('joeluisrr@gmail.com');
+                              $this->email->from('eli7diaz@gmail.com');
                               $this->email->to($email); 
                               //$this->email->cc('another@another-example.com'); 
                               //$this->email->bcc('them@their-example.com'); 
@@ -562,7 +562,7 @@ $date = new DateTime();
                               $this->email->initialize($configGmail);
                              
 
-                              $this->email->from('joeluisrr@gmail.com');
+                              $this->email->from('eli7diaz@gmail.com');
                               $this->email->to($email); 
                               //$this->email->cc('another@another-example.com'); 
                               //$this->email->bcc('them@their-example.com'); 
@@ -646,8 +646,8 @@ $date = new DateTime();
                               $this->email->initialize($configGmail2);
                              
 
-                              $this->email->from('joeluisrr@gmail.com');
-                              $this->email->to('joeluisrr@gmail.com'); 
+                              $this->email->from('eli7diaz@gmail.com');
+                              $this->email->to('eli7diaz@gmail.com'); 
                               //$this->email->cc('another@another-example.com'); 
                               //$this->email->bcc('them@their-example.com'); 
                               //$psswd = substr( md5(microtime()), 1, 4);
@@ -672,7 +672,7 @@ $date = new DateTime();
                               $this->email->clear();
                              
 
-                              $this->email->from('joeluisrr@gmail.com');
+                              $this->email->from('eli7diaz@gmail.com');
                               $this->email->to($row->email); 
                               //$this->email->cc('another@another-example.com'); 
                               //$this->email->bcc('them@their-example.com'); 
@@ -768,8 +768,8 @@ $date = new DateTime();
                               $this->email->initialize($configGmail2);
                              
 
-                              $this->email->from('joeluisrr@gmail.com');
-                              $this->email->to('joeluisrr@gmail.com'); 
+                              $this->email->from('eli7diaz@gmail.com');
+                              $this->email->to('eli7diaz@gmail.com'); 
                               //$this->email->cc('another@another-example.com'); 
                               //$this->email->bcc('them@their-example.com'); 
                               //$psswd = substr( md5(microtime()), 1, 4);
@@ -793,7 +793,7 @@ $date = new DateTime();
                               $this->email->clear();
                              
 
-                              $this->email->from('joeluisrr@gmail.com');
+                              $this->email->from('eli7diaz@gmail.com');
                               $this->email->to($row->email); 
                               //$this->email->cc('another@another-example.com'); 
                               //$this->email->bcc('them@their-example.com'); 

@@ -13,8 +13,7 @@ class Signup_model extends CI_Model {
        $data = array(
             'email' => $email,
             'password' => $pw,
-            'role_id' => $id_rol,
-            'status' => 0
+            'role_id' => $id_rol
             
         );
         $this->db->insert('users', $data);  
@@ -32,31 +31,6 @@ class Signup_model extends CI_Model {
             return $query->row();
     }
     }
-
-  public function get_temp_day($id){
-       
-        $this->db->where('id_sub',$id);
-        $query = $this->db->get('subscription_temp_day');
-    
-        
-        if ($query->num_rows() == 1) {
-            
-            return $query->row();
-    }
-    }
-
-    public function get_temp_emp($id){
-       
-        $this->db->where('id_sub',$id);
-        $query = $this->db->get('subscription_temp_emp');
-    
-        
-        if ($query->num_rows() == 1) {
-            
-            return $query->row();
-    }
-    }
-
      public function get_adm($id_user){
        
         $this->db->where('user_id',$id_user);
@@ -152,77 +126,6 @@ function new_administrator($id_daycare,$id_user,$type_emp,$director)
 
 
    }
-
-       function new_temp_day($email,$pw,$id_rol,$name,$phone,$address,$children,$owner,$type_emp,$director,$description,$date_end,$amount)
-    {
-       $data = array(
-            'email' => $email,
-            'password' => $pw,
-            'id_rol' => $id_rol,
-            'name' => $name,
-            'phone' => $phone,
-            'address' => $address,
-            'children' => $children,
-            'owner' => $owner,
-            'type_emp' => $type_emp,
-            'dirname' => $director,
-            'description' => $description,
-            'date_end' => $date_end,
-            'price' => $amount
-
-        );
-        
-        $this->db->insert('subscription_temp_day', $data);
-        return $this->db->insert_id();   
-    }
-
-           function new_temp_emp($email,$pw,$id_rol,$name,$phone,$address,$bdate,$gender,$type_emp,$description,$date_end,$amount)
-    {
-       $data = array(
-            'email' => $email,
-            'password' => $pw,
-            'id_rol' => $id_rol,
-            'name' => $name,
-            'phone' => $phone,
-            'address' => $address,
-            'birthdate' => $bdate,
-            'gender' => $gender,
-            'type_emp' => $type_emp,
-            'description' => $description,
-            'date_end' => $date_end,
-            'price' => $amount
-
-        );
-        
-        $this->db->insert('subscription_temp_emp', $data);
-        return $this->db->insert_id();   
-    }
-
-    function update_sub_emp($id){
-
-         $data = array(
-            'status' => 0
-            
-        );
-
-            $this->db->where('id_sub', $id);
-            return  $this->db->update('subscription_temp_emp', $data);
-
-
- }
-    function update_sub_day($id){
-
-         $data = array(
-            'status' => 0
-            
-        );
-
-            $this->db->where('id_sub', $id);
-            return  $this->db->update('subscription_temp_day', $data);
-
-
- }
-
 
     
 }
