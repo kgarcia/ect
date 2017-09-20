@@ -1,4 +1,3 @@
-
      <section class="features-tabbed section">
             <div class="container">
                 <h2 class="page-title text-center"><i class="fa fa-archive"></i> Staff List</h2><br><br>
@@ -6,13 +5,13 @@
                 <div class="row">
                     <div class="blog-list blog-category-list">
                         <div id="dvData" class="table-responsive">
-                            <table class="table table-bordered display" id="table_completed_workshops">
+                            <table class="table table-bordered display" id="table_employee_list">
                                 <thead>
                                 <tr>
                                     <th>Picture</th>
                                     <th>Name</th>
                                     <th>phone</th>
-                                    <th>Gender</th>
+                                    <th>Job</th>
                                     <th>Completed Hours</th>
                                     <th>Missing Hours</th>
                                 </tr>
@@ -24,6 +23,17 @@
                         
                         $cer = $this->db->get_where('certifications', array('id_employee' => $emp->id_employees, 'status' => '1'));
                         $certifications = $cer->result();
+                        
+                        $enr = $this->db->get_where('enrollment', array('employee_id' => $emp->id_employees, 'status' => '1'));
+                        $enrollments = $enr->result();
+                        
+                        $today = date( 'Y-m-d H:i:s' );  
+                        
+                        $actual_scholar_year = $this->db->get_where('scholar_years', array('start <=' => $today, 'finish >=' => $today, 'status' => 1));
+                        
+                        $scholar_year_id = $actual_scholar_year->result()[0]->id_scholar_years;
+                        
+                        
                         
                             //$certifications = $workshopmodel->get_employee_certifications($emp->id_employees);
                             $ruleshours=10;
@@ -41,12 +51,11 @@
 
                             
                             $hoursc = 0;
-                            if( is_array($certifications)){
-                                foreach ($certifications as $i => $certification) {
-                
+                            
+                                foreach ($enrollments as $i => $enrollment) {
 //                                    $workshops[$i] = $this->Workshop_model->get_workshop($certification->id_workshop);
-                                    
-                                    $query = $this->db->get_where('workshops', array('id_workshops' => $certification->id_workshop, 'status' => 1));
+                                    if ($enrollment->scholar_year_id == $scholar_year_id){
+                                    $query = $this->db->get_where('workshops', array('id_workshops' => $enrollment->workshop_id));
                                         // si hay resultados
                                         if ($query->num_rows() == 1) {
                                            
@@ -54,16 +63,17 @@
                                             $hoursc = $hoursc + $wrkshp->hours;
                                             
                                         }
+                                    }
                                 }
-                            }
+                            
                         ?>
                         
                         
                                 <tr>
-                                    <td><img src="../<?= $emp->profile_picture ?>" class="img-thumbnail" align="center" style="width:50px; height: 50px;"></img></td>
+                                    <td><img src="../<?= $emp->profile_picture ?>" class="img-thumbnail" align="center" style="width:75px; height: 75px;"></img></td>
                                     <td><a href="../daycare/employee_workshops/<?= $emp->id_employees ?>"><?= $emp->name ?></a></td>
                                     <td><?= $emp->phone ?></td>
-                                    <td><?= $emp->gender ?></td>
+                                    <td><?= $emp->job?></td>
                                     <td class="success"><?= $hoursc ?></td>
                                     <td class="danger"><?= $ruleshours-$hoursc ?></td>
                                </tr>
@@ -79,8 +89,8 @@
         </section>
         
           <script type="text/javascript" src="<?=base_url().'assets/js/main.js'?>"></script>
-        
-        <script type="text/javascript">
+    
+               <script type="text/javascript">
             $(document).ready(function() {
               $("#btnExport").click(function(e) {
                 e.preventDefault();
@@ -97,6 +107,4 @@
               });
             });
         </script>
-
-            
       

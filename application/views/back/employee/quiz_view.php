@@ -7,7 +7,7 @@
  					<div class="row">
  						<div class="form-container col-xs-12 col-md-12">
  							<?php $attributes = array('class' => 'form-horizontal', 
- 							'onsubmit' => "return confirm('Are you sure to submit your quiz? Once is submitted you will not be able to change any answer.');"); ?>
+ 							'onsubmit' => "return confirm('".$quiz_confirm."');"); ?>
           					<?php echo form_open_multipart(base_url().'quiz/send', $attributes) ?> 
  								</br>
  								<?php
@@ -28,7 +28,7 @@
 						                  foreach($solutions[$question->id_questions] as $sols)
 						                  {
 						                    ?>
-						                    <input type="radio" name=<?="ans_".$question->id_questions?> value=<?=$sols->id_solutions?>> <?=$sols->description?><br>
+						                    <input type="checkbox" name=<?="ans_".$question->id_questions."[]"?> value=<?=$sols->id_solutions?>> <?=$sols->description?><br>
 						                    <?php
 						                  }
 
@@ -56,7 +56,7 @@
  								<input type="hidden" name="quiz_id" value="<?php echo $quiz_id; ?>"/>
 
  								</br>
- 								<button type="submit" class="btn btn-block btn-cta-primary">Send</button>  
+ 								<button type="submit" class="btn btn-block btn-cta-primary"><?=$quiz_send?></button>  
  							<?php echo form_close() ?>
  						</div><!--//form-container-->
  					</div><!--//row-->

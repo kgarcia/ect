@@ -20,25 +20,36 @@
 
 					                  	case 1:
 
-					                  		if ($correct_ids[$question->id_questions] == $answers[$question->id_questions]->answer_option) {
-					                  		?>
+					                  		if (is_array($answers[$question->id_questions])){
 
-					                  			<div class="alert alert-success col-xs-12 col-md-12">
-					                  				<div class="col-xs-10 col-md-10">Correct Answer</div>
-					                  				<div class="col-xs-2 col-md-2">
-					                  					<b><?= $answers[$question->id_questions]->score."/".$question->score ?></b>
-					                  				</div>
-					                  			</div>
+						                  		if ($question->score == $answers[$question->id_questions][0]->score) {
+						                  		?>
 
-					                  		<?php } else { ?>
+						                  			<div class="alert alert-success col-xs-12 col-md-12">
+						                  				<div class="col-xs-10 col-md-10"><?=$quiz_correct_answer?></div>
+						                  				<div class="col-xs-2 col-md-2">
+						                  					<b><?= $answers[$question->id_questions][0]->score."/".$question->score ?></b>
+						                  				</div>
+						                  			</div>
 
-					                  			<div class="alert alert-danger col-xs-12 col-md-12">		<div class="col-xs-10 col-md-10">Wrong Answer</div>
-					                  				<div class="col-xs-2 col-md-2">
-					                  					<b><?= $answers[$question->id_questions]->score."/".$question->score ?></b>
-					                  				</div>
-					                  			</div>
+						                  		<?php } else { ?>
 
-					                  		<?php } ?>
+						                  			<div class="alert alert-danger col-xs-12 col-md-12">		<div class="col-xs-10 col-md-10"><?=$quiz_wrong_answer?></div>
+						                  				<div class="col-xs-2 col-md-2">
+						                  					<b><?= $answers[$question->id_questions][0]->score."/".$question->score ?></b>
+						                  				</div>
+						                  			</div>
+
+						                  		<?php }
+						                  		} else { ?>
+
+						                  		<div class="alert alert-danger col-xs-12 col-md-12">		<div class="col-xs-10 col-md-10"><?=$quiz_wrong_answer?></div>
+						                  				<div class="col-xs-2 col-md-2">
+						                  					<b><?= "0/".$question->score ?></b>
+						                  				</div>
+						                  			</div>
+
+						                  		<?php } ?>
 
 	 									<b><?=$question->description." (".$question->score." pts.) "?></b><br><br>
 	 									<input type="hidden" name="<?php echo "quest_".$q; ?>" value="<?php echo $question->id_questions; ?>"/>
@@ -47,9 +58,18 @@
 
 						                  foreach($solutions[$question->id_questions] as $sols)
 						                  {
+						                  	if (is_array($answers_options[$question->id_questions])) {
 						                    ?>
-						                    <input type="radio" name=<?="ans_".$question->id_questions?> value=<?=$sols->id_solutions?> <?php if($sols->id_solutions == $answers[$question->id_questions]->answer_option){echo('checked="checked"');}?> disabled> <?=$sols->description?><br>
+
+						                    <input type="checkbox" name=<?="ans_".$question->id_questions?> value=<?=$sols->id_solutions?> <?php if (in_array($sols->id_solutions, $answers_options[$question->id_questions])){echo('checked="checked"');}?> disabled> <?=$sols->description?><br>
+
 						                    <?php
+						                	} else { ?>
+
+						                	<input type="checkbox" name=<?="ans_".$question->id_questions?> value=<?=$sols->id_solutions?> disabled> <?=$sols->description?><br>
+
+						                	<?php }
+
 						                  }
 
 						                  break;
@@ -59,14 +79,14 @@
 						                  if ($quiz_reviewed == 0) {
 					                  		?>
 
-					                  			<div class="alert alert-warning">This question has not been graded</div>
+					                  			<div class="alert alert-warning"><?=$quiz_not_graded?></div>
 
 					                  		<?php } else { ?>
 
 					                  			<div class="alert alert-success col-xs-12 col-md-12">
-					                  				<div class="col-xs-10 col-md-10">Graded</div>
+					                  				<div class="col-xs-10 col-md-10"><?=$quiz_graded?></div>
 					                  				<div class="col-xs-2 col-md-2">
-					                  					<b><?= $answers[$question->id_questions]->score."/".$question->score ?></b>
+					                  					<b><?= $answers[$question->id_questions][0]->score."/".$question->score ?></b>
 					                  				</div>
 					                  			</div>
 
@@ -75,7 +95,7 @@
 		 									<b><?=$question->description." (".$question->score." pts.) "?></b><br><br>
 		 									<input type="hidden" name="<?php echo "quest_".$q; ?>" value="<?php echo $question->id_questions; ?>"/>
 
-						                  <textarea id=<?=$question->id_questions?> name=<?="ans_".$question->id_questions?> rows="4" style="width:100%" disabled><?php echo $answers[$question->id_questions]->answer_text;?>
+						                  <textarea id=<?=$question->id_questions?> name=<?="ans_".$question->id_questions?> rows="4" style="width:100%" disabled><?php echo $answers[$question->id_questions][0]->answer_text;?>
 						                  </textarea>
 
 						                   <?php						                

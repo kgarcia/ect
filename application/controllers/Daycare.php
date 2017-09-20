@@ -16,18 +16,27 @@ class Daycare extends CI_Controller {
         $this->load->model('back/quiz_model');
         $this->load->model('back/Workshop_model');
         $this->load->model('front/Signup_model');
-        
+	    
+           
 	}
 
 	function personnel_registration(){
-
+    if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'administrator')
+        {
         $data['title'] = 'Personnel Registration';    
         $data['active'] = 'Personnel_Registration';
+        $employee_id = $this->session->userdata('id_employee');
+        $employee = $this->employee_model->get_employee($employee_id);
+        $data['cancreatequiz'] = $this->quiz_model->get_daycare_quiz_count($employee->daycare_id);
         $this->load->view('back/daycare/header_view_k', $data);
         //$this->load->view('front/nav_view', $data);
         $this->load->view('back/daycare/personnel_registration', $data);
         $this->load->view('back/footer_view', $data); 
-        
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }       
 	} 
 	
 	function create_employee(){
@@ -37,6 +46,11 @@ class Daycare extends CI_Controller {
         $employee = $this->employee_model->get_employee($employee_id);
         $email = $this->input->post('email');
         $id_rol = $this->input->post('rol');
+        if($id_rol==3){
+            $type_employee_id = 1;
+        }else{
+            $type_employee_id = 2;
+        }
         $password ='1234567';
         $pw = md5($password);
         $newuser_id = $this->Signup_model->new_user($email,$pw,$id_rol);
@@ -45,6 +59,7 @@ class Daycare extends CI_Controller {
 			'address' =>$this->input->post('address'),// $this->input->post('address'),
                         'daycare_id' => $employee->daycare_id,
                         'user_id'=> $newuser_id,
+                        'type_employee_id'=>$type_employee_id,
                         'job'=>$this->input->post('job'),
                         'phone'=>$this->input->post('phone'),
                         'birthdate'=>$this->input->post('birthdate'),
@@ -102,15 +117,23 @@ class Daycare extends CI_Controller {
 	}
 
 	function employee_list(){
+	 if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'administrator')
+        {
 		$data['title'] = 'Employee List';    
         $data['active'] = 'Employee_List';
-        $data['employees'] = $this->employee_model->getEmployees();
-        $data['workshopmodel'] = $this->workshop_model; 
         
+         $employee_id = $this->session->userdata('id_employee');
+        $employee = $this->employee_model->get_employee($employee_id);
+        $data['employees'] = $this->employee_model->get_daycare_employees($employee->daycare_id);
+        $data['cancreatequiz'] = $this->quiz_model->get_daycare_quiz_count($employee->daycare_id);
         $this->load->view('back/daycare/header_view_k', $data);
         $this->load->view('back/daycare/employee_list', $data);
         $this->load->view('back/footer_view', $data); 
-        
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }  
 	}
 	
 	function show_employee(){
@@ -143,7 +166,7 @@ class Daycare extends CI_Controller {
             
             $id_employee = $this->uri->segment(3);
             $employee = $this->Workshop_model->get_employee($id_employee);
-
+        $data['cancreatequiz'] = $this->quiz_model->get_daycare_quiz_count($employee->daycare_id);
            
             $certifications = $this->Workshop_model->get_employee_certifications($id_employee);
 
@@ -177,13 +200,33 @@ class Daycare extends CI_Controller {
     }
     
     function quiz_registration(){
-
+        if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'administrator')
+        {
         $data['title'] = 'Quiz Registration';    
         $data['active'] = 'Quiz_Registration';
+        $employee_id = $this->session->userdata('id_employee');
+        $employee = $this->employee_model->get_employee($employee_id);
+        $quizzes = $this->quiz_model->getQuizzes($employee->daycare_id);
+        $data['idioma']=3;
+        if($quizzes){
+        foreach($quizzes->result() as $quiz){
+            echo 'qt'.$quiz->quiztype_id.'pq';
+            if ($quiz->quiztype_id==1){
+                $data['idioma']=2;
+            }elseif($quiz->quiztype_id==2){
+                $data['idioma']=1;
+            }
+        }
+        }
         $this->load->view('back/daycare/header_view_k', $data);
         $this->load->view('back/daycare/quiz_registration', $data);
         $this->load->view('back/footer_view', $data); 
-        
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }  
 	} 
     
     function create_quiz(){
@@ -195,7 +238,7 @@ class Daycare extends CI_Controller {
                             $quiz = array(
                     			'description' => $this->input->post('description'),
                     			'daycare_id' =>$employee->daycare_id,
-                                            'quiztype_id' => 1,
+                                            'quiztype_id' => $this->input->post('quizztype_id'),
                                             'duration' => '10:00:00'//
                     			);
                     			$quizid = $this->quiz_model->createQuiz($quiz);
@@ -281,16 +324,152 @@ class Daycare extends CI_Controller {
 	}
 	
 	function quiz_list(){
+	      if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'administrator')
+        {
 		$data['title'] = 'Quizzes List';    
-        $data['active'] = 'Employee_List';
+        $data['active'] = 'quiz_List';
+        $employee_id = $this->session->userdata('id_employee');
+        $employee = $this->employee_model->get_employee($employee_id);
         
-        $data['quizzes'] = $this->quiz_model->getQuizzes();
-        
+        $data['quizzes'] = $this->quiz_model->getQuizzes($employee->daycare_id);
+        $data['cancreatequiz'] = $this->quiz_model->get_daycare_quiz_count($employee->daycare_id);
         $this->load->view('back/daycare/header_view_k', $data);
         $this->load->view('back/daycare/quiz_list', $data);
         $this->load->view('back/footer_view', $data); 
-        
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }
 	}
+	
+	    function quiz_registration2(){
+        if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'administrator')
+        {
+        $data['title'] = 'Quiz Registration';    
+        $data['active'] = 'Quiz_Registration';
+        $employee_id = $this->session->userdata('id_employee');
+        $employee = $this->employee_model->get_employee($employee_id);
+        $quizzes = $this->quiz_model->getQuizzes($employee->daycare_id);
+        $data['idioma']=3;
+        if($quizzes){
+        foreach($quizzes->result() as $quiz){
+            echo 'qt'.$quiz->quiztype_id.'pq';
+            if ($quiz->quiztype_id==1){
+                $data['idioma']=2;
+            }elseif($quiz->quiztype_id==2){
+                $data['idioma']=1;
+            }
+        }
+        }
+        $this->load->view('back/daycare/header_view_k', $data);
+        $this->load->view('back/daycare/quiz_registration', $data);
+        $this->load->view('back/footer_view', $data); 
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }  
+	} 
+    
+    function edit_quiz(){
+         if($this->session->userdata('roles') == TRUE && 
+            $this->session->userdata('roles') == 'administrator')
+        {
+            $id_employee = $this->session->userdata('id_user');
+            $employee = $this->employee_model->get_employee_by_user_id($id_employee);
+                            $quiz = array(
+                                'id_quizzes' => $this->input->post('quiz_id'),
+                			    'description' => $this->input->post('description'),
+                    			'daycare_id' =>$employee->daycare_id,
+                                'quiztype_id' => $this->input->post('quizztype_id'),
+                                'duration' => '10:00:00'//
+                    			);
+                    			$quizid =$this->input->post('quiz_id');
+                    			$this->quiz_model->edit_quiz($quiz);
+            
+                             if ($this->input->post('question')) { // returns false if no property 
+                                $questions = $this->input->post('question', true);
+                                $count = $this->input->post('count', true);// questions count
+                                $questionsid = $this->input->post('question_id', true);
+                                $score = $this->input->post('score', true);
+                                $opciones = array();
+                                $correctas = array();
+                                for ($x = 0; $x <= $count; $x++) {
+                                    $var = 'optio'.$x.'n';
+                                    $corr = 'correc'.$x.'t';
+                                    ${"options$x"} = $this->input->post($var, true);
+                                    ${"correct$x"} = $this->input->post($corr, true);
+                                    array_push($opciones,${"options$x"});
+                                    array_push($correctas,${"correct$x"});
+
+                                } 
+                                 // echo '<pre>las opciones';
+                                    ////print_r($opciones);
+                                   // print_r($correctas);
+                                    //echo '<br>las score';
+                                    ////print_r($score);
+                                //echo '<br>Qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';
+                                $preg = 0;
+                                foreach ($questions as $i => $a) { // need index to match other properties
+                                    //echo '<br>quest';
+                                    //echo $a;
+                                    //echo '<br>score';
+                                    //echo $score[$i];
+                                    $preg++;
+                                    $dataq = array(
+                                            'id_questions'=>$questionsid[$i],
+                                			'description' => $a,
+                                			'quiz_id' => $quizid,
+                                            'questiontype_id' => 1,
+                                            'score' => $score[$i]//
+                                			);
+                                			
+                                    $this->quiz_model->updateQuestion($dataq);
+                                    
+                                        //echo '<br>OOOOOOOOOOOOOOOOoooooooooooooooooooooopppp';
+                                        $optin = $i+1;
+                                        $u = 1;
+                                    foreach (${"options$optin"} as $in => $op) {
+                                        //echo '<br>quest';
+                                        //echo $count;
+                                        //print_r($correctas[$preg]);
+                                        //echo 'val'.in_array($u, $correctas[$preg]).'<br>';
+                                        if (in_array($u, $correctas[$preg])) {
+                                            $bool = 1;
+                                        }
+                                        else{
+                                            $bool = 0;
+                                        };
+                                        $option = array(
+                                            'id_solutions' => ${"solutio$optin"."n[$u]"},
+                                			'description' => $op,
+                                			'question_id' => $questionid,
+                                            'correct' => $bool
+                                			);
+                                			//echo'<br>solution: ';
+                                			//print_r($option);
+                            			$this->quiz_model->updateSolution($option);
+                                        $u++;
+                                    }
+                                    
+                                }
+                            
+                                // don't redirect inside the loop
+                                redirect(base_url().'daycare/quiz_list');
+                                //echo '</pre>';   
+                            } else{
+                                ////echo 'No Data';
+                            }
+        }
+         else 
+         {
+            redirect(base_url().'login');
+         }            
+	}
+
 	
 	function profile()
     {
@@ -374,7 +553,36 @@ class Daycare extends CI_Controller {
         }
     }
 
-	  
+	
+	function quiz_edit(){
+	    if($this->session->userdata('roles') == TRUE && ( $this->session->userdata('roles') == 'administrator'))
+        {
+            $id_employee = $this->session->userdata('id_user');
+            $employee = $this->employee_model->get_employee_by_user_id($id_employee);
+            $data['segmento'] = $this->uri->segment(3);
+            $id_quiz = $this->uri->segment(3);
+            $quiz = $this->quiz_model->showQuiz($id_quiz)->result();
+            $data['quiz'] = $quiz[0];
+            $questions = $this->quiz_model->get_quiz_questions($id_quiz);
+            
+            $this->load->view('back/daycare/header_view_k', $data);
+            
+            $this->load->view('back/daycare/quiz_edit_up', $data);
+            $count = 1;
+            foreach($questions as $question) {
+                $solutions = $this->quiz_model->get_question_solutions($question->id_questions);
+                $this->load->view('/back/daycare/question_partial', array('question' => $question, 'solutions' => $solutions, 'count' => $count));
+                $count++;
+            }
+           $this->load->view('back/daycare/quiz_edit_down', $data);
+            $this->load->view('back/footer_view', $data); 
+          
+        }else 
+        {
+            redirect(base_url().'login');
+        } 
+
+	}
     
 }
 ?>

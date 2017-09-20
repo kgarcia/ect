@@ -1,6 +1,5 @@
-
     
-    <div class="headline-bg">
+    <div class="headline-bgk">
     </div><!--//headline-bg-->         
     
     <!-- ******Video Section****** --> 
@@ -11,7 +10,7 @@
             <div class="member">
                 <div class="member-inner">
                     <figure class="profile text-center" align="center">
-                        <img id="profile_thumb" class="img-responsive img-thumbnail" align="center" style="min-height: 350px;max-height: 350px; min-width: 350px;max-width: 350px"  src="../<?= $daycare->profile_picture ?>" alt=""/>
+                        <img id="profile_thumb" class="img-responsive img-thumbnail" align="center" style="min-height: 180px;max-height: 180px; min-width: 180px;max-width: 180px"  src="../<?= $daycare->profile_picture ?>" alt=""/>
                         <div align="center" class="text-center" >
                             <input type="file" id="profile_picture" name="profile_picture" style="display: none" accept="image/jpeg,image/gif,image/png">
                         </div>

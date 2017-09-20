@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">     
                         <div class="form-box-inner">
-                            <h2 class="title text-center">Employee Registration</h2>                 
+                            <h2 class="title text-center">Staff Registration</h2>                 
                             <div class="row">
                                 <div class="form-container col-xs-12 col-md-12" align="center">
                                     <?=form_open(base_url().'daycare/create_employee', $toForm)?>
@@ -47,7 +47,7 @@
 
 					                  
 					                    <option value="3">Director</option>
-					                    <option value="5">Employee</option>
+					                    <option value="5">Staff</option>
 					                                 
 					                </select> 
 

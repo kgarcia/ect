@@ -26,20 +26,20 @@
                                                     <!-- Set the terms of the regular subscription. -->
                                                     <!--<input type="hidden" name="currency_code" value="USD">-->
 
-                                                    <?php if (($children >= 2) and ($children <= 9)) {
+                                                    <?php if (($children >= 10) and ($children <= 19)) {
 
-                                                          $amount = 5 * $children;
+                                                          $amount = 10 * $children;
 
-                                                          $description = '5$ per employee Plan';
+                                                          $description = '10$ per staff member Plan';
 
                                                       ?>
 
 
 
 
-                                                    <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
+                                                    <input type="hidden" name="item_name" value="Institution with <?=$children?> staff members ">
                                                     <input type="hidden" name="on0" value="Plan">
-                                                    <input type="hidden" name="os0" value="5$ per employee (Monthly)">
+                                                    <input type="hidden" name="os0" value="10$ per staff member (Monthly)">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
@@ -51,17 +51,17 @@
                                                     <input type="hidden" name="t3" value="M">
 
                                                       
-                                                    <?php }elseif (($children >= 10) and ($children <= 19)) {
+                                                    <?php }elseif (($children >= 20) and ($children <= 35)) {
 
 
 
-                                                    $amount = 10 * $children;
+                                                    $amount = 9 * $children;
 
-                                                    $description = '10$ per employee Plan';
+                                                    $description = '9$ per staff member Plan';
                                                      ?>
-                                                    <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
+                                                    <input type="hidden" name="item_name" value="Institution with <?=$children?> staff members ">
                                                     <input type="hidden" name="on0" value="Plan">
-                                                    <input type="hidden" name="os0" value="10$ per employee (Monthly)">
+                                                    <input type="hidden" name="os0" value="9$ per staff member (Monthly)">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
@@ -71,22 +71,22 @@
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 
-                                                    <?php }elseif (($children >= 20) and ($children <= 35)) { 
+                                                    <?php }elseif ($children >= 36) { 
 
 
 
-                                                      $amount = 17 * $children;
+                                                      $amount = 8 * $children;
 
-                                                       $description = '17$ per employee Plan';
+                                                       $description = '8$ per staff member Plan';
 
 
 
 
                                                       ?>
 
-                                                    <input type="hidden" name="item_name" value="DayCare with <?=$children?> employees ">
+                                                    <input type="hidden" name="item_name" value="Institution with <?=$children?> staff members ">
                                                     <input type="hidden" name="on0" value="Plan">
-                                                    <input type="hidden" name="os0" value="17$ per employee (Monthly)">
+                                                    <input type="hidden" name="os0" value="8$ per staff member (Monthly)">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
@@ -98,19 +98,19 @@
 
                                                     <?php }elseif ($type == 3) { 
 
-                                                        $amount = 9;
+                                                        $amount = 7.99;
 
-                                                       $description = '9$ solo employee Plan';
+                                                       $description = '7.99$ solo staff member Plan';
 
                                                       ?>
 
-                                                    <input type="hidden" name="item_name" value="Employee ">
+                                                    <input type="hidden" name="item_name" value="Solo staff member ">
 
 
                                                     <!--<input type="hidden" name="amount" value="1.00">-->
                                                     <input type="hidden" name="item_number" value="DIG Weekly">
 
-                                                    <input type="hidden" name="a3" value="9.00">
+                                                    <input type="hidden" name="a3" value="<?=$amount?>">
                                                     <input type="hidden" name="p3" value="1">
                                                     <input type="hidden" name="t3" value="M">
 

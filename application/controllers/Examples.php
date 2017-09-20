@@ -151,18 +151,18 @@ class Examples extends CI_Controller {
 		 if($this->session->userdata('roles') == TRUE && 
             $this->session->userdata('roles') == 'administrator')
         {
-        	$this->load->model('back/employee_model');
-            $id_employee = $this->session->userdata('id_user');
-            $employee = $this->employee_model->get_employee_by_user_id($id_employee);
-            
+            $this->load->model('back/employee_model');
+            $id_employee = $this->session->userdata('id_employee');
+            $employ = $this->employee_model->get_employee($id_employee);
+			
 			$crud = new grocery_CRUD();
 
 			$crud->set_theme('flexigrid');
 			
-			$crud->where('daycare_id',$employee->daycare_id);
+			// $this->employee_model->get_employee($id_employee)->daycare_id);
 			$crud->set_table('employees');
 			// where daycare_id = mi daycare
-			
+			$crud->where('daycare_id', $employ->daycare_id);
 			$crud->set_relation('daycare_id','daycares','name');
 			$crud->set_relation('type_employee_id','type_employees','name');
 			$crud->display_as('daycare_id','Daycare');
@@ -176,10 +176,12 @@ class Examples extends CI_Controller {
 		//	$crud->required_fields('lastName');
 
 			//$crud->set_field_upload('file_url','assets/uploads/files');
-
+			//$crud->unset_jquery();
+			
 			$output = $crud->render();
- $data['title'] = 'Employee Management';    
-        $data['active'] = 'Employee_management';
+			
+ $data['title'] = 'Staff Management';    
+        $data['active'] = 'Staff_management';
 			$this->_example_output($output, $data);
         }
          else 
@@ -187,7 +189,6 @@ class Examples extends CI_Controller {
             redirect(base_url().'login');
          }       
 	}
-
 	public function customers_management()
 	{
 			$crud = new grocery_CRUD();

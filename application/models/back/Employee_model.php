@@ -15,11 +15,7 @@ class Employee_model extends CI_Model
 					                        'user_id'=>$data['user_id'],
 					                        'phone'=>$data['phone'],
 					                        'birthdate'=>$data['birthdate'],
-					                        'gender'=>$data['gender'],
-					                        'job'=>$data['job'],
-					                        'date_of_hired'=>$data['date_of_hired'],
-					                        'date_of_responsability'=>$data['date_of_responsability'],
-					                        'status'=>1
+					                        'gender'=>$data['gender']
     											));
     }
 
@@ -32,37 +28,38 @@ class Employee_model extends CI_Model
     		return false;
 
     }
-
-    public function showEmployee($id){
-        $this->db->where('id_employees', $id);
-        $query = $this->db->get('employees');
-        if($query->num_rows()>0) {
-            return $query;}
-        else
-            return false;
-    }
     
+    public function get_daycare_employees($daycare_id){
+    	$query = $this->db->get_where('employees', array('daycare_id' => $daycare_id, 'status' => 1));
+    	echo $query->num_rows();
+    	if($query->num_rows()>0) 
+    		return $query;
+    	else
+    		return false;
+
+    }
+
     function get_employee($id_employees){
-		
+        
         $query = $this->db->get_where('employees', array('id_employees' => $id_employees, 'status' => 1));
         // si hay resultados
         if ($query->num_rows() == 1) {
-		   
+           
             return $query->row();
         }
-    } 
+    }
     
-     
-    function get_employee_by_user_id($id){
-		
-        $query = $this->db->get_where('employees', array('user_id' => $id, 'status' => 1));
+    function get_employee_by_user_id($id_employees){
+        
+        $query = $this->db->get_where('employees', array('user_id' => $id_employees, 'status' => 1));
         // si hay resultados
         if ($query->num_rows() == 1) {
-		   
+           
             return $query->row();
         }
-    } 
-function get_user($id_user){
+    }
+
+    function get_user($id_user){
         
         $query = $this->db->get_where('users', array('id_user' => $id_user, 'status' => 1));
         // si hay resultados
@@ -71,14 +68,15 @@ function get_user($id_user){
             return $query->row();
         }
     }
-									  
-											  
-											 
-								 
-						  
-			
-						 
-	 
+
+    public function showEmployee($id){
+        $this->db->where('id_employees', $id);
+        $query = $this->db->get('employees');
+        if($query->num_rows()>0) 
+            return $query;
+        else
+            return false;
+    }
     
     public function getWorkshops($id){
         $this->db->where('employee_id', $id);
@@ -88,17 +86,7 @@ function get_user($id_user){
         else
             return false;
     }
-    
-    
-    function get_daycare($id_employees){
-        $query = $this->db->get_where('employees', array('id_employees' => $id_employees, 'status' => 1));
-        // si hay resultados
-        if ($query->num_rows() == 1) {
-            $querydc = $this->db->get_where('daycares', array('id_daycares' => $query->row()->daycare_id, 'status' => 1));
-            return $querydc->row();
-        }
-	
-	
+
     function update_employee($id_employees,$name,$phone,$address)
     {
        $data = array(
@@ -120,28 +108,15 @@ function get_user($id_user){
         $this->db->where('id_employees', $id_employees);
         $this->db->update('employees', $data);    
     }
-	  
-														
-												  
-    } 
 
-																	
-	 
-		function get_employee_certifications($employee_id){
-
-		$query = $this->db->get_where('certifications', array('id_employee' => $employee_id, 'status' => '1'));
-
-        // si hay resultados
-		if ($query->num_rows() > 0) {
-
-			return $query->result();
-		}
-	}				 
-												 
-			
-		  
-														
-												  
-	 
+    function update_password($id_user,$password)
+    {
+       $data = array(
+            'password' => $password
+            
+        );
+        $this->db->where('id_user', $id_user);
+        $this->db->update('users', $data);    
+    }
 
 }

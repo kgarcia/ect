@@ -12,6 +12,9 @@ class Employee_quiz extends CI_Controller {
         $this->load->library(array('form_validation'));
         $this->load->helper(array('url','form'));
         $this->load->database('default');
+
+        $this->lang->load('employeeheader',$this->session->userdata('lang') ); 
+        $this->lang->load('employeequiz',$this->session->userdata('lang') );
                
     }
 
@@ -37,14 +40,32 @@ class Employee_quiz extends CI_Controller {
                     {
                         case 1:
 
-                            $correct_solution = $this->Quiz_model->get_question_correct_solution($question_id);
-                            $answer_option = $this->input->post('ans_'.$question_id);
-                            if ($correct_solution->id_solutions == $answer_option){
+                            $correct_solutions = $this->Quiz_model->get_question_correct_solutions($question_id);
+                            $answer_options = $this->input->post('ans_'.$question_id.'[]');
+
+                            $cont = 0;
+
+                            if (is_array($correct_solutions) && is_array($answer_options)){
+                                foreach ($correct_solutions as $sol) {
+                                    if (in_array($sol->id_solutions, $answer_options)){
+                                        $cont++;
+                                    }
+                                }
+                            }
+
+
+                            if ($cont == sizeof($correct_solutions)){
                                 $score = $question->score;
                             } else {
                                 $score = 0;
                             }
-                            $this->Quiz_model->create_answer_option($employee_quiz_id,$question_id,$answer_option,$score);
+
+                            if (is_array($answer_options)){
+                                foreach ($answer_options as $opts) {
+                                    $this->Quiz_model->create_answer_option($employee_quiz_id,$question_id,$opts,$score);
+                                }
+                            }
+
                             break;
 
                         case 2:
@@ -60,7 +81,7 @@ class Employee_quiz extends CI_Controller {
 
             }
 
-            echo "<script>javascript:alert('The quiz has been sent successfully');
+            echo "<script>javascript:alert('".$this->lang->line('quiz_sent_success')."');
             window.location='".base_url()."quiz/preservice'
             </script>";
 
@@ -74,51 +95,131 @@ class Employee_quiz extends CI_Controller {
          if($this->session->userdata('roles') == TRUE && $this->session->userdata('roles') == 'employee')
             {
 
+            $lang = $this->session->userdata('lang');
+
+            if ($lang == "spanish") {
+                $quiz_type_id = 2;
+            } else {
+                $quiz_type_id = 1;
+            }
+
             $daycare_id = $this->session->userdata('id_daycare');
-            $quiz = $this->Quiz_model->get_daycare_quiz($daycare_id);
-            $employee_id = $this->session->userdata('id_employee'); 
-            $questions = $this->Quiz_model->get_quiz_questions($quiz->id_quizzes); 
+            $quiz = $this->Quiz_model->get_daycare_quiz($daycare_id, $quiz_type_id);
 
-            $employee_quiz = $this->Quiz_model->get_quiz_from_employee($quiz->id_quizzes, $employee_id);
+             //Header & Footer Languages Variables
+            
+            $data['employee_label'] = $this->lang->line('employee_label');
+            $data['home_item'] = $this->lang->line('home_item');
+            $data['workshops_item'] = $this->lang->line('workshops_item');
+            $data['workshops_completed_item'] = $this->lang->line('workshops_completed_item');
+            $data['workshops_all_item'] = $this->lang->line('workshops_all_item');
+            $data['quiz_item'] = $this->lang->line('quiz_item');
+            $data['reports_item'] = $this->lang->line('reports_item');
+            $data['reports_work_per_year_item'] = $this->lang->line('reports_work_per_year_item');
+            $data['profile_item'] = $this->lang->line('profile_item');
+            $data['change_password_item'] = $this->lang->line('change_password_item');
+            $data['up_cert_item'] = $this->lang->line('up_cert_item');
+            $data['signoff_item'] = $this->lang->line('signoff_item');
+            $data['stay_footer'] = $this->lang->line('stay_footer');
+            $data['enteremail_footer'] = $this->lang->line('enteremail_footer');
+            $data['subscribe_footer'] = $this->lang->line('subscribe_footer');
+            $data['copyright_footer'] = $this->lang->line('copyright_footer');
+            $data['aboutus_footer'] = $this->lang->line('aboutus_footer');
+            $data['product_footer'] = $this->lang->line('product_footer');
+            $data['others_footer'] = $this->lang->line('others_footer');
+            $data = array(
+                            'employee_label'     =>         $data['employee_label'],
+                            'home_item'     =>         $data['home_item'],
+                            'workshops_item'        =>        $data['workshops_item'],
+                            'workshops_completed_item'        =>        $data['workshops_completed_item'],
+                            'workshops_all_item'         =>         $data['workshops_all_item'],
+                            'quiz_item' =>  $data['quiz_item'],
+                            'reports_item' =>  $data['reports_item'],
+                            'reports_work_per_year_item' =>       $data['reports_work_per_year_item'],
+                            'profile_item'     =>         $data['profile_item'],
+                            'change_password_item'     =>         $data['change_password_item'],
+                            'up_cert_item'     =>         $data['up_cert_item'],
+                            'signoff_item'        =>         $data['signoff_item'],
+                            'stay_footer'        =>        $data['stay_footer'],
+                            'enteremail_footer'         =>         $data['enteremail_footer'],
+                            'subscribe_footer' =>  $data['subscribe_footer'] ,
+                            'copyright_footer' =>  $data['copyright_footer'],
+                            'aboutus_footer' =>       $data['aboutus_footer'] ,
+                            'product_footer' =>  $data['product_footer'] ,
+                            'copyright_footer' =>  $data['copyright_footer'],
+                            'others_footer' =>       $data['others_footer'] 
+                            );        
+                            $this->session->set_userdata($data);
 
-            if (!is_null($employee_quiz)){
 
-                foreach ($questions as $i => $question) {
-                    if ($question->questiontype_id == 1) {
-                        $solutions[$question->id_questions] = $this->Quiz_model->get_question_solutions($question->id_questions);
-                        $correct_sol = $this->Quiz_model->get_question_correct($question->id_questions);
-                        $correct_ids[$question->id_questions] = $correct_sol->id_solutions;
-                    }
-                    $answers[$question->id_questions] = $this->Quiz_model->get_employee_question_answer($employee_quiz->id_employee_quiz, $question->id_questions);
-                }
+            //LAnguage variables
+            
+            $data['quiz_send'] = $this->lang->line('quiz_send');
+            $data['quiz_confirm'] = $this->lang->line('quiz_confirm');
+            $data['no_quiz_language'] = $this->lang->line('no_quiz_language');
+            $data['quiz_wrong_answer'] = $this->lang->line('quiz_wrong_answer');
+            $data['quiz_correct_answer'] = $this->lang->line('quiz_correct_answer');
+            $data['quiz_not_graded'] = $this->lang->line('quiz_not_graded');
+            $data['quiz_graded'] = $this->lang->line('quiz_graded');
 
-                $data['questions'] = $questions;
-                $data['solutions'] = $solutions;
-                $data['answers'] = $answers;
-                $data['correct_ids'] = $correct_ids;
-                $data['quiz_description'] = $quiz->description;
-                $data['quiz_reviewed'] = $employee_quiz->reviewed;
+            if (is_null($quiz)) {
 
                 $this->load->view('back/employee/header_view', $data);
-                $this->load->view('back/employee/solved_quiz_view', $data);
-                $this->load->view('back/footer_view', $data);  
+                $this->load->view('back/employee/no_quiz_view', $data);
+                $this->load->view('back/footer_view', $data);
 
             } else {
 
-                foreach ($questions as $i => $question) {
-                    if ($question->questiontype_id == 1) {
-                        $solutions[$question->id_questions] = $this->Quiz_model->get_question_solutions($question->id_questions);
+                $employee_id = $this->session->userdata('id_employee'); 
+                $questions = $this->Quiz_model->get_quiz_questions($quiz->id_quizzes); 
+
+                $employee_quiz = $this->Quiz_model->get_quiz_from_employee($quiz->id_quizzes, $employee_id);
+
+                if (!is_null($employee_quiz)){
+
+                    foreach ($questions as $i => $question) {
+                        $answers[$question->id_questions] = $this->Quiz_model->get_employee_question_answers($employee_quiz->id_employee_quiz, $question->id_questions);
+                        if ($question->questiontype_id == 1) {
+                            $solutions[$question->id_questions] = $this->Quiz_model->get_question_solutions($question->id_questions);
+                            if (is_array($answers[$question->id_questions])){
+                                foreach ($answers[$question->id_questions] as $k => $ans) {
+                                    $answers_options[$question->id_questions][$k] = $ans->answer_option;
+                                }
+                            }
+                            //$correct_sols[$question->id_questions] = $this->Quiz_model->get_question_correct_solutions($question->id_questions);
+                            //$correct_ids[$question->id_questions] = $correct_sol->id_solutions;
+                        }
                     }
+
+                    $data['questions'] = $questions;
+                    $data['solutions'] = $solutions;
+                    $data['answers'] = $answers;
+                    $data['answers_options'] = $answers_options;
+                    $data['quiz_description'] = $quiz->description;
+                    $data['quiz_reviewed'] = $employee_quiz->reviewed;
+
+                    $this->load->view('back/employee/header_view', $data);
+                    $this->load->view('back/employee/solved_quiz_view', $data);
+                    $this->load->view('back/footer_view', $data);  
+
+                } else {
+
+                    foreach ($questions as $i => $question) {
+                        if ($question->questiontype_id == 1) {
+                            $solutions[$question->id_questions] = $this->Quiz_model->get_question_solutions($question->id_questions);
+                        }
+                    }
+
+                    $data['questions'] = $questions;
+                    $data['solutions'] = $solutions;
+                    $data['quiz_id'] = $quiz->id_quizzes;
+                    $data['quiz_description'] = $quiz->description;
+
+                    $this->load->view('back/employee/header_view', $data);
+                    $this->load->view('back/employee/quiz_view', $data);
+                    $this->load->view('back/footer_view', $data);
+
                 }
-
-                $data['questions'] = $questions;
-                $data['solutions'] = $solutions;
-                $data['quiz_id'] = $quiz->id_quizzes;
-                $data['quiz_description'] = $quiz->description;
-
-                $this->load->view('back/employee/header_view', $data);
-                $this->load->view('back/employee/quiz_view', $data);
-                $this->load->view('back/footer_view', $data);  
 
             }
 

@@ -45,7 +45,7 @@
         <header class="header header-blog">  
             <div class="container">       
                 <h1 class="logo">
-                    <a href="<?=base_url().'user-section/home'?>">ECT <span class="sub"><?=$title?></span></a>
+                    <a href="<?=base_url().'user-section/home'?>">STC <span class="sub"><?=$title?></span></a>
                 </h1><!--//logo-->
                 <nav class="main-nav navbar-right" role="navigation">
                     <div class="navbar-header">

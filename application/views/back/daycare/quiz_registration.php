@@ -35,6 +35,19 @@
                                             <label class="sr-only" for="description">Name</label>
                                             <?=form_input($description)?>
                                         </div>
+                                        <div class="form-group">
+                                            <select class="form-control" name="quizztype_id" id="quizztype_id">
+        
+        					                  <option>Select a language</option>
+        
+        					                  <?php if($idioma==1 || $idioma==3){ ?>
+        					                    <option value="1">English</option>
+        					                    <?php }if($idioma==2 || $idioma==3){?>
+        					                    <option value="2">Spanish</option>
+        					                    <?php } ?>
+        					                                 
+        					                </select> 
+                                        </div>
                                     </div>
                                     <div class="row" id="question_container">
                                         

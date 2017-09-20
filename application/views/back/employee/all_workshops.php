@@ -1,7 +1,21 @@
 
 <section class="features-tabbed section">
             <div class="container">
-                <h2 class="page-title text-center"><i class="fa fa-archive"></i> All Workshops </h2><br><br>
+                <h2 class="page-title text-center"><i class="fa fa-archive"></i> <?=$header_wc?> </h2><br><br>
+
+                <script type="text/javascript">
+      
+                         var dt_records = <?php echo json_encode($dt_records); ?>;
+                         var dt_search = <?php echo json_encode($dt_search); ?>;
+                         var dt_showing = <?php echo json_encode($dt_showing); ?>;
+                         var table_to = <?php echo json_encode($table_to); ?>;
+                                        var table_of = <?php echo json_encode($table_of); ?>;
+                                        var table_entries = <?php echo json_encode($table_entries); ?>;
+                                        var table_previous = <?php echo json_encode($table_previous); ?>;
+                                        var table_next = <?php echo json_encode($table_next); ?>;
+
+
+                </script>
             
                 <div class="row">
                     
@@ -9,12 +23,12 @@
                             <table class="table table-bordered" id="table_all_workshops">
                             <thead>
                                 <tr>
-                                    <th>Workshop</th> 
-                                    <th>Institution</th>
-                                    <th>Certificate</th>
-                                    <th>Credit hours</th>
-                                    <th>Missing hours</th>
-                                    <th>Estatus</th>
+                                    <th><?=$table_workshop?></th>  
+                                    <th><?=$table_institution?></th>
+                                    <th><?=$table_certificates?></th>
+                                    <th><?=$table_hours?></th>
+                                    <th><?=$table_missing?></th>
+                                    <th><?=$table_status?></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -28,14 +42,14 @@
                                             <td><a><?=$workshop->name?></a></td> 
                                             <td><?=$vendors[$i]->name?></td>
                                             <td>
-                                            <button type="button" class="open-uploadDialog btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-id="<?=$workshop->id_workshops?>">Upload</button>
+                                            <button type="button" class="open-uploadDialog btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-id="<?=$workshop->id_workshops?>"><?=$table_up?></button>
                                             </td>
                                             <td><?=$workshop->hours?></td>
                                             
                                             <?php if ($completed_hours_cat[$workshop->category_id] >= $required_hours_cat[$workshop->category_id]) { ?>
 
                                                 <td class="success">0</td>
-                                                <td class="success">Completed</td>
+                                                <td class="success"><?=$completed?></td>
 
                                             <?php
                                               } else if (($completed_hours_cat[$workshop->category_id] < $required_hours_cat[$workshop->category_id]) && 
@@ -43,14 +57,14 @@
                                             ?>
 
                                                 <td class="warning"><?=$required_hours_cat[$workshop->category_id] - $completed_hours_cat[$workshop->category_id] ?> </td>
-                                                <td class="warning">In Process</td>
+                                                <td class="warning"><?=$process?></td>
 
                                             <?php
                                               } else { 
                                             ?>
 
                                                 <td class="danger"><?= $required_hours_cat[$workshop->category_id] ?></td>
-                                                <td class="danger">Pending</td>
+                                                <td class="danger"><?=$pending?></td>
 
                                             <?php
                                               } 
@@ -73,7 +87,7 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Upload Certificate</h4>
+                                <h4 class="modal-title"><?=$table_upload?></h4>
                               </div>                              
 
                               <div class="modal-body"> 
@@ -82,9 +96,9 @@
 
                                      <input type="hidden" name="workshopId" id="workshopId" value="" />
                                      <input type = "file" name = "certificate" accept="image/jpeg,image/gif,image/png,application/pdf" /> 
-                                     <p class="help-block">Only Image and PDF File Import.</p>
+                                     <p class="help-block"><?=$table_only?></p>
                                      <br /><br /> 
-                                     <button type="submit" class="btn btn-block btn-cta-primary">Upload</button>
+                                     <button type="submit" class="btn btn-block btn-cta-primary"><?=$table_up?></button>
                                   
                                   <?php echo form_close() ?>
                                     

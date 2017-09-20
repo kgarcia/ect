@@ -3,12 +3,36 @@
  		<div class="row">
  			<div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8">     
  				<div class="form-box-inner">
- 				<h2 class="title text-center">Upload Certificate</h2>                 
+ 				<h2 class="title text-center"><?=$header_up?></h2>                 
  					<div class="row">
  						<div class="form-container col-xs-12 col-md-12">
  							<?php $attributes = array('class' => 'form-horizontal'); ?>
           					<?php echo form_open_multipart(base_url().'certification/save', $attributes) ?> 
  								</br>
+
+ 								<div class="form-group">
+
+ 								<?php echo form_error('scholar_year'); ?>
+									
+ 									<label class="sr-only" >Scholar Year</label>
+ 									<?php echo form_error('scholar_year'); ?>
+ 									<select class="form-control" name="scholar_year" id="scholar_year">
+
+					                  <option><?=$select_year?></option>
+
+					                  <?php
+					                  foreach($scholar_years as $i => $scholar_year)
+					                  {
+					                    ?>
+					                    <option value="<?=$scholar_year->id_scholar_years?>">
+					                      <?=$sy_names[$i]?>
+					                    </option>
+					                    <?php
+					                  }
+					                  ?>               
+					                </select> 
+
+					            </div>
 
  								<div class="form-group">
 
@@ -18,7 +42,7 @@
  									<?php echo form_error('category'); ?>
  									<select class="form-control" name="category" id="category">
 
-					                  <option>Select a category</option>
+					                  <option><?=$select_category?></option>
 
 					                  <?php
 					                  foreach($categories as $category)
@@ -51,7 +75,7 @@
 									<label class="sr-only" >Certificate in PDF or image file</label>
  									<?php echo form_error('certification'); ?>
 					                <input type="file" id="certification" name="certification" accept="image/jpeg,image/gif,image/png,application/pdf" style="display: inline-block;">
-                                     <p class="help-block">Only Image and PDF File Import.</p>
+                                     <p class="help-block"><?=$only_up?></p>
                                      <br>
 
 					             </div>
@@ -62,7 +86,7 @@
  								<input type="hidden" name="quiz_id" value="<?php echo $quiz_id; ?>"/>
 
  								</br>
- 								<button type="submit" class="btn btn-block btn-cta-primary">Save</button>  
+ 								<button type="submit" class="btn btn-block btn-cta-primary"><?=$save_up?></button>  
  							<?php echo form_close() ?>
  						</div><!--//form-container-->
  					</div><!--//row-->

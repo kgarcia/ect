@@ -62,6 +62,9 @@ $route['profile/save'] = 'employee_profile/save';
 $route['profile'] = 'employee_profile';
 $route['certification/upload'] = 'employee_workshops/upload_single';
 $route['certification/save'] = 'employee_workshops/upload_single_certificate';
+$route['change_password'] = 'employee_profile/change_password';
+$route['save_password'] = 'employee_profile/save_password';
+$route['workshops/per_year'] = 'employee_workshops/workshops_per_year';
 
 //USER AGENCY ROUTES
 //

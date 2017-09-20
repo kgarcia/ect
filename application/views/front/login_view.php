@@ -20,7 +20,7 @@
                 
                     <div class="form-box col-md-offset-2 col-sm-offset-0 xs-offset-0 col-xs-12 col-md-8" align="center">     
                         <div class="form-box-inner">
-                            <h2 class="title text-center">Log in to Child Care</h2>                 
+                            <h2 class="title text-center">Log in</h2>                 
                             <div class="row">
                                 <div class="form-container col-xs-12 col-md-12" align="center" >
                                     <?=form_open(base_url().'login/singin', $toForm)?>              
@@ -45,7 +45,7 @@
                                                 <input type="checkbox"> Remember me
                                             </label>
                                         </div><!--//checkbox-->
-                                         <p class="lead">Don't have a Child Care account yet? <br /><a class="signup-link" href="<?=base_url().'signup'?>">Create your account now</a></p>  
+                                         <p class="lead">Don't have an account yet? <br /><a class="signup-link" href="<?=base_url().'signup'?>">Create your account now</a></p>  
                                     <?=form_close()?>
 
                                     <?php

@@ -9,19 +9,20 @@
              <div class="price-cols row">
                 <div class="items-wrapper col-md-10 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
                 <!-- aquie esta lo modificado -->
-                <div class="item price-1 col-md-3 col-sm-4 col-xs-12 text-center">
+               <div class="item price-3 col-md-3 col-sm-4 col-xs-12 text-center">
                         <div class="item-inner">
                             <div class="heading">
-                            <h3 class="title">Registration DayCare</h3>
-                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">5</span><br /><span class="unit"> per month</span></span></p>
+                                <h3 class="title">Institution Registration</h3>
+                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">10</span><br /><span class="unit">per month</span></span></p>
                             </div>
                             <div class="content">
-                                <p>DayCare with 2 - 9 employees pay only $ 5 per month for each member</p>
+                                <p>Institution with 10 - 19 staff members pay only $ 10 per month for each one ($1000 to 1900 year)</p>
                                 <a class="btn btn-cta btn-cta-primary" href="<?=base_url().'signup'?>">Sign Up</a>
-   
+                                
                             </div><!--//content-->
                         </div><!--//item-inner-->
-                    </div><!--//item--> 
+                    </div><!--//item-->
+                 
 
                     <!--////////// para alguna promocion 
                     <div class="item price-2 col-md-4 col-sm-4 col-xs-12 text-center best-buy">
@@ -39,44 +40,44 @@
                             </div><!--//ribbon-->
                         <!--/div><!--//item-inner-->
                     <!--/div><!--//item-->
-                    <!--//////////-->
-                    
+                    <!--//////////--> 
+
                     <div class="item price-3 col-md-3 col-sm-4 col-xs-12 text-center">
                         <div class="item-inner">
                             <div class="heading">
-                                <h3 class="title">Registration DayCare</h3>
-                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">10</span><br /><span class="unit">per month</span></span></p>
+                                <h3 class="title">Institution Registration</h3>
+                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">9</span><br /><span class="unit">per month</span></span></p>
                             </div>
                             <div class="content">
-                                <p>DayCare with 10 - 19 employees pay only $ 10 per month for each member</p>
+                                <p>Institution with 20 - 35 staff members pay only $ 9 per month for each one ($1800 to 3150 year)</p>
                                 <a class="btn btn-cta btn-cta-primary" href="<?=base_url().'signup'?>">Sign Up</a>
                                 
                             </div><!--//content-->
                         </div><!--//item-inner-->
                     </div><!--//item--> 
 
-                    <div class="item price-3 col-md-3 col-sm-4 col-xs-12 text-center">
+                    <div class="item price-1 col-md-3 col-sm-4 col-xs-12 text-center">
                         <div class="item-inner">
                             <div class="heading">
-                                <h3 class="title">Registration DayCare</h3>
-                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">17</span><br /><span class="unit">per month</span></span></p>
+                            <h3 class="title">Institution Registration</h3>
+                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">8</span><br /><span class="unit"> per month</span></span></p>
                             </div>
                             <div class="content">
-                                <p>DayCare with 20 - 35 employees pay only $ 17 per month for each member</p>
+                                <p>Institution with 36 + staff members pay only $ 8 per month for each one ($2880 to 4000 year)</p>
                                 <a class="btn btn-cta btn-cta-primary" href="<?=base_url().'signup'?>">Sign Up</a>
-                                
+   
                             </div><!--//content-->
                         </div><!--//item-inner-->
-                    </div><!--//item-->  
+                    </div><!--//item--> 
                     
                     <div class="item price-3 col-md-3 col-sm-4 col-xs-12 text-center">
                         <div class="item-inner">
                             <div class="heading">
-                                <h3 class="title">Registration Employee</h3>
-                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">9</span><br /><span class="unit">per month</span></span></p>
+                                <h3 class="title">Staff Registration (Solo member)</h3>
+                                <p class="price-figure"><span class="price-figure-inner"><span class="currency">$</span><span class="number">7.99</span><br /><span class="unit">per month</span></span></p>
                             </div>
                             <div class="content">
-                                <p>yourself pay $9 per month <br><br><br></p>
+                                <p>yourself pay $7.99 per month <br><br><br></p>
                                 <a class="btn btn-cta btn-cta-primary" href="<?=base_url().'signup'?>">Sign Up</a>
                                 
                             </div><!--//content-->

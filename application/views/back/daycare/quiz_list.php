@@ -1,4 +1,3 @@
-
      <section class="features-tabbed section">
             <div class="container">
                 <h2 class="page-title text-center"><i class="fa fa-archive"></i> Quiz List</h2><br><br>
@@ -15,10 +14,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                        <?php foreach ($quizzes->result() as $quiz) {?>
+                        <?php  if($quizzes){ foreach ($quizzes->result() as $quiz) {?>
                                 <tr>
                                     
-                                    <td><a href="#"><?= $quiz->description ?></a></td>
+                                    <td><a href="../daycare/quiz_edit/<?= $quiz->id_quizzes ?>"><?= $quiz->description ?></a></td>
                                      <td><?php $this->db->where('quiz_id', $quiz->id_quizzes);
                                                 $this->db->from('questions');
                                                 echo $this->db->count_all_results(); ?></td>
@@ -27,12 +26,10 @@
                                                 $this->db->where('quiz_id', $quiz->id_quizzes);
                                                 echo $this->db->get('questions')->result()[0]->score;?></td>
                                </tr>
-                            <?php }?><!-- ENDFOREACH -->
+                            <?php }}?><!-- ENDFOREACH -->
                             </tbody>
                             </table>
                         </div>
-                        <input class="btn btn-cta btn-cta-primary" type="button" id="btnExport" value=" Export Table data into Excel " />
-
                     </div>
                 </div>
             </div>

@@ -99,8 +99,8 @@ class Signup extends CI_Controller
 
         echo '<div class="form-group">'.
               form_error("name").'
-            <label class="sr-only" >Name of the Daycare</label>
-            <input type="text" name="name" class="form-control login-email" placeholder="Name of the Daycare" value="'.set_value("name").'">
+            <label class="sr-only" >Name of the Institution</label>
+            <input type="text" name="name" class="form-control login-email" placeholder="Name of the Institution" value="'.set_value("name").'">
         </div>
         <div class="form-group">'.
        form_error("address").'
@@ -121,7 +121,7 @@ class Signup extends CI_Controller
         <div class="form-group">'.
         form_error("children").'
             <label class="sr-only" >Number of Employees</label>
-            <input type="number" name="children" min="2" class="form-control login-email " placeholder="Number of Employees" value="'.set_value("children").'">
+            <input type="number" name="children" min="2" class="form-control login-email " placeholder="Number of staff members" value="'.set_value("children").'">
         </div>
 
         <div class="form-group">'.

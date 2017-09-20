@@ -8,7 +8,7 @@ class Quiz_model extends CI_Model
 
   public function createQuiz($data){
     	if (!$this->db->insert('quizzes', array('description'=>$data['description'], 
-    										'quiztype_id' =>1,
+    										'quiztype_id' =>$data['quiztype_id'],
 					                        'daycare_id' => $data['daycare_id'],
 					                        'duration'=>$data['duration']
     											))) {
@@ -20,24 +20,57 @@ class Quiz_model extends CI_Model
     	return $insert_id;
     }
     
-    public function createQuestion($data){
-        if (!$this->db->insert('questions', $data)) {
+    public function edit_quiz($data){
+    	if (!$this->db->set('quizzes', array('description'=>$data['description'], 
+    										'quiztype_id' =>$data['quiztype_id'],
+					                        'daycare_id' => $data['daycare_id'],
+					                        'duration'=>$data['duration']
+    											))) {
                                         // quit if insert fails - adjust accordingly
-                                        print_r($data);
+                                        print_r($question);
+                                        die('Failed question insert');
+        }   
+    	$insert_id = $this->db->insert_id();
+    	return $insert_id;
+    }
+    
+    public function createQuestion($question){
+        if (!$this->db->insert('questions', $question)) {
+                                        // quit if insert fails - adjust accordingly
+                                        print_r($question);
                                         die('Failed question insert');
                                     }  
         $insert_id = $this->db->insert_id();
     	return $insert_id;
     }
     
-    public function getQuizzes(){
-    	$query = $this->db->get('quizzes');
-    	echo $query->num_rows();
+    
+    public function updateQuestion($question){
+        
+        $data = array(
+                                            'id_questions'=>$questions['id_questions'],
+                                			'description' => $questions['description'],
+                                			'quiz_id' => $questions['quiz_id'],
+                                            'questiontype_id' => 1,
+                                            'score' => $questions['score']//
+                                			);
+         $this->db->where('id_questions', $question['id_questions']);
+        $this->db->update('questions', $question);  
+    }
+    
+    
+    public function updateSolution($solution){
+         $this->db->where('id_questions', $solution->id_solution);
+        $this->db->update('solutions', $solution);  
+    }
+    
+    public function getQuizzes($daycare_id){
+    	$query = $this->db->get_where('quizzes', array('daycare_id' => $daycare_id, 'status' => 1));
+    	
     	if($query->num_rows()>0) 
     		return $query;
     	else
     		return false;
-
     }
 
     public function showQuiz($id){
@@ -66,7 +99,27 @@ class Quiz_model extends CI_Model
            
             return $query->row();
         }
-    } 
+    }
+    
+    function get_daycare_quiz_count($daycare_id){
+        
+        $query = $this->db->get_where('quizzes', array('daycare_id' => $daycare_id, 'status' => 1));
+        // si hay resultados
+        if ($query->num_rows() < 2) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    function get_question_count($quiz_id){
+        
+        $query = $this->db->get_where('questions', array('quiz_id' => $quiz_id, 'status' => 1));
+        // si hay resultados
+            return $query->num_rows();
+    }
+
 
     function get_quiz_questions($quiz_id){
 
